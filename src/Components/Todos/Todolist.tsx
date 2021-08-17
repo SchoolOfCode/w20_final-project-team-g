@@ -1,4 +1,6 @@
-const Todolist = () => {
+const Todolist: React.FC = () => {
+
+  // render each todoItem here 
   return <div></div>;
 };
 
