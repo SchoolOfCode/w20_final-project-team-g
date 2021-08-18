@@ -6,25 +6,28 @@ import HomePage from './Pages/HomePage';
 import KumospacePage from './Pages/KumospacePage';
 import ProfilePage from './Pages/ProfilePage';
 import Layout from './Layout/Layout';
+import TodosContextProvider from './Store/TodosContext';
 
 function App() {
   return (
-    <Layout>
-      <Switch>
-        <Route path="/" exact>
-          <HomePage />
-        </Route>
-        <Route path="/kumospace" exact>
-          <KumospacePage />
-        </Route>
-        <Route path="/profile" exact>
-          <ProfilePage />
-        </Route>
-        <Route path="*">
-          <Redirect to="/" />
-        </Route>
-      </Switch>
-    </Layout>
+    <TodosContextProvider>
+      <Layout>
+        <Switch>
+          <Route path="/" exact>
+            <HomePage />
+          </Route>
+          <Route path="/kumospace" exact>
+            <KumospacePage />
+          </Route>
+          <Route path="/profile" exact>
+            <ProfilePage />
+          </Route>
+          <Route path="*">
+            <Redirect to="/" />
+          </Route>
+        </Switch>
+      </Layout>
+    </TodosContextProvider>
   );
 }
 
