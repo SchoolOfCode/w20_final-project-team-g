@@ -1,5 +1,6 @@
 import TodoClass from '../Models/TodoClass';
 import React, { useState, useContext } from 'react';
+import firebase from '../utilities/firebase';
 
 type TodosContextObj = {
   items: TodoClass[];
@@ -8,6 +9,7 @@ type TodosContextObj = {
   removeTodo: (id: string) => void;
   startTodo: (id: string) => void; // changes status to "1"
   finishTodo: (id: string) => void; // changes status to "Done"
+  retrieveTodo: (todoref: any) => void;
 };
 
 export const TodosContext = React.createContext<TodosContextObj>({
@@ -17,6 +19,7 @@ export const TodosContext = React.createContext<TodosContextObj>({
   removeTodo: (id: string) => {},
   startTodo: (id: string) => {},
   finishTodo: (id: string) => {},
+  retrieveTodo: (todoref: any) => {},
 });
 
 const TodosContextProvider: React.FC = (props) => {
@@ -26,12 +29,33 @@ const TodosContextProvider: React.FC = (props) => {
 
   function addTodoHandler(todoText: string) {
     const newTodo = new TodoClass(todoText);
+    const todoref = firebase.database().ref('currentTodo');
+    todoref.push(newTodo);
+  console.log('im being called from context woohoo');
 
-    setTodos((prevTodos) => {
-      return prevTodos.concat(newTodo);
+    // todoref.on('value', (snapshot: any) => {
+    //   const todos = snapshot.val();
+
+    //   const todolist = [];
+    //   for (const key in todos) {
+    //     todolist.push(todos[key]);
+
+    //     setTodos(todolist);
+     // }
+    //});
+  }
+
+  function retrieveCurrentTodoHandler(todoref: any) {
+    todoref.on('value', (snapshot: any) => {
+      const todos = snapshot.val();
+
+      const todolist = [];
+      for (const key in todos) {
+        todolist.push(todos[key]);
+
+        setTodos(todolist);
+      }
     });
-
-    // send to firebase
   }
 
   function removeTodoHandler(todoId: string) {
@@ -70,6 +94,7 @@ const TodosContextProvider: React.FC = (props) => {
     removeTodo: removeTodoHandler,
     startTodo: startTodoHandler,
     finishTodo: finishTodoHandler,
+    retrieveTodo: retrieveCurrentTodoHandler,
   };
 
   return (
