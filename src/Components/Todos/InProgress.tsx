@@ -9,20 +9,20 @@ const InProgress: React.FC = (props) => {
   return (
       <Fragment>
           <h3>In Progress</h3>
-      <ul className={styles.todos}>
+      {/* <ul className={styles.todos}>
         {todoCtx.items.map((item) => (
-          //   item.status === 'todo' && (
+          //   item.status === 'inprogress' && (
           <TodoItem
             key={item.id}
             text={item.todoTitle}
-            //onRemoveTodo={todoCtx.removeTodo.bind(null, item.id)}
+            onRemoveTodo={todoCtx.removeTodo.bind(null, item.id)}
             // add onstart to move to
           >
             {item.todoTitle}
           </TodoItem>
         ))}
         ;
-      </ul>
+      </ul> */}
     </Fragment>
   );
 };

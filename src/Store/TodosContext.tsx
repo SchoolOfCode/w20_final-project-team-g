@@ -16,7 +16,7 @@ export const TodosContext = React.createContext<TodosContextObj>({
   items: [],
   reloadRequired: false,
   addTodo: () => {},
-  removeTodo: (id: string) => {},
+  removeTodo: (todo: string) => {},
   startTodo: (id: string) => {},
   finishTodo: (id: string) => {},
   retrieveTodo: (todoref: any) => {},
@@ -31,7 +31,7 @@ const TodosContextProvider: React.FC = (props) => {
     const newTodo = new TodoClass(todoText);
     const todoref = firebase.database().ref('currentTodo');
     todoref.push(newTodo);
-  console.log('im being called from context woohoo');
+    console.log('im being called from context woohoo');
 
     // todoref.on('value', (snapshot: any) => {
     //   const todos = snapshot.val();
@@ -41,7 +41,7 @@ const TodosContextProvider: React.FC = (props) => {
     //     todolist.push(todos[key]);
 
     //     setTodos(todolist);
-     // }
+    // }
     //});
   }
 
@@ -58,20 +58,18 @@ const TodosContextProvider: React.FC = (props) => {
     });
   }
 
-  function removeTodoHandler(todoId: string) {
-    // setTodos((prevTodos) => {
-    //   return prevTodos.filter((todo) => todo.id !== todoId);
+  function removeTodoHandler(todosID: string) {
+    // to delete from state & firebase
+    // setTodos((prev) => {
+    //   return prev.filter((todo) => {
+    //     // const todoRef = firebase.database().ref('currentTodo').child(todosID);
+    //     // todoRef.remove();
+    //     return todo.id !== todosID;
+    //   });
     // });
-    const change = new TodoClass(todoId);
-    setTodos((prevTodos) => {
-      change.status = 'inprogress';
-      return prevTodos.concat(change);
-    });
-    //       const o = setTodos((todoId) => {
-    //       return todos.map((todo => todo.status = "hi");
-    //       });
 
-    // console.log('changed status:', InProgressTodos);
+    const todoRef = firebase.database().ref('currentTodo').child(todosID);
+    todoRef.remove();
   }
 
   function startTodoHandler(todoId: string) {
@@ -104,3 +102,9 @@ const TodosContextProvider: React.FC = (props) => {
   );
 };
 export default TodosContextProvider;
+
+// const change = new TodoClass(todoId);
+// setTodos((prevTodos) => {
+//   change.status = 'inprogress';
+//   return prevTodos.concat(change);
+// });

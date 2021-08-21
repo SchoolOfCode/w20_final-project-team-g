@@ -21,7 +21,7 @@ const TodoList: React.FC = () => {
             <TodoItem
               key={item.id}
               text={item.todoTitle}
-              //onRemoveTodo={todoCtx.removeTodo.bind(null, item.id)}
+              onRemoveTodo={todoCtx.removeTodo.bind(null, item.id)}
               // add onstart to move to
             >
               {item.todoTitle}
