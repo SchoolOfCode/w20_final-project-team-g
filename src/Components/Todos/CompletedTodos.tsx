@@ -29,7 +29,7 @@ const CompletedTodos: React.FC = () => {
               {item.todoTitle}
             </TodoItem>
           ) : (
-            <h5>Nothing completed =(</h5>
+            <h4 key={item.id}>Nothing completed</h4>
           )
         )}
       </ul>

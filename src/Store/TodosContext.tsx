@@ -1,8 +1,8 @@
 import TodoClass from '../Models/TodoClass';
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 //import { v4 as uuidv4 } from 'uuid';
 import firebase from '../utilities/firebase';
-
+import { TodoStatus } from '../Models/TodoClass';
 type TodosContextObj = {
   items: TodoClass[];
   reloadRequired: boolean;
@@ -28,12 +28,13 @@ export const TodosContext = React.createContext<TodosContextObj>({
 const TodosContextProvider: React.FC = (props) => {
   const [todos, setTodos] = useState<TodoClass[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const newTodoRef = firebase.firestore().collection('todos');
+  const todoRef = firebase.firestore().collection('todos');
 
   console.log('ALL TODO STATE', todos);
+
   function addTodoHandler(newTodoInput: string) {
     const newTodo = new TodoClass(newTodoInput);
-    newTodoRef
+    todoRef
       .doc(newTodo.id)
       .set(Object.assign({}, newTodo))
       .catch((err) => {
@@ -44,7 +45,7 @@ const TodosContextProvider: React.FC = (props) => {
   // all good
   function retrieveCurrentTodoHandler() {
     setIsLoading(true);
-    newTodoRef.onSnapshot((querySnapshot) => {
+    todoRef.onSnapshot((querySnapshot) => {
       const items: any = [];
       querySnapshot.forEach((doc) => {
         items.push(doc.data());
@@ -56,7 +57,7 @@ const TodosContextProvider: React.FC = (props) => {
 
   // all good
   function deleteTodoHandler(selectedTodo: TodoClass) {
-    newTodoRef
+    todoRef
       .doc(selectedTodo.id)
       .delete()
       .catch((err) => {
@@ -68,18 +69,41 @@ const TodosContextProvider: React.FC = (props) => {
 
   function startTodoHandler(selectedTodo: TodoClass) {
     console.log('STARTED TODO IS', selectedTodo);
-    selectedTodo.status = 1;
-  }
 
-  // function retrieveInProgressTodoHandler() {
-  //   inProgressTodoRef.onSnapshot((querySnapshot) => {
-  //     const items: any = [];
-  //     querySnapshot.forEach((doc) => {
-  //       items.push(doc.data());
-  //     });
-  //     // setIsLoading(false);
-  //   });
-  // }
+    // nee to update DATABASE
+    // todoRef
+    //   .doc()
+    //   .update({ selectedTodo.status : 1  })  // not sure wtf to do here 
+    //   .then(() => {
+    //     console.log('Document successfully updated!');
+    //   })
+    //   .catch((error) => {
+    //     // The document probably doesn't exist.
+    //     console.error('Error updating document: ', error);
+    //   });
+
+    // update todos successfully 
+    setTodos((prev) => {
+      const indexToUpdate = prev.findIndex(
+        (todo) => todo.id === selectedTodo.id
+      );
+      const oldValue = prev[indexToUpdate];
+      const newValue = Object.assign({}, oldValue, {
+        status: TodoStatus.inProgress,
+      });
+      const updatedTodos = [
+        // all items to left of what we are updating
+        ...prev.slice(0, indexToUpdate),
+        // the updated value
+        newValue,
+        // all the items to the right of what we are updating
+        ...prev.slice(indexToUpdate + 1),
+        // skip what was updated
+      ];
+
+      return updatedTodos;
+    });
+  }
 
   function finishTodoHandler(selectedTodo: TodoClass) {
     console.log('FINISHED TODO IS', selectedTodo);

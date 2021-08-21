@@ -9,7 +9,6 @@ const TodoList: React.FC = () => {
   useEffect(() => {
     // const todoref = firebase.database().ref('currentTodo');
     todoCtx.retrieveCurrentTodo();
-    console.log(todoCtx.items);
   }, []);
 
   return (
