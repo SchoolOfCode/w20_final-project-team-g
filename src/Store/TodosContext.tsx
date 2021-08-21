@@ -8,9 +8,10 @@ type TodosContextObj = {
   reloadRequired: boolean;
   addTodo: (text: string) => void;
   removeTodo: (selectedTodo: TodoClass) => void;
-  startTodo: (id: string) => void; // changes status to "1"
-  finishTodo: (id: string) => void; // changes status to "Done"
-  retrieveTodo: () => void;
+  startTodo: (selectedTodo: TodoClass) => void; // changes status to "1"
+  finishTodo: (selectedTodo: TodoClass) => void; // changes status to "Done"
+  retrieveCurrentTodo: () => void;
+  // retrieveInProgressTodo: () => void;
 };
 
 export const TodosContext = React.createContext<TodosContextObj>({
@@ -18,19 +19,21 @@ export const TodosContext = React.createContext<TodosContextObj>({
   reloadRequired: false,
   addTodo: () => {},
   removeTodo: (selectedTodo: TodoClass) => {},
-  startTodo: (id: string) => {},
-  finishTodo: (id: string) => {},
-  retrieveTodo: () => {},
+  startTodo: (selectedTodo: TodoClass) => {},
+  finishTodo: (selectedTodo: TodoClass) => {},
+  retrieveCurrentTodo: () => {},
+  // retrieveInProgressTodo: () => {},
 });
 
 const TodosContextProvider: React.FC = (props) => {
   const [todos, setTodos] = useState<TodoClass[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const ref = firebase.firestore().collection('todos');
+  const newTodoRef = firebase.firestore().collection('todos');
 
+  console.log('ALL TODO STATE', todos);
   function addTodoHandler(newTodoInput: string) {
     const newTodo = new TodoClass(newTodoInput);
-    ref
+    newTodoRef
       .doc(newTodo.id)
       .set(Object.assign({}, newTodo))
       .catch((err) => {
@@ -38,9 +41,10 @@ const TodosContextProvider: React.FC = (props) => {
       });
   }
 
+  // all good
   function retrieveCurrentTodoHandler() {
     setIsLoading(true);
-    ref.onSnapshot((querySnapshot) => {
+    newTodoRef.onSnapshot((querySnapshot) => {
       const items: any = [];
       querySnapshot.forEach((doc) => {
         items.push(doc.data());
@@ -50,37 +54,47 @@ const TodosContextProvider: React.FC = (props) => {
     });
   }
 
-  function removeTodoHandler(selectedTodo: TodoClass) {
-
-    ref
+  // all good
+  function deleteTodoHandler(selectedTodo: TodoClass) {
+    newTodoRef
       .doc(selectedTodo.id)
       .delete()
       .catch((err) => {
         console.error(err);
       });
+
+    console.log('todo deleted from database');
   }
 
-  function startTodoHandler(todoId: string) {
-    setTodos((prevTodos) => {
-      return prevTodos.filter((todo) => todo.status === 'in_progress');
-    });
+  function startTodoHandler(selectedTodo: TodoClass) {
+    console.log('STARTED TODO IS', selectedTodo);
+    selectedTodo.status = 1;
   }
 
-  function finishTodoHandler(todoId: string) {
-    //change status here to "done"
-    // setTodos((prevTodos) => {
-    //     return prevTodos.filter((todo) => todo.id === todoId) { todo.status === 'done' } });
-    // });
+  // function retrieveInProgressTodoHandler() {
+  //   inProgressTodoRef.onSnapshot((querySnapshot) => {
+  //     const items: any = [];
+  //     querySnapshot.forEach((doc) => {
+  //       items.push(doc.data());
+  //     });
+  //     // setIsLoading(false);
+  //   });
+  // }
+
+  function finishTodoHandler(selectedTodo: TodoClass) {
+    console.log('FINISHED TODO IS', selectedTodo);
+    return (selectedTodo.status = 2);
   }
 
   const contextValue: TodosContextObj = {
     items: todos,
     reloadRequired: false,
     addTodo: addTodoHandler,
-    removeTodo: removeTodoHandler,
+    removeTodo: deleteTodoHandler,
     startTodo: startTodoHandler,
     finishTodo: finishTodoHandler,
-    retrieveTodo: retrieveCurrentTodoHandler,
+    retrieveCurrentTodo: retrieveCurrentTodoHandler,
+    // retrieveInProgressTodo: retrieveInProgressTodoHandler,
   };
 
   return (
@@ -90,9 +104,3 @@ const TodosContextProvider: React.FC = (props) => {
   );
 };
 export default TodosContextProvider;
-
-// const change = new TodoClass(todoId);
-// setTodos((prevTodos) => {
-//   change.status = 'inprogress';
-//   return prevTodos.concat(change);
-// });

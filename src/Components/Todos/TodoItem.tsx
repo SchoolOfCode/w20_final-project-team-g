@@ -3,14 +3,25 @@
 // }> = (props) => {
 //   return <li>{props.text}</li>;
 // };
-
-// export default TodoItem;
+import { Fragment } from 'react';
+import styles from './Todolist.module.css';
 
 const TodoItem: React.FC<{
   text: string;
-  onRemoveTodo: () => void;
+  onRemoveTodo?: () => void;
+  onStartTodo?: () => void;
+  onFinish?: () => void;
 }> = (props) => {
-  return <li onClick={props.onRemoveTodo}>{props.text}</li>;
+  return (
+    <Fragment>
+      <li className={styles.todoItem}>
+        {props.text}
+        <button onClick={props.onStartTodo}>Start</button>
+        <button onClick={props.onRemoveTodo}>Delete</button>
+        <button onClick={props.onFinish}>Finish</button>
+      </li>
+    </Fragment>
+  );
 };
 
 export default TodoItem;

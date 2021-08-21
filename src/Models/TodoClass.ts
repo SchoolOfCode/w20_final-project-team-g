@@ -1,6 +1,6 @@
-const TO_DO = 'todo';
-const IN_Progress = 'in-progress';
-const Done = 'done';
+// const TO_DO = 'todo';
+// const IN_Progress = 'in-progress';
+// const Done = 'done';
 
 class TodoClass {
   id: string;
@@ -8,7 +8,7 @@ class TodoClass {
   date: string;
   todoBody?: string;
   createdBy?: string;
-  status?: string;
+  status?: number;
 
   constructor(todoTitle: string) {
     this.todoTitle = todoTitle;
@@ -16,7 +16,7 @@ class TodoClass {
     this.id = new Date().toISOString();
     this.date = new Date().toISOString();
     this.createdBy = ''; // later change to signed in user name/ID ?
-    this.status = TO_DO; // by default
+    this.status = 0; // by default
   }
 }
 

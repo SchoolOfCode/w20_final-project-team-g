@@ -1,15 +1,10 @@
 .flex {
   display: flex;
   margin: 1rem auto;
-  padding: 1rem;
   justify-content: space-evenly;
 }
-.column1 {
+.column {
   display: flex;
   flex-direction: column;
-}
-
-.column2 {
-  display: flex;
-  flex-direction: column;
+  padding: 10px;
 }

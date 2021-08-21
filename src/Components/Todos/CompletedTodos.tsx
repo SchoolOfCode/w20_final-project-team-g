@@ -3,34 +3,39 @@ import styles from './Todolist.module.css';
 import TodoItem from './TodoItem';
 import { TodosContext } from '../../Store/TodosContext';
 
-const TodoList: React.FC = () => {
+const CompletedTodos: React.FC = () => {
   const todoCtx = useContext(TodosContext);
 
-  useEffect(() => {
-    // const todoref = firebase.database().ref('currentTodo');
-    todoCtx.retrieveCurrentTodo();
-    console.log(todoCtx.items);
-  }, []);
+  // let change = todoCtx.items.map((item) => {
+  //   return item.status === 1;
+  // });
+  // useEffect(() => {
+  //   console.log('InProgress useEffect rerun due to status change');
+  //   // todoCtx.retrieveTodo();
+  //   // console.log(todoCtx.items);
+  // }, [change]);
 
   return (
     <Fragment>
-      <h3>TO DO</h3>
+      <h3>DONE </h3>
       <ul className={styles.todos}>
-        {todoCtx.items &&
-          todoCtx.items.map((item) => (
+        {todoCtx.items.map((item) =>
+          item.status === 2 ? (
             <TodoItem
               key={item.id}
               text={item.todoTitle}
-              onRemoveTodo={todoCtx.removeTodo.bind(null, item)}
-              onStartTodo={todoCtx.startTodo.bind(null, item)}
               onFinish={todoCtx.finishTodo.bind(null, item)}
             >
               {item.todoTitle}
             </TodoItem>
-          ))}
+          ) : (
+            <h5>Nothing completed =(</h5>
+          )
+        )}
       </ul>
     </Fragment>
   );
 };
 
-export default TodoList;
+export default CompletedTodos;
+

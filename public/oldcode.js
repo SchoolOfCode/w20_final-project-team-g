@@ -21,3 +21,8 @@
     //     setTodos(todolist);
     //   }
     // });
+
+        //change status here to "done"
+    // setTodos((prevTodos) => {
+    //     return prevTodos.filter((todo) => todo.id === todoId) { todo.status === 'done' } });
+    // });
