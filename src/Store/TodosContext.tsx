@@ -70,10 +70,10 @@ const TodosContextProvider: React.FC = (props) => {
   function startTodoHandler(selectedTodo: TodoClass) {
     console.log('STARTED TODO IS', selectedTodo);
 
-    // nee to update DATABASE
+    // Need to update database
     // todoRef
     //   .doc()
-    //   .update({ selectedTodo.status : 1  })  // not sure wtf to do here 
+    //   .update({ selectedTodo.status : 1  })  // not sure wtf to do here
     //   .then(() => {
     //     console.log('Document successfully updated!');
     //   })
@@ -82,7 +82,8 @@ const TodosContextProvider: React.FC = (props) => {
     //     console.error('Error updating document: ', error);
     //   });
 
-    // update todos successfully 
+    // sucessfully updates todos  in state, but since in "retrieveCurrentTodoHandler" we are retrieving the data from the 
+    // firebase, we also need to update the database here with the latest todos which I can't seem to do 
     setTodos((prev) => {
       const indexToUpdate = prev.findIndex(
         (todo) => todo.id === selectedTodo.id
