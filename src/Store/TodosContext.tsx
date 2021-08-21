@@ -75,26 +75,30 @@ const TodosContextProvider: React.FC = (props) => {
       .doc(selectedTodo.id) // inserted the todo id into here so firebase finds the correct Doc to update
       .update({ status: 1 }); //
 
-    // sucessfully updates todos  in state, but since in "retrieveCurrentTodoHandler" we are retrieving the data from the
-    // firebase, we also need to update the database here with the latest todos which I can't seem to do
-    setTodos((prev) => {
-      const indexToUpdate = prev.findIndex((todo) => todo.id === selectedTodo.id);
-      const oldValue = prev[indexToUpdate];
-      const newValue = Object.assign({}, oldValue, {
-        status: TodoStatus.inProgress,
-      });
-      const updatedTodos = [
-        // all items to left of what we are updating
-        ...prev.slice(0, indexToUpdate),
-        // the updated value
-        newValue,
-        // all the items to the right of what we are updating
-        ...prev.slice(indexToUpdate + 1),
-        // skip what was updated
-      ];
+    // Now working.The code below I don't believe is necessary as Firebase handles all the updates on their end.
+    //Think of it like  every time we update/change/add/delete a to do its runs the setTodo hook for us. I think...
 
-      return updatedTodos;
-    });
+    ///////////////////////////////////// MIGHT BE NEEDED LATER IN PROJECT?///////
+    // setTodos((prev) => {
+    //   const indexToUpdate = prev.findIndex((todo) => todo.id === selectedTodo.id);
+    //   const oldValue = prev[indexToUpdate];
+    //   const newValue = Object.assign({}, oldValue, {
+    //     status: TodoStatus.inProgress,
+    //   });
+    //   const updatedTodos = [
+    //     // all items to left of what we are updating
+    //     ...prev.slice(0, indexToUpdate),
+    //     // the updated value
+    //     newValue,
+    //     // all the items to the right of what we are updating
+    //     ...prev.slice(indexToUpdate + 1),
+    //     // skip what was updated
+    //   ];
+
+    //   return updatedTodos;
+    // });
+    //////////////////////////// MIGHT BE NEEDED LATER IN PROJECT?///////
+    //
   }
 
   function finishTodoHandler(selectedTodo: TodoClass) {
