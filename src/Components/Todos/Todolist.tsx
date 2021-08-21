@@ -8,8 +8,8 @@ const TodoList: React.FC = () => {
   const todoCtx = useContext(TodosContext);
 
   useEffect(() => {
-    const todoref = firebase.database().ref('currentTodo');
-    todoCtx.retrieveTodo(todoref);
+    // const todoref = firebase.database().ref('currentTodo');
+    todoCtx.retrieveTodo();
   }, []);
 
   return (
@@ -21,7 +21,7 @@ const TodoList: React.FC = () => {
             <TodoItem
               key={item.id}
               text={item.todoTitle}
-              onRemoveTodo={todoCtx.removeTodo.bind(null, item.id)}
+              onRemoveTodo={todoCtx.removeTodo.bind(null, item)}
               // add onstart to move to
             >
               {item.todoTitle}

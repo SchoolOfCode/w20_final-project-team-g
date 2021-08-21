@@ -1,75 +1,63 @@
 import TodoClass from '../Models/TodoClass';
 import React, { useState, useContext } from 'react';
+//import { v4 as uuidv4 } from 'uuid';
 import firebase from '../utilities/firebase';
 
 type TodosContextObj = {
   items: TodoClass[];
   reloadRequired: boolean;
   addTodo: (text: string) => void;
-  removeTodo: (id: string) => void;
+  removeTodo: (selectedTodo: TodoClass) => void;
   startTodo: (id: string) => void; // changes status to "1"
   finishTodo: (id: string) => void; // changes status to "Done"
-  retrieveTodo: (todoref: any) => void;
+  retrieveTodo: () => void;
 };
 
 export const TodosContext = React.createContext<TodosContextObj>({
   items: [],
   reloadRequired: false,
   addTodo: () => {},
-  removeTodo: (todo: string) => {},
+  removeTodo: (selectedTodo: TodoClass) => {},
   startTodo: (id: string) => {},
   finishTodo: (id: string) => {},
-  retrieveTodo: (todoref: any) => {},
+  retrieveTodo: () => {},
 });
 
 const TodosContextProvider: React.FC = (props) => {
   const [todos, setTodos] = useState<TodoClass[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const ref = firebase.firestore().collection('todos');
 
-  console.log(todos);
-
-  function addTodoHandler(todoText: string) {
-    const newTodo = new TodoClass(todoText);
-    const todoref = firebase.database().ref('currentTodo');
-    todoref.push(newTodo);
-    console.log('im being called from context woohoo');
-
-    // todoref.on('value', (snapshot: any) => {
-    //   const todos = snapshot.val();
-
-    //   const todolist = [];
-    //   for (const key in todos) {
-    //     todolist.push(todos[key]);
-
-    //     setTodos(todolist);
-    // }
-    //});
+  function addTodoHandler(newTodoInput: string) {
+    const newTodo = new TodoClass(newTodoInput);
+    ref
+      .doc(newTodo.id)
+      .set(Object.assign({}, newTodo))
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
-  function retrieveCurrentTodoHandler(todoref: any) {
-    todoref.on('value', (snapshot: any) => {
-      const todos = snapshot.val();
-
-      const todolist = [];
-      for (const key in todos) {
-        todolist.push(todos[key]);
-
-        setTodos(todolist);
-      }
+  function retrieveCurrentTodoHandler() {
+    setIsLoading(true);
+    ref.onSnapshot((querySnapshot) => {
+      const items: any = [];
+      querySnapshot.forEach((doc) => {
+        items.push(doc.data());
+      });
+      setTodos(items);
+      setIsLoading(false);
     });
   }
 
-  function removeTodoHandler(todosID: string) {
-    // to delete from state & firebase
-    // setTodos((prev) => {
-    //   return prev.filter((todo) => {
-    //     // const todoRef = firebase.database().ref('currentTodo').child(todosID);
-    //     // todoRef.remove();
-    //     return todo.id !== todosID;
-    //   });
-    // });
+  function removeTodoHandler(selectedTodo: TodoClass) {
 
-    const todoRef = firebase.database().ref('currentTodo').child(todosID);
-    todoRef.remove();
+    ref
+      .doc(selectedTodo.id)
+      .delete()
+      .catch((err) => {
+        console.error(err);
+      });
   }
 
   function startTodoHandler(todoId: string) {

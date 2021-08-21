@@ -12,7 +12,6 @@ const HomePage = () => {
         <div className={styles.column1}>
           <TodoList />
         </div>
-
         <div className={styles.column2}>
           <InProgress />
         </div>
