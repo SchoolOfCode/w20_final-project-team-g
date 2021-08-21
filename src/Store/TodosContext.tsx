@@ -1,8 +1,8 @@
-import TodoClass from '../Models/TodoClass';
-import React, { useState } from 'react';
+import TodoClass from "../Models/TodoClass";
+import React, { useState } from "react";
 //import { v4 as uuidv4 } from 'uuid';
-import firebase from '../utilities/firebase';
-import { TodoStatus } from '../Models/TodoClass';
+import firebase from "../utilities/firebase";
+import { TodoStatus } from "../Models/TodoClass";
 type TodosContextObj = {
   items: TodoClass[];
   reloadRequired: boolean;
@@ -28,9 +28,9 @@ export const TodosContext = React.createContext<TodosContextObj>({
 const TodosContextProvider: React.FC = (props) => {
   const [todos, setTodos] = useState<TodoClass[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const todoRef = firebase.firestore().collection('todos');
+  const todoRef = firebase.firestore().collection("todos");
 
-  console.log('ALL TODO STATE', todos);
+  console.log("ALL TODO STATE", todos);
 
   function addTodoHandler(newTodoInput: string) {
     const newTodo = new TodoClass(newTodoInput);
@@ -64,30 +64,21 @@ const TodosContextProvider: React.FC = (props) => {
         console.error(err);
       });
 
-    console.log('todo deleted from database');
+    console.log("todo deleted from database");
   }
 
   function startTodoHandler(selectedTodo: TodoClass) {
-    console.log('STARTED TODO IS', selectedTodo);
+    console.log("STARTED TODO IS", selectedTodo);
 
     // Need to update database
-    // todoRef
-    //   .doc()
-    //   .update({ selectedTodo.status : 1  })  // not sure wtf to do here
-    //   .then(() => {
-    //     console.log('Document successfully updated!');
-    //   })
-    //   .catch((error) => {
-    //     // The document probably doesn't exist.
-    //     console.error('Error updating document: ', error);
-    //   });
+    todoRef
+      .doc(selectedTodo.id) // inserted the todo id into here so firebase finds the correct Doc to update
+      .update({ status: 1 }); //
 
-    // sucessfully updates todos  in state, but since in "retrieveCurrentTodoHandler" we are retrieving the data from the 
-    // firebase, we also need to update the database here with the latest todos which I can't seem to do 
+    // sucessfully updates todos  in state, but since in "retrieveCurrentTodoHandler" we are retrieving the data from the
+    // firebase, we also need to update the database here with the latest todos which I can't seem to do
     setTodos((prev) => {
-      const indexToUpdate = prev.findIndex(
-        (todo) => todo.id === selectedTodo.id
-      );
+      const indexToUpdate = prev.findIndex((todo) => todo.id === selectedTodo.id);
       const oldValue = prev[indexToUpdate];
       const newValue = Object.assign({}, oldValue, {
         status: TodoStatus.inProgress,
@@ -107,7 +98,7 @@ const TodosContextProvider: React.FC = (props) => {
   }
 
   function finishTodoHandler(selectedTodo: TodoClass) {
-    console.log('FINISHED TODO IS', selectedTodo);
+    console.log("FINISHED TODO IS", selectedTodo);
     return (selectedTodo.status = 2);
   }
 
@@ -122,10 +113,6 @@ const TodosContextProvider: React.FC = (props) => {
     // retrieveInProgressTodo: retrieveInProgressTodoHandler,
   };
 
-  return (
-    <TodosContext.Provider value={contextValue}>
-      {props.children}
-    </TodosContext.Provider>
-  );
+  return <TodosContext.Provider value={contextValue}>{props.children}</TodosContext.Provider>;
 };
 export default TodosContextProvider;

@@ -1,13 +1,13 @@
-import React, { Fragment, useContext, useEffect } from 'react';
-import styles from './Todolist.module.css';
-import TodoItem from './TodoItem';
-import { TodosContext } from '../../Store/TodosContext';
+import React, { Fragment, useContext, useEffect } from "react";
+import styles from "./Todolist.module.css";
+import TodoItem from "./TodoItem";
+import { TodosContext } from "../../Store/TodosContext";
 
 const InProgress: React.FC = () => {
   const todoCtx = useContext(TodosContext);
 
   useEffect(() => {
-    console.log('InProgress useEffect rerun due to status change');
+    console.log("InProgress useEffect rerun due to status change");
     todoCtx.retrieveCurrentTodo();
   }, []);
 
