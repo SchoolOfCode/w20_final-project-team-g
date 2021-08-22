@@ -17,9 +17,7 @@ const HomePage = () => {
     <div>
       <h1>This is the homepage</h1>
       <CardWrapper>
-        <button onClick={startTaskHandler}>
-          START TASK: Modal test button
-        </button>
+        <button onClick={startTaskHandler}>START TIMER</button>
       </CardWrapper>
 
       {modalIsOpen && (
