@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Modal from '../Layout/Modal';
 import Backdrop from '../Layout/Backdrop';
+import CardWrapper from '../Layout/CardWrapper';
 const HomePage = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
@@ -15,7 +16,11 @@ const HomePage = () => {
   return (
     <div>
       <h1>This is the homepage</h1>
-      <button onClick={startTaskHandler}>START TASK: Modal test button</button>
+      <CardWrapper>
+        <button onClick={startTaskHandler}>
+          START TASK: Modal test button
+        </button>
+      </CardWrapper>
 
       {modalIsOpen && (
         <Modal onCancel={closeModalHandler} onConfirm={closeModalHandler} />
