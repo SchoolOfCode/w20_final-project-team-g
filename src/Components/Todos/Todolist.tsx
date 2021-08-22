@@ -3,9 +3,16 @@ import styles from './Todolist.module.css';
 import TodoItem from './TodoItem';
 import { TodosContext } from '../../Store/TodosContext';
 import { TodoStatus } from '../../Models/TodoClass';
+import Modal from '../../Layout/Modal';
+import Backdrop from '../../Layout/Backdrop';
 
 const TodoList: React.FC = () => {
   const todoCtx = useContext(TodosContext);
+
+  function closeModalHandler() {
+
+    todoCtx.closeModal();
+  }
 
   useEffect(() => {
     todoCtx.retrieveCurrentTodo();
@@ -30,6 +37,9 @@ const TodoList: React.FC = () => {
                 </TodoItem>
               )
           )}
+
+        {todoCtx.modal && <Modal onCancel={closeModalHandler} />}
+        {todoCtx.modal && <Backdrop onCancel={closeModalHandler} />}
       </ul>
     </Fragment>
   );

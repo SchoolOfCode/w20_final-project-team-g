@@ -1,15 +1,17 @@
-import TodoClass from "../Models/TodoClass";
-import React, { useState } from "react";
-import firebase from "../utilities/firebase";
-import { TodoStatus } from "../Models/TodoClass";
+import TodoClass from '../Models/TodoClass';
+import React, { useState } from 'react';
+import firebase from '../utilities/firebase';
+import { TodoStatus } from '../Models/TodoClass';
 type TodosContextObj = {
   items: TodoClass[];
   reloadRequired: boolean;
+  modal: boolean;
   addTodo: (text: string) => void;
   removeTodo: (selectedTodo: TodoClass) => void;
   startTodo: (selectedTodo: TodoClass) => void; // changes status to "1"
   finishTodo: (selectedTodo: TodoClass) => void; // changes status to "Done"
   retrieveCurrentTodo: () => void;
+  closeModal: () => void;
 };
 
 export const TodosContext = React.createContext<TodosContextObj>({
@@ -20,14 +22,17 @@ export const TodosContext = React.createContext<TodosContextObj>({
   startTodo: (selectedTodo: TodoClass) => {},
   finishTodo: (selectedTodo: TodoClass) => {},
   retrieveCurrentTodo: () => {},
+  modal: false,
+  closeModal: () => {},
 });
 
 const TodosContextProvider: React.FC = (props) => {
   const [todos, setTodos] = useState<TodoClass[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const todoRef = firebase.firestore().collection("todos");
+  const todoRef = firebase.firestore().collection('todos');
+  const [modalIsOpen, setModalIsOpen] = useState(false);
 
-  console.log("ALL TODO STATE", todos);
+  console.log('ALL TODO STATE', todos);
 
   function addTodoHandler(newTodoInput: string) {
     const newTodo = new TodoClass(newTodoInput);
@@ -59,32 +64,39 @@ const TodosContextProvider: React.FC = (props) => {
         console.error(err);
       });
 
-    console.log("todo deleted from database");
+    console.log('todo deleted from database');
   }
 
   function startTodoHandler(selectedTodo: TodoClass) {
-    console.log("STARTED TODO IS", selectedTodo);
-    todoRef
-      .doc(selectedTodo.id) 
-      .update({ status: TodoStatus.inProgress }); 
+    console.log('STARTED TODO IS', selectedTodo);
+    todoRef.doc(selectedTodo.id).update({ status: TodoStatus.inProgress });
+    setModalIsOpen(true);
+  }
+
+  function closeModalHandler() {
+    setModalIsOpen(false);
   }
 
   function finishTodoHandler(selectedTodo: TodoClass) {
-    todoRef
-      .doc(selectedTodo.id) 
-      .update({ status: TodoStatus.done }); //
+    todoRef.doc(selectedTodo.id).update({ status: TodoStatus.done }); //
   }
 
   const contextValue: TodosContextObj = {
     items: todos,
     reloadRequired: false,
+    modal: modalIsOpen,
     addTodo: addTodoHandler,
     removeTodo: deleteTodoHandler,
     startTodo: startTodoHandler,
     finishTodo: finishTodoHandler,
     retrieveCurrentTodo: retrieveCurrentTodoHandler,
+    closeModal: closeModalHandler,
   };
 
-  return <TodosContext.Provider value={contextValue}>{props.children}</TodosContext.Provider>;
+  return (
+    <TodosContext.Provider value={contextValue}>
+      {props.children}
+    </TodosContext.Provider>
+  );
 };
 export default TodosContextProvider;
