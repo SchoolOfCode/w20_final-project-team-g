@@ -3,10 +3,35 @@ import TodoList from '../Components/Todos/Todolist';
 import InProgress from '../Components/Todos/InProgress';
 import styles from './HomePage.module.css';
 import CompletedTodos from '../Components/Todos/CompletedTodos';
+import { Fragment, useState } from 'react';
+import Modal from '../Layout/Modal';
+import Backdrop from '../Layout/Backdrop';
+import CardWrapper from '../Layout/CardWrapper';
+
 const HomePage = () => {
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+
+  function startTaskHandler() {
+    setModalIsOpen(true);
+  }
+
+  function closeModalHandler() {
+    setModalIsOpen(false);
+  }
+
   return (
-    <div>
-      <h1>This is the homepage</h1>
+    <Fragment>
+      <div>
+        <CardWrapper>
+          <button onClick={startTaskHandler}>START TIMER</button>
+        </CardWrapper>
+
+        {modalIsOpen && (
+          <Modal onCancel={closeModalHandler} onConfirm={closeModalHandler} />
+        )}
+        {modalIsOpen && <Backdrop onCancel={closeModalHandler} />}
+      </div>
+
       <NewTodo />
 
       <div className={styles.flex}>
@@ -20,7 +45,7 @@ const HomePage = () => {
           <CompletedTodos />
         </div>
       </div>
-    </div>
+    </Fragment>
   );
 };
 

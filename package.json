@@ -44,6 +44,7 @@
     ]
   },
   "devDependencies": {
+    "@types/moment-duration-format": "^2.2.3",
     "@types/react-router-dom": "^5.1.8"
   }
 }
