@@ -1,7 +1,7 @@
 import PomodoroTimer from "../Components/PomodoroTimer/PomodoroTimer";
 const KumospacePage = () => {
     return (
-      <PomodoroTimer/>
+      <h1>KumospacePage</h1>
     );
 }
 
