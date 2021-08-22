@@ -1,6 +1,5 @@
 import TodoClass from "../Models/TodoClass";
 import React, { useState } from "react";
-//import { v4 as uuidv4 } from 'uuid';
 import firebase from "../utilities/firebase";
 import { TodoStatus } from "../Models/TodoClass";
 type TodosContextObj = {
@@ -11,7 +10,6 @@ type TodosContextObj = {
   startTodo: (selectedTodo: TodoClass) => void; // changes status to "1"
   finishTodo: (selectedTodo: TodoClass) => void; // changes status to "Done"
   retrieveCurrentTodo: () => void;
-  // retrieveInProgressTodo: () => void;
 };
 
 export const TodosContext = React.createContext<TodosContextObj>({
@@ -22,7 +20,6 @@ export const TodosContext = React.createContext<TodosContextObj>({
   startTodo: (selectedTodo: TodoClass) => {},
   finishTodo: (selectedTodo: TodoClass) => {},
   retrieveCurrentTodo: () => {},
-  // retrieveInProgressTodo: () => {},
 });
 
 const TodosContextProvider: React.FC = (props) => {
@@ -42,7 +39,6 @@ const TodosContextProvider: React.FC = (props) => {
       });
   }
 
-  // all good
   function retrieveCurrentTodoHandler() {
     setIsLoading(true);
     todoRef.onSnapshot((querySnapshot) => {
@@ -55,7 +51,6 @@ const TodosContextProvider: React.FC = (props) => {
     });
   }
 
-  // all good
   function deleteTodoHandler(selectedTodo: TodoClass) {
     todoRef
       .doc(selectedTodo.id)
@@ -69,41 +64,15 @@ const TodosContextProvider: React.FC = (props) => {
 
   function startTodoHandler(selectedTodo: TodoClass) {
     console.log("STARTED TODO IS", selectedTodo);
-
-    // Need to update database
     todoRef
-      .doc(selectedTodo.id) // inserted the todo id into here so firebase finds the correct Doc to update
-      .update({ status: 1 }); //
-
-    // Now working.The code below I don't believe is necessary as Firebase handles all the updates on their end.
-    //Think of it like  every time we update/change/add/delete a to do its runs the setTodo hook for us. I think...
-
-    ///////////////////////////////////// MIGHT BE NEEDED LATER IN PROJECT?///////
-    // setTodos((prev) => {
-    //   const indexToUpdate = prev.findIndex((todo) => todo.id === selectedTodo.id);
-    //   const oldValue = prev[indexToUpdate];
-    //   const newValue = Object.assign({}, oldValue, {
-    //     status: TodoStatus.inProgress,
-    //   });
-    //   const updatedTodos = [
-    //     // all items to left of what we are updating
-    //     ...prev.slice(0, indexToUpdate),
-    //     // the updated value
-    //     newValue,
-    //     // all the items to the right of what we are updating
-    //     ...prev.slice(indexToUpdate + 1),
-    //     // skip what was updated
-    //   ];
-
-    //   return updatedTodos;
-    // });
-    //////////////////////////// MIGHT BE NEEDED LATER IN PROJECT?///////
-    //
+      .doc(selectedTodo.id) 
+      .update({ status: TodoStatus.inProgress }); 
   }
 
   function finishTodoHandler(selectedTodo: TodoClass) {
-    console.log("FINISHED TODO IS", selectedTodo);
-    return (selectedTodo.status = 2);
+    todoRef
+      .doc(selectedTodo.id) 
+      .update({ status: TodoStatus.done }); //
   }
 
   const contextValue: TodosContextObj = {
@@ -114,7 +83,6 @@ const TodosContextProvider: React.FC = (props) => {
     startTodo: startTodoHandler,
     finishTodo: finishTodoHandler,
     retrieveCurrentTodo: retrieveCurrentTodoHandler,
-    // retrieveInProgressTodo: retrieveInProgressTodoHandler,
   };
 
   return <TodosContext.Provider value={contextValue}>{props.children}</TodosContext.Provider>;

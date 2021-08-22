@@ -1,36 +1,29 @@
-import React, { Fragment, useContext, useEffect } from 'react';
+import React, { Fragment, useContext } from 'react';
 import styles from './Todolist.module.css';
 import TodoItem from './TodoItem';
 import { TodosContext } from '../../Store/TodosContext';
+import { TodoStatus } from '../../Models/TodoClass';
 
 const CompletedTodos: React.FC = () => {
   const todoCtx = useContext(TodosContext);
-
-  // let change = todoCtx.items.map((item) => {
-  //   return item.status === 1;
-  // });
-  // useEffect(() => {
-  //   console.log('InProgress useEffect rerun due to status change');
-  //   // todoCtx.retrieveTodo();
-  //   // console.log(todoCtx.items);
-  // }, [change]);
 
   return (
     <Fragment>
       <h3>DONE </h3>
       <ul className={styles.todos}>
-        {todoCtx.items.map((item) =>
-          item.status === 2 ? (
-            <TodoItem
-              key={item.id}
-              text={item.todoTitle}
-              onFinish={todoCtx.finishTodo.bind(null, item)}
-            >
-              {item.todoTitle}
-            </TodoItem>
-          ) : (
-            <h4 key={item.id}>Nothing completed</h4>
-          )
+        {todoCtx.items.map(
+          (item) =>
+            item.status === TodoStatus.done && (
+              <TodoItem
+                key={item.id}
+                text={item.todoTitle}
+                onStartTodo={todoCtx.startTodo.bind(null, item)}
+                onFinish={todoCtx.finishTodo.bind(null, item)}
+                onRemoveTodo={todoCtx.removeTodo.bind(null, item)}
+              >
+                {item.todoTitle}
+              </TodoItem>
+            )
         )}
       </ul>
     </Fragment>
@@ -38,4 +31,3 @@ const CompletedTodos: React.FC = () => {
 };
 
 export default CompletedTodos;
-

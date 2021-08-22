@@ -1,7 +1,8 @@
-import React, { Fragment, useContext, useEffect } from "react";
-import styles from "./Todolist.module.css";
-import TodoItem from "./TodoItem";
-import { TodosContext } from "../../Store/TodosContext";
+import React, { Fragment, useContext, useEffect } from 'react';
+import styles from './Todolist.module.css';
+import TodoItem from './TodoItem';
+import { TodosContext } from '../../Store/TodosContext';
+import { TodoStatus } from '../../Models/TodoClass';
 
 const TodoList: React.FC = () => {
   const todoCtx = useContext(TodosContext);
@@ -18,13 +19,13 @@ const TodoList: React.FC = () => {
         {todoCtx.items &&
           todoCtx.items.map(
             (item) =>
-              item.status === 0 && (
+              item.status === TodoStatus.todo && (
                 <TodoItem
                   key={item.id}
                   text={item.todoTitle}
-                  onRemoveTodo={todoCtx.removeTodo.bind(null, item)}
                   onStartTodo={todoCtx.startTodo.bind(null, item)}
                   onFinish={todoCtx.finishTodo.bind(null, item)}
+                  onRemoveTodo={todoCtx.removeTodo.bind(null, item)}
                 >
                   {item.todoTitle}
                 </TodoItem>

@@ -1,15 +1,11 @@
-import React, { Fragment, useContext, useEffect } from "react";
-import styles from "./Todolist.module.css";
-import TodoItem from "./TodoItem";
-import { TodosContext } from "../../Store/TodosContext";
+import React, { Fragment, useContext } from 'react';
+import styles from './Todolist.module.css';
+import TodoItem from './TodoItem';
+import { TodosContext } from '../../Store/TodosContext';
+import { TodoStatus } from '../../Models/TodoClass';
 
 const InProgress: React.FC = () => {
   const todoCtx = useContext(TodosContext);
-
-  useEffect(() => {
-    console.log("InProgress useEffect rerun due to status change");
-    todoCtx.retrieveCurrentTodo();
-  }, []);
 
   return (
     <Fragment>
@@ -17,11 +13,13 @@ const InProgress: React.FC = () => {
       <ul className={styles.todos}>
         {todoCtx.items.map(
           (item) =>
-            item.status === 1 && (
+            item.status === TodoStatus.inProgress && (
               <TodoItem
                 key={item.id}
                 text={item.todoTitle}
+                onStartTodo={todoCtx.startTodo.bind(null, item)}
                 onFinish={todoCtx.finishTodo.bind(null, item)}
+                onRemoveTodo={todoCtx.removeTodo.bind(null, item)}
               >
                 {item.todoTitle}
               </TodoItem>
@@ -33,20 +31,3 @@ const InProgress: React.FC = () => {
 };
 
 export default InProgress;
-
-// const InProgress: React.FC = (props) => {
-//   const todoCtx = useContext(TodosContext);
-
-//   return (
-//     <Fragment>
-//       <h3>In Progress</h3>
-//       <ul className={styles.todos}>
-//         {props.children}
-//       </ul>
-//     </Fragment>
-//   );
-// };
-
-// export default InProgress;
-
-//
