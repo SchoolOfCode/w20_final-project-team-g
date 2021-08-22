@@ -1,8 +1,7 @@
+import PomodoroTimer from "../Components/PomodoroTimer/PomodoroTimer";
 const KumospacePage = () => {
     return (
-      <div>
-        <h1>Virtual space</h1>
-      </div>
+      <PomodoroTimer/>
     );
 }
 

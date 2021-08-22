@@ -1,11 +1,11 @@
-import React from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import React from "react";
+import { Switch, Route, Redirect } from "react-router-dom";
 
-import './App.css';
-import HomePage from './Pages/HomePage';
-import KumospacePage from './Pages/KumospacePage';
-import ProfilePage from './Pages/ProfilePage';
-import Layout from './Layout/Layout';
+import "./App.css";
+import HomePage from "./Pages/HomePage";
+import KumospacePage from "./Pages/KumospacePage";
+import ProfilePage from "./Pages/ProfilePage";
+import Layout from "./Layout/Layout";
 
 function App() {
   return (
