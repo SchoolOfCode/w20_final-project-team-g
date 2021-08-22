@@ -55,12 +55,12 @@ h2 {
   background-color: white;
   padding: 1rem;
   text-align: center;
-  width: 40rem;
+  width: 50rem;
   height: 25rem;
   z-index: 20;
   position: fixed;
   top: 20vh;
-  left: calc(50% - 15rem);
+  left: calc(50% - 25rem);
 }
 
 .backdrop {
