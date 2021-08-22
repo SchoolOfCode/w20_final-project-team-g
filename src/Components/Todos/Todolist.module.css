@@ -1,0 +1,13 @@
+.todos {
+  list-style: none;
+  margin: 0.5rem auto;
+  padding: 0;
+  width: 15rem;
+  border: 2px solid aqua;
+}
+
+.todoItem {
+  border: 2px solid pink;
+    margin: 0.5rem auto;
+
+}
