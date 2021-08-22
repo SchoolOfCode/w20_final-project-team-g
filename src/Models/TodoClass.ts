@@ -1,22 +1,8 @@
-// const TO_DO = 'todo';
-// const IN_Progress = 'in-progress';
-// const Done = 'done';
-
 export enum TodoStatus {
   todo,
   inProgress,
   done,
 }
-
-export interface TodoModel {
-  id: string;
-  todoTitle: string;
-  date: string;
-  todoBody?: string;
-  createdBy?: string;
-  status?: TodoStatus;
-}
-
 
 class TodoClass {
   id: string;

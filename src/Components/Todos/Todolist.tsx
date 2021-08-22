@@ -8,7 +8,6 @@ const TodoList: React.FC = () => {
   const todoCtx = useContext(TodosContext);
 
   useEffect(() => {
-    // const todoref = firebase.database().ref('currentTodo');
     todoCtx.retrieveCurrentTodo();
   }, []);
 
