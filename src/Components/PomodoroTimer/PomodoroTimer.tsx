@@ -69,7 +69,7 @@ const PomodoroTimer = () => {
         }
         return prevTimeLeft;
       });
-    }, 100);
+    }, 1000);
   };
 
   return (
