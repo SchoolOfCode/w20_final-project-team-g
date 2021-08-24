@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import "./PomodoroTimer.css";
+import { useState, useEffect } from 'react';
+import styles from './Pomodoro.module.css';
 
 const PomodoroTimer = () => {
   //break code
@@ -21,7 +21,6 @@ const PomodoroTimer = () => {
   const breakLengthInMinutes = Math.floor(breakLength / 60);
 
   //session code
-
   const [sessionLength, setSessionLength] = useState(60 * 25);
 
   const decrementSessionLengthByOneMin = () => {
@@ -40,20 +39,19 @@ const PomodoroTimer = () => {
   const sessionLengthInMinutes = Math.floor(sessionLength / 60);
 
   //time left code
-
   const [timeLeft, setTimeLeft] = useState(sessionLength);
 
   let minutes = Math.floor(timeLeft / 60);
   let seconds = timeLeft - minutes * 60;
-  let secondZeroString = "";
-  let minuteZeroString = "";
+  let secondZeroString = '';
+  let minuteZeroString = '';
 
   if (seconds < 10) {
-    secondZeroString = "0";
+    secondZeroString = '0';
   }
 
   if (minutes < 10) {
-    minuteZeroString = "0";
+    minuteZeroString = '0';
   }
 
   useEffect(() => {

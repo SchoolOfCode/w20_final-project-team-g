@@ -2,6 +2,7 @@ import TodoClass from '../Models/TodoClass';
 import React, { useState } from 'react';
 import firebase from '../utilities/firebase';
 import { TodoStatus } from '../Models/TodoClass';
+
 type TodosContextObj = {
   items: TodoClass[];
   reloadRequired: boolean;
