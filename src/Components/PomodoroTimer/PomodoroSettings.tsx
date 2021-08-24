@@ -1,21 +1,21 @@
-import { useState } from 'react';
-
+import { useState, useContext } from 'react';
 import styles from './Pomodoro.module.css';
-
-const Settings = () => {
+import { PomodoroContext } from '../../Store/PomodoroContext';
+import { PomoStatus } from '../../Store/PomodoroContext';
+const PomodoroSettings = () => {
   const [newTimer, setNewTimer] = useState({
     work: 0.3,
     short: 0.2,
     long: 1,
-    active: 'work', // which timer is being used
+    active: PomoStatus.work, // which timer is being used
   });
 
-  //   const { updateExecute } = useContext(SettingsContext);
+  const pomodoroCtx = useContext(PomodoroContext);
 
   const handleChange = (event: React.FormEvent) => {
     const { name, value } = event.target as HTMLInputElement;
     switch (name) {
-      case 'work':
+      case PomoStatus.work:
         setNewTimer({
           ...newTimer,
           work: parseInt(value),
@@ -37,29 +37,29 @@ const Settings = () => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    // updateExecute(newTimer);
+    pomodoroCtx.updateExecute(newTimer);
   };
 
   return (
-    <div className="form-container">
+    <div className={styles.formContainer}>
       <form noValidate onSubmit={handleSubmit}>
-        <div className="input-wrapper">
+        <div className={styles.inputWrapper}>
           <input
-            className="input"
+            className={styles.input}
             type="number"
             name="work"
             onChange={handleChange}
             value={newTimer.work}
           />
           <input
-            className="input"
+            className={styles.input}
             type="number"
             name="shortBreak"
             onChange={handleChange}
             value={newTimer.short}
           />
           <input
-            className="input"
+            className={styles.input}
             type="number"
             name="longBreak"
             onChange={handleChange}
@@ -72,4 +72,4 @@ const Settings = () => {
   );
 };
 
-export default Settings;
+export default PomodoroSettings;

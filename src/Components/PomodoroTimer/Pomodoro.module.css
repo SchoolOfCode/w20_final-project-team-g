@@ -24,19 +24,19 @@
   border-radius: 1.5rem;
 }
 
-.active-label {
+.activeLabel {
   color: #0c0e1b;
   background-color: #fe6f6b;
 }
 
-.timer-container {
+.timerContainer {
   display: flex;
   flex: 2;
   align-items: center;
   justify-content: center;
 }
 
-.time-wrapper {
+.timeWrapper {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -49,7 +49,7 @@
   box-shadow: 1rem 1.5rem 2rem rgba(0, 0, 0, 0.6);
 }
 
-.button-wrapper {
+.buttonWrapper {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -68,18 +68,18 @@ button {
   cursor: pointer;
 }
 
-.button-wrapper button.activve {
+.buttonWrapper button.activve {
   color: #0c0e1b;
   background-color: #c9ccea;
   border: 1px solid #0c0e1b;
 }
-.form-container {
+.formContainer {
   text-align: center;
 }
-.input-wrapper {
+.inputWrapper {
   margin: 1.5rem;
 }
-.input-wrapper input {
+.inputWrapper input {
   height: 30px;
   width: 30px;
   padding: 2rem;

@@ -1,8 +1,15 @@
 import { useState, createContext } from 'react';
 
+export enum PomoStatus {
+  work = 'work',
+  short = 'short',
+  long = 'long',
+  nothing = 'null',
+}
+
 export const PomodoroContext = createContext({
   pomodoro: 0,
-  executing: {},
+  executing: PomoStatus,
   updateExecute: (updatedSettings: any) => {},
   startAnimate: false,
   startTimer: (updatedSettings: any) => {},
@@ -15,15 +22,16 @@ export const PomodoroContext = createContext({
 
 const PomodoroContextProvider: React.FC = (props) => {
   const [pomodoro, setPomodoro] = useState(0);
-  const [executing, setExecuting] = useState({});
+    const [executing, setExecuting] = useState(PomoStatus);
   const [startAnimate, setStartAnimate] = useState(false);
 
-  function setCurrentTimer(active_state) {
+  function setCurrentTimer(active_state: PomoStatus) {
     updateExecute({
       ...executing,
       active: active_state,
     });
     setTimerTime(executing);
+    console.log('function called');
   }
 
   // start animation fn
@@ -44,7 +52,7 @@ const PomodoroContextProvider: React.FC = (props) => {
 
   // clear session storage
   const SettingsBtn = () => {
-    setExecuting({});
+    setExecuting(PomoStatus.nothing);
     setPomodoro(0);
   };
 
@@ -74,36 +82,37 @@ const PomodoroContextProvider: React.FC = (props) => {
     setStartAnimate(false);
   }
 
-//   const contextValue: typeof PomodoroContext = {
-//     pomodoro,
-//     executing,
-//     updateExecute,
-//     startAnimate,
-//     startTimer,
-//     pauseTimer,
-//     children,
-//     SettingsBtn,
-//     setCurrentTimer,
-//     stopAimate,
-//   };
+  //   const contextValue: typeof PomodoroContext = {
+  //     pomodoro,
+  //     executing,
+  //     updateExecute,
+  //     startAnimate,
+  //     startTimer,
+  //     pauseTimer,
+  //     children,
+  //     SettingsBtn,
+  //     setCurrentTimer,
+  //     stopAimate,
+  //   };
 
-    return (
-        <PomodoroContext.Provider value={{
-            pomodoro, 
-            executing,
-            updateExecute, 
-            startAnimate, 
-            startTimer,
-            pauseTimer,
-            children,
-            SettingsBtn,
-            setCurrentTimer,
-            stopAimate
-        }}>
-            {props.children}
-        </PomodoroContext.Provider>
-    )
-    
+  return (
+    <PomodoroContext.Provider
+      value={{
+        pomodoro,
+        executing,
+        updateExecute,
+        startAnimate,
+        startTimer,
+        pauseTimer,
+        children,
+        SettingsBtn,
+        setCurrentTimer,
+        stopAimate,
+      }}
+    >
+      {props.children}
+    </PomodoroContext.Provider>
+  );
 };
 
 export default PomodoroContextProvider;

@@ -1,5 +1,5 @@
 import { Fragment } from 'react';
-import Settings from '../Components/PomodoroTimer/SetPomodoro';
+import Settings from '../Components/PomodoroTimer/PomodoroSettings';
 const KumospacePage = () => {
   return (
     <Fragment>
