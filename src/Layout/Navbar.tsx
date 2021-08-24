@@ -23,30 +23,37 @@ const Navbar = () => {
   const {
     userProfile: { name, email, uniqueID },
   } = useContext(UserContext);
-  console.log(user ? "yes" : "no");
-  return (
-    <nav>
+  // console.log(user ? "yes" : "no");
+  if (user) {
+    return (
       <>
-        <div className="loginState">
-          {!user && <Login></Login>}
-          {user && <Dashboard></Dashboard>}
-        </div>
+        <nav>
+          <>
+            <div className="loginState">{user && <Dashboard></Dashboard>}</div>
+          </>
+          <ul>
+            <li>
+              <Link to="/">Kanban</Link>
+            </li>
+
+            <li>
+              <Link to="/kumospace">Kumospace</Link>
+            </li>
+
+            <li>
+              <Link to="/profile">My profile</Link>
+            </li>
+          </ul>
+        </nav>
       </>
-      {/* <Dashboard></Dashboard> */}
-      <ul>
-        <li>
-          <Link to="/">Kanban</Link>
-        </li>
-
-        <li>
-          <Link to="/kumospace">Kumospace</Link>
-        </li>
-
-        <li>
-          <Link to="/profile">My profile</Link>
-        </li>
-      </ul>
-    </nav>
+    );
+  }
+  return (
+    <div>
+      <p>
+        Please <Link to="/login">Login</Link>
+      </p>
+    </div>
   );
 };
 

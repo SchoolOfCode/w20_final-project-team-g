@@ -5,7 +5,7 @@ const KumospacePage = () => {
   const {
     userProfile: { name, email, uniqueID },
   } = useContext(UserContext);
-  // const { name, email, uniqueID } = userProfile;
+  // const { name, email, uniqueID } = userProfile
   console.log(name);
   return (
     <div>

@@ -8,13 +8,14 @@ import Layout from "./Layout/Layout";
 import TodosContextProvider from "./Store/TodosContext";
 import "firebase/auth";
 import { auth, db } from "./utilities/firebase";
-// import Login from "./Components/Login/Login";
-// import Register from "./Components/Login/Register";
-// import Reset from "./Components/Login/Reset";
+import Login from "./Components/Login/Login";
+import Register from "./Components/Login/Register";
+import Reset from "./Components/Login/Reset";
 // import Dashboard from "./Components/Login/Dashboard";
 import { UserContext } from "./Store/UserContext";
 import { useAuthState } from "react-firebase-hooks/auth";
 import Navbar from "./Layout/Navbar";
+// import Register from "./Components/Login/Register";
 //
 function App() {
   //
@@ -27,33 +28,41 @@ function App() {
     try {
       const query = await db.collection("users").where("uid", "==", user?.uid).get();
       const data = await query.docs[0].data();
-      setUserProfile({ user, name: data.name, email: user.email, uniqueID: user.uid }); // get user info for the userContext
+      setUserProfile({ name: data.name, email: user.email, uniqueID: user.uid }); // get user info for the userContext
     } catch (err) {
       console.error(err);
-      alert("An error occured while fetching user data");
+      console.log("An error occured while fetching user data");
     }
   };
   useEffect(() => {
     if (loading) return;
-    // if (!user) return history.replace("/"); // I think this returns you to home if user does not exist?
+    if (!user) return history.replace("/register"); // I think this returns you to home if user does not exist?
     fetchUserName();
-  }, []);
-  ///
-  //Router sits on top so its always visible. Bug where when I refresh the router does not render. think its to to with the Router below that has the login components
-  console.log(user ? "Yes" : "NO");
+  }, [user, loading]);
+
+  console.log(user ? "Yes logged in" : "No user logged in"); // user returns true if someone is logged in
   return (
     <UserContext.Provider value={{ userProfile }}>
       <TodosContextProvider>
         <Layout>
           <Switch>
+            <Route path="/login" exact>
+              <Login />
+            </Route>
+            <Route path="/passwordreset" exact>
+              <Reset />
+            </Route>
+            <Route path="/register" exact>
+              <Register />
+            </Route>
             <Route path="/" exact>
               <HomePage />
             </Route>
-            <Route path="/kumospace" exact>
-              <KumospacePage />
-            </Route>
             <Route path="/profile" exact>
               <ProfilePage />
+            </Route>
+            <Route path="/kumospace" exact>
+              <KumospacePage />
             </Route>
             <Route path="*">
               <Redirect to="/" />

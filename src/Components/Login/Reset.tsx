@@ -10,7 +10,7 @@ function Reset() {
   const history = useHistory();
   useEffect(() => {
     if (loading) return;
-    if (user) history.replace("/dashboard");
+    if (user) history.replace("/");
   }, [user, loading]);
   return (
     <div className="reset">
