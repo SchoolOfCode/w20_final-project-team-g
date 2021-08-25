@@ -14,9 +14,7 @@ import Reset from "./Components/Login/Reset";
 // import Dashboard from "./Components/Login/Dashboard";
 import { UserContext } from "./Store/UserContext";
 import { useAuthState } from "react-firebase-hooks/auth";
-import Navbar from "./Layout/Navbar";
-// import Register from "./Components/Login/Register";
-//
+
 function App() {
   //
   //GET USER INFO FOR USER CONTEXT--> can this be put in its own context file like the Todo list?
