@@ -1,7 +1,12 @@
+import Moodtracker from '../Components/Moodtracker/Moodtracker';
 const KumospacePage = () => {
-    return (
+  return (
+    <div>
       <h1>KumospacePage</h1>
-    );
-}
 
-export default KumospacePage
+      <Moodtracker />
+    </div>
+  )
+};
+
+export default KumospacePage;
