@@ -9,60 +9,45 @@ export enum PomoStatus {
 
 export const PomodoroContext = createContext({
   pomodoro: 0,
-  executing: PomoStatus,
-  updateExecute: (updatedSettings: any) => {},
+  settings: {},
+  updateSettings: (updatedSettings: any) => {},
   startAnimate: false,
   startTimer: (updatedSettings: any) => {},
   pauseTimer: (updatedSettings: any) => {},
   children: (updatedSettings: any) => {},
-  SettingsBtn: (updatedSettings: any) => {},
-  setCurrentTimer: (updatedSettings: any) => {},
-  stopAimate: () => {},
+  resetSettings: (updatedSettings: any) => {},
+  setSession: (updatedSettings: any) => {},
+  stopTimer: () => {},
 });
 
 const PomodoroContextProvider: React.FC = (props) => {
   const [pomodoro, setPomodoro] = useState(0);
-    const [executing, setExecuting] = useState(PomoStatus);
+  const [settings, setsettings] = useState({});
   const [startAnimate, setStartAnimate] = useState(false);
 
-  function setCurrentTimer(active_state: PomoStatus) {
-    updateExecute({
-      ...executing,
-      active: active_state,
-    });
-    setTimerTime(executing);
-    console.log('function called');
-  }
+  console.log('chosen settings', settings);
 
-  // start animation fn
   function startTimer() {
     setStartAnimate(true);
   }
-  // pause animation fn
   function pauseTimer() {
     setStartAnimate(false);
   }
-  // pass time to counter
-  const children = ({ remainingTime }) => {
-    const minutes = Math.floor(remainingTime / 60);
-    const seconds = remainingTime % 60;
 
-    return `${minutes}:${seconds}`;
+  function stopTimer() {
+    setStartAnimate(false);
+  }
+
+  const updateSettings = (updatedSettings: {}) => {
+    //obtained from PomodoroSettings
+    setsettings(updatedSettings);
+    setTimer(updatedSettings);
   };
 
-  // clear session storage
-  const SettingsBtn = () => {
-    setExecuting(PomoStatus.nothing);
-    setPomodoro(0);
-  };
-
-  const updateExecute = (updatedSettings) => {
-    setExecuting(updatedSettings);
-    setTimerTime(updatedSettings);
-  };
-
-  const setTimerTime = (evaluate) => {
-    switch (evaluate.active) {
+  const setTimer = (evaluate) => {
+    switch (
+      evaluate.session // frm settings
+    ) {
       case 'work':
         setPomodoro(evaluate.work);
         break;
@@ -78,38 +63,44 @@ const PomodoroContextProvider: React.FC = (props) => {
     }
   };
 
-  function stopAimate() {
-    setStartAnimate(false);
+  const resetSettings = () => {
+    setsettings({});
+    setPomodoro(0);
+
+    console.log("resetsettings function called")
+  };
+
+  function setSession(chosenSession: {}) {
+    updateSettings({
+      ...settings, // updating the session key
+      session: chosenSession,
+    });
+    setTimer(settings); // either work, short, or long
   }
 
-  //   const contextValue: typeof PomodoroContext = {
-  //     pomodoro,
-  //     executing,
-  //     updateExecute,
-  //     startAnimate,
-  //     startTimer,
-  //     pauseTimer,
-  //     children,
-  //     SettingsBtn,
-  //     setCurrentTimer,
-  //     stopAimate,
-  //   };
+  // pass time to counter
+  const children = ({ remainingTime }) => {
+    const minutes = Math.floor(remainingTime / 60);
+    const seconds = remainingTime % 60;
+
+    return `${minutes}:${seconds}`;
+  };
+
+  const contextValue = {
+    pomodoro,
+    settings,
+    updateSettings,
+    startAnimate,
+    startTimer,
+    pauseTimer,
+    children,
+    resetSettings,
+    setSession,
+    stopTimer,
+  };
 
   return (
-    <PomodoroContext.Provider
-      value={{
-        pomodoro,
-        executing,
-        updateExecute,
-        startAnimate,
-        startTimer,
-        pauseTimer,
-        children,
-        SettingsBtn,
-        setCurrentTimer,
-        stopAimate,
-      }}
-    >
+    <PomodoroContext.Provider value={contextValue}>
       {props.children}
     </PomodoroContext.Provider>
   );

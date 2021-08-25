@@ -4,18 +4,18 @@ import { PomodoroContext } from '../../Store/PomodoroContext';
 import { PomoStatus } from '../../Store/PomodoroContext';
 const PomodoroSettings = () => {
   const [newTimer, setNewTimer] = useState({
-    work: 0.3,
-    short: 0.2,
-    long: 1,
-    active: PomoStatus.work, // which timer is being used
+    work: 25,
+    short: 5,
+    long: 10,
+    session: 'work',
   });
 
-  const pomodoroCtx = useContext(PomodoroContext);
+  const { updateSettings } = useContext(PomodoroContext);
 
-  const handleChange = (event: React.FormEvent) => {
-    const { name, value } = event.target as HTMLInputElement;
+  const handleChange = (input) => {
+    const { name, value } = input.target;
     switch (name) {
-      case PomoStatus.work:
+      case 'work':
         setNewTimer({
           ...newTimer,
           work: parseInt(value),
@@ -35,15 +35,17 @@ const PomodoroSettings = () => {
         break;
     }
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    pomodoroCtx.updateExecute(newTimer);
+    updateSettings(newTimer); // passes object back to useCOntext
+    console.log(newTimer);
   };
 
   return (
     <div className={styles.formContainer}>
       <form noValidate onSubmit={handleSubmit}>
-        <div className={styles.inputWrapper}>
+        <div>
           <input
             className={styles.input}
             type="number"
@@ -52,21 +54,21 @@ const PomodoroSettings = () => {
             value={newTimer.work}
           />
           <input
-            className={styles.input}
             type="number"
             name="shortBreak"
             onChange={handleChange}
             value={newTimer.short}
           />
           <input
-            className={styles.input}
             type="number"
             name="longBreak"
             onChange={handleChange}
             value={newTimer.long}
           />
         </div>
-        <button type="submit">Set Timer</button>
+        <button className={styles.Specialbutton} type="submit">
+          Set Timer
+        </button>
       </form>
     </div>
   );
