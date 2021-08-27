@@ -3,17 +3,11 @@ import TodoList from '../Components/Todos/Todolist';
 import InProgress from '../Components/Todos/InProgress';
 import styles from './HomePage.module.css';
 import CompletedTodos from '../Components/Todos/CompletedTodos';
-import { Fragment, useState } from 'react';
-
+import { Fragment } from 'react';
 
 const HomePage = () => {
-
-
-
   return (
     <Fragment>
-  
-
       <NewTodo />
 
       <div className={styles.flex}>

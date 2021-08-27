@@ -9,10 +9,11 @@ type TodosContextObj = {
   modal: boolean;
   addTodo: (text: string) => void;
   removeTodo: (selectedTodo: TodoClass) => void;
-  startTodo: (selectedTodo: TodoClass) => void; // changes status to "1"
-  finishTodo: (selectedTodo: TodoClass) => void; // changes status to "Done"
+  startTodo: (selectedTodo: TodoClass) => void; 
+  finishTodo: (selectedTodo: TodoClass) => void; 
   retrieveCurrentTodo: () => void;
   closeModal: () => void;
+  // inProgressTodo: {};
 };
 
 export const TodosContext = React.createContext<TodosContextObj>({
@@ -25,6 +26,7 @@ export const TodosContext = React.createContext<TodosContextObj>({
   retrieveCurrentTodo: () => {},
   modal: false,
   closeModal: () => {},
+  // inProgressTodo: {},
 });
 
 const TodosContextProvider: React.FC = (props) => {
@@ -32,6 +34,7 @@ const TodosContextProvider: React.FC = (props) => {
   const [isLoading, setIsLoading] = useState(false);
   const todoRef = firebase.firestore().collection('todos');
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  // const [inProgressTodo, setInProgressTodo] = useState<TodoClass>();
 
   console.log('ALL TODO STATE', todos);
 
@@ -72,6 +75,8 @@ const TodosContextProvider: React.FC = (props) => {
     console.log('STARTED TODO IS', selectedTodo);
     todoRef.doc(selectedTodo.id).update({ status: TodoStatus.inProgress });
     setModalIsOpen(true);
+    // setInProgressTodo(selectedTodo);
+    // console.log('moved to in progress is', inProgressTodo);
   }
 
   function closeModalHandler() {
@@ -92,6 +97,7 @@ const TodosContextProvider: React.FC = (props) => {
     finishTodo: finishTodoHandler,
     retrieveCurrentTodo: retrieveCurrentTodoHandler,
     closeModal: closeModalHandler,
+    // inProgressTodo: inProgressTodo,
   };
 
   return (

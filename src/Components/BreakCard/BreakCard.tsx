@@ -1,5 +1,5 @@
 const BreakCard = () => {
-  return <div></div>;
+  return <div>I am the break card</div>;
 };
 
 export default BreakCard;

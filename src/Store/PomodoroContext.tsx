@@ -12,6 +12,7 @@ export const PomodoroContext = createContext({
   settings: {},
   updateSettings: (updatedSettings: any) => {},
   startAnimate: false,
+  isTimerFinished: false,
   startTimer: (updatedSettings: any) => {},
   pauseTimer: (updatedSettings: any) => {},
   children: (updatedSettings: any) => {},
@@ -24,8 +25,7 @@ const PomodoroContextProvider: React.FC = (props) => {
   const [pomodoro, setPomodoro] = useState(0);
   const [settings, setsettings] = useState({});
   const [startAnimate, setStartAnimate] = useState(false);
-
-  console.log('chosen settings', settings);
+  const [isTimerFinished, setIsTimerFinished] = useState(false);
 
   function startTimer() {
     setStartAnimate(true);
@@ -67,7 +67,7 @@ const PomodoroContextProvider: React.FC = (props) => {
     setsettings({});
     setPomodoro(0);
 
-    console.log("resetsettings function called")
+    console.log('resetsettings function called');
   };
 
   function setSession(chosenSession: {}) {
@@ -80,15 +80,19 @@ const PomodoroContextProvider: React.FC = (props) => {
 
   // pass time to counter
   const children = ({ remainingTime }) => {
-    const minutes = Math.floor(remainingTime / 60);
+    const minutes = Math.floor(remainingTime / 60); // change display here
     const seconds = remainingTime % 60;
 
+    if (remainingTime === 0) {
+      setIsTimerFinished(true);
+    }
     return `${minutes}:${seconds}`;
   };
 
   const contextValue = {
     pomodoro,
     settings,
+    isTimerFinished,
     updateSettings,
     startAnimate,
     startTimer,

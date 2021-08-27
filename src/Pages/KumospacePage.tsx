@@ -1,9 +1,9 @@
 import { Fragment } from 'react';
+import PomodoroTimer from '../Components/PomodoroTimer/PomodoroTimer';
 import Modal from '../Layout/Modal';
 const KumospacePage = () => {
   return (
     <Fragment>
-      <Modal />
       <h1>KumospacePage</h1>;
     </Fragment>
   );

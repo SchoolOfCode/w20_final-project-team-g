@@ -2,18 +2,20 @@ import { useState, useContext } from 'react';
 import styles from './Pomodoro.module.css';
 import { PomodoroContext } from '../../Store/PomodoroContext';
 import { PomoStatus } from '../../Store/PomodoroContext';
+import CardWrapper from '../../Layout/CardWrapper';
 const PomodoroSettings = () => {
   const [newTimer, setNewTimer] = useState({
-    work: 25,
-    short: 5,
-    long: 10,
+    work: 0,
+    break: 0,
     session: 'work',
   });
 
-  const { updateSettings } = useContext(PomodoroContext);
+  const pomodoroCtx = useContext(PomodoroContext);
 
-  const handleChange = (input) => {
-    const { name, value } = input.target;
+  const handleClick = (selectedTime) => {
+    selectedTime.preventDefault();
+
+    const { name, value } = selectedTime.target; // extract name and value property of button
     switch (name) {
       case 'work':
         setNewTimer({
@@ -21,55 +23,37 @@ const PomodoroSettings = () => {
           work: parseInt(value),
         });
         break;
-      case 'shortBreak':
+      case 'break':
         setNewTimer({
           ...newTimer,
-          short: parseInt(value),
-        });
-        break;
-      case 'longBreak':
-        setNewTimer({
-          ...newTimer,
-          long: parseInt(value),
+          break: parseInt(value),
         });
         break;
     }
-  };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    updateSettings(newTimer); // passes object back to useCOntext
+    console.log(selectedTime.target.value);
+    pomodoroCtx.updateSettings(newTimer); // passes object back to useCOntext
     console.log(newTimer);
+
   };
 
   return (
     <div className={styles.formContainer}>
-      <form noValidate onSubmit={handleSubmit}>
-        <div>
-          <input
-            className={styles.input}
-            type="number"
-            name="work"
-            onChange={handleChange}
-            value={newTimer.work}
-          />
-          <input
-            type="number"
-            name="shortBreak"
-            onChange={handleChange}
-            value={newTimer.short}
-          />
-          <input
-            type="number"
-            name="longBreak"
-            onChange={handleChange}
-            value={newTimer.long}
-          />
-        </div>
-        <button className={styles.Specialbutton} type="submit">
-          Set Timer
+      <CardWrapper>
+        <button name="work" value="25" onClick={handleClick}>
+          25 minutes
         </button>
-      </form>
+      </CardWrapper>
+      <CardWrapper>
+        <button name="work" value="50" onClick={handleClick}>
+          50 minutes
+        </button>
+      </CardWrapper>
+      <CardWrapper>
+        <button name="work" value="1" onClick={handleClick}>
+          for quick test
+        </button>
+      </CardWrapper>
     </div>
   );
 };

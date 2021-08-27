@@ -8,15 +8,15 @@ const CountdownAnimation = ({ key, timer, animate, children }) => {
     <CountdownCircleTimer
       key={key}
       isPlaying={animate}
-      duration={timer * 60}
+      duration={timer * 6} 
       colors={[
-        ['#FCD34D', 0.33],
-        ['#FCD34D', 0.33],
+        ['#f9fafb', 0.33],
+        ['#f9fafb', 0.33],
         ['#f9fafb', 0.33],
       ]}
       strokeWidth={6}
       size={220}
-      trailColor="#151932"
+      trailColor="#FCD34D"
       onComplete={() => {
         pomodoroCtx.stopTimer();
       }}

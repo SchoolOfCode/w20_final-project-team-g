@@ -5,12 +5,12 @@ import { TodosContext } from '../../Store/TodosContext';
 import { TodoStatus } from '../../Models/TodoClass';
 import Modal from '../../Layout/Modal';
 import Backdrop from '../../Layout/Backdrop';
+import PomodoroTimer from '../PomodoroTimer/PomodoroTimer';
 
 const TodoList: React.FC = () => {
   const todoCtx = useContext(TodosContext);
 
   function closeModalHandler() {
-
     todoCtx.closeModal();
   }
 
@@ -38,7 +38,12 @@ const TodoList: React.FC = () => {
               )
           )}
 
-        {todoCtx.modal && <Modal onCancel={closeModalHandler} />}
+        {todoCtx.modal && (
+          <Modal>
+            <PomodoroTimer />
+          </Modal>
+        )}
+
         {todoCtx.modal && <Backdrop onCancel={closeModalHandler} />}
       </ul>
     </Fragment>
