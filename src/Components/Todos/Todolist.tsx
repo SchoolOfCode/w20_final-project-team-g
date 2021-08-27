@@ -26,6 +26,7 @@ const TodoList: React.FC = () => {
             (item) =>
               item.status === TodoStatus.todo && (
                 <TodoItem
+                  urgency={item.urgency}
                   key={item.id}
                   text={item.todoTitle}
                   createdBy={item.createdBy}

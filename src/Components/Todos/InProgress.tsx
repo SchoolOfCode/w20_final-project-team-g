@@ -18,6 +18,7 @@ const InProgress: React.FC = () => {
                 createdBy={item.createdBy}
                 key={item.id}
                 text={item.todoTitle}
+                urgency={item.urgency}
                 onStartTodo={todoCtx.startTodo.bind(null, item)}
                 onFinish={todoCtx.finishTodo.bind(null, item)}
                 onRemoveTodo={todoCtx.removeTodo.bind(null, item)}

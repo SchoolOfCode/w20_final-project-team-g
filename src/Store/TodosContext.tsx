@@ -8,7 +8,7 @@ type TodosContextObj = {
   items: TodoClass[];
   reloadRequired: boolean;
   modal: boolean;
-  addTodo: (text: string, createdBy: string, todoBody: string) => void;
+  addTodo: (text: string, createdBy: string, todoBody: string, todoUrgency: number) => void;
   removeTodo: (selectedTodo: TodoClass) => void;
   startTodo: (selectedTodo: TodoClass) => void; // changes status to "1"
   finishTodo: (selectedTodo: TodoClass) => void; // changes status to "Done"
@@ -34,8 +34,8 @@ const TodosContextProvider: React.FC = (props) => {
   const todoRef = firebase.firestore().collection("todos");
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
-  function addTodoHandler(newTodoInput: string, createdBy: string, todoBody: string) {
-    const newTodo = new TodoClass(newTodoInput, createdBy, todoBody);
+  function addTodoHandler(newTodoInput: string, createdBy: string, todoBody: string, todoUrgency) {
+    const newTodo = new TodoClass(newTodoInput, createdBy, todoBody, todoUrgency);
     todoRef
       .doc(newTodo.id)
       .set(Object.assign({}, newTodo))

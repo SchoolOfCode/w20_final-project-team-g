@@ -11,14 +11,16 @@ class TodoClass {
   todoBody?: string;
   createdBy?: string;
   status?: TodoStatus;
+  urgency?: number;
 
-  constructor(todoTitle: string, createdBy: string, todoBody: string) {
+  constructor(todoTitle: string, createdBy: string, todoBody: string, urgency: number) {
     this.todoTitle = todoTitle;
     this.todoBody = todoBody;
     this.id = new Date().toISOString();
     this.date = new Date().toISOString();
     this.createdBy = createdBy; // later change to signed in user name/ID ?
     this.status = TodoStatus.todo; // by default
+    this.urgency = urgency;
   }
 }
 

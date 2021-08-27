@@ -9,6 +9,7 @@ import styles from "./Todolist.module.css";
 const TodoItem: React.FC<{
   text: string;
   createdBy: string;
+  urgency: number;
   onRemoveTodo?: () => void;
   onStartTodo?: () => void;
   onFinish?: () => void;
@@ -17,6 +18,7 @@ const TodoItem: React.FC<{
     <Fragment>
       <li className={styles.todoItem}>
         <h3>{props.text}</h3>
+        <h5>Urgency {props.urgency}</h5>
 
         <p>Created By: {props.createdBy}</p>
         <button onClick={props.onStartTodo}>Start</button>
