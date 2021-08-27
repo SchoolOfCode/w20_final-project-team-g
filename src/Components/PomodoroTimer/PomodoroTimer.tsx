@@ -6,17 +6,26 @@ import PomodoroSettings from './PomodoroSettings';
 import { useContext } from 'react';
 import Modal from '../../Layout/Modal';
 import YesNoModal from '../YesNoModal/YesNoModal';
-
+// import closeTabIcon from '../../images/modal-buttons/close.png';
+// import { TodosContext } from '../../Store/TodosContext';
 const PomodoroTimer = () => {
   const pomodoroCtx = useContext(PomodoroContext);
   const [fetchModal, setFetchModal] = useState(false);
+  // const todoCtx = useContext(TodosContext);
 
+  // function closeModalHandler() {
+  //   todoCtx.closeModal();
+  // }
   const presentModal = () => {
     setFetchModal(true);
   };
 
+  // removed the close icon from here due to lack of CSS knowledge
   return (
     <div className={styles.container}>
+      {/* <div className={styles.closeIcon}>
+        <img src={closeTabIcon} alt="close tab" onClick={closeModalHandler} />
+      </div> */}
       <small>You got this</small>
       {pomodoroCtx.pomodoro !== 0 ? (
         <>
@@ -37,8 +46,6 @@ const PomodoroTimer = () => {
       )}
 
       {/* new extra conditional rendering*/}
-
-      
       {pomodoroCtx.pomodoro !== 0 && !pomodoroCtx.isTimerFinished && (
         <div className={styles.buttonWrapper}>
           <button
