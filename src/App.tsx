@@ -11,7 +11,6 @@ import { auth, db } from "./utilities/firebase";
 import Login from "./Components/Login/Login";
 import Register from "./Components/Login/Register";
 import Reset from "./Components/Login/Reset";
-// import Dashboard from "./Components/Login/Dashboard";
 import { UserContext } from "./Store/UserContext";
 import { useAuthState } from "react-firebase-hooks/auth";
 
@@ -19,6 +18,8 @@ function App() {
   //
   //GET USER INFO FOR USER CONTEXT--> can this be put in its own context file like the Todo list?
   const [user, loading, error] = useAuthState(auth);
+
+  //
   const [userProfile, setUserProfile] = useState({});
   const history = useHistory();
   // name does not exist on 'user' so it needs an async fetch to get it.
@@ -34,7 +35,7 @@ function App() {
   };
   useEffect(() => {
     if (loading) return;
-    if (!user) return history.replace("/register"); // I think this returns you to home if user does not exist?
+    if (!user) return history.replace("/login"); // Send you to register rather than home if no user is logged n
     fetchUserName();
   }, [user, loading]);
 

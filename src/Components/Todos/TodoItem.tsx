@@ -8,6 +8,7 @@ import styles from "./Todolist.module.css";
 
 const TodoItem: React.FC<{
   text: string;
+  createdBy: string;
   onRemoveTodo?: () => void;
   onStartTodo?: () => void;
   onFinish?: () => void;
@@ -15,7 +16,9 @@ const TodoItem: React.FC<{
   return (
     <Fragment>
       <li className={styles.todoItem}>
-        {props.text}
+        <h3>{props.text}</h3>
+
+        <p>Created By: {props.createdBy}</p>
         <button onClick={props.onStartTodo}>Start</button>
         <button onClick={props.onRemoveTodo}>Delete</button>
         <button onClick={props.onFinish}>Finish</button>
