@@ -15,7 +15,7 @@ const YesNoModal = () => {
   const presentBreakCardUpdateTodo = () => {
     setPresentBreak(true);
     // todoCtx.finishTodo(); // the selected class needs to be passed here but idk how
-//    todoCtx.finishTodo(todoCtx.items); // the selected class needs to be passed here but idk how
+   //todoCtx.finishTodo(todoCtx.items); // the selected class needs to be passed here but idk how
   };
   return (
     <div>

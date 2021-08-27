@@ -38,6 +38,7 @@ const PomodoroTimer = () => {
 
       {/* new extra conditional rendering*/}
 
+      
       {pomodoroCtx.pomodoro !== 0 && !pomodoroCtx.isTimerFinished && (
         <div className={styles.buttonWrapper}>
           <button

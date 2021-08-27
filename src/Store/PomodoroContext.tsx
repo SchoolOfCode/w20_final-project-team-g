@@ -22,7 +22,7 @@ export const PomodoroContext = createContext({
 });
 
 const PomodoroContextProvider: React.FC = (props) => {
-  const [pomodoro, setPomodoro] = useState(0);
+  const [pomodoro, setPomodoro] = useState(0); // the number of minutes picked
   const [settings, setsettings] = useState({});
   const [startAnimate, setStartAnimate] = useState(false);
   const [isTimerFinished, setIsTimerFinished] = useState(false);
@@ -95,6 +95,9 @@ const PomodoroContextProvider: React.FC = (props) => {
 
     if (remainingTime === 0) {
       setIsTimerFinished(true);
+      setsettings({});
+
+      setPomodoro(0) // cuasing rendering issue 
     }
 
     return `${zeroDisplayerMinutes}${minutes}:${zeroDisplayerSeconds}${seconds}`;

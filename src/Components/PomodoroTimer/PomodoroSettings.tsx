@@ -19,13 +19,13 @@ const PomodoroSettings = () => {
       case 'work':
         setNewTimer({
           ...newTimer,
-          work: parseInt(value),
+          work: +value,
         });
         break;
       case 'break':
         setNewTimer({
           ...newTimer,
-          break: parseInt(value),
+          break: +value, // needs to be auto value depending on work session chosen
         });
         break;
     }
@@ -49,7 +49,7 @@ const PomodoroSettings = () => {
         </button>
       </CardWrapper>
       <CardWrapper>
-        <button name="work" value="1" onClick={handleClick}>
+        <button name="work" value="0.05" onClick={handleClick}>
           for quick test
         </button>
       </CardWrapper>
