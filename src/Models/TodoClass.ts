@@ -12,14 +12,20 @@ class TodoClass {
   createdBy?: string;
   status?: TodoStatus;
 
-  constructor(todoTitle: string) {
+  constructor(todoTitle: string, createdBy: string) {
     this.todoTitle = todoTitle;
     this.todoBody = "";
     this.id = new Date().toISOString();
     this.date = new Date().toISOString();
-    this.createdBy = ""; // later change to signed in user name/ID ?
+    this.createdBy = createdBy; // later change to signed in user name/ID ?
     this.status = TodoStatus.todo; // by default
   }
 }
 
 export default TodoClass;
+
+//Notes on adding futher database entries to show in DOM(i.e adding a body and notes):
+//Add as variable above
+// NewTodo line 20, add as parameter
+// ToDosContext.tsx line 11(add todo) add parameter
+//ibid line 43 (addTodoHandler)

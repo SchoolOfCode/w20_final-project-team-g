@@ -8,7 +8,7 @@ type TodosContextObj = {
   items: TodoClass[];
   reloadRequired: boolean;
   modal: boolean;
-  addTodo: (text: string) => void;
+  addTodo: (text: string, createdBy: string) => void;
   removeTodo: (selectedTodo: TodoClass) => void;
   startTodo: (selectedTodo: TodoClass) => void; // changes status to "1"
   finishTodo: (selectedTodo: TodoClass) => void; // changes status to "Done"
@@ -33,16 +33,9 @@ const TodosContextProvider: React.FC = (props) => {
   const [isLoading, setIsLoading] = useState(false);
   const todoRef = firebase.firestore().collection("todos");
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const {
-    userProfile: { name },
-  } = useContext(UserContext);
 
-  // console.log('ALL TODO STATE', todos);
-  console.log(`Context: ${name}`);
-
-  function addTodoHandler(newTodoInput: string) {
-    const newTodo = new TodoClass(newTodoInput);
-    newTodo.createdBy = name;
+  function addTodoHandler(newTodoInput: string, createdBy: string) {
+    const newTodo = new TodoClass(newTodoInput, createdBy);
 
     todoRef
       .doc(newTodo.id)
@@ -50,7 +43,6 @@ const TodosContextProvider: React.FC = (props) => {
       .catch((err) => {
         console.log(err);
       });
-    // todoRef.doc(newTodo.id).update({ createdBy: "Merlin" });
     console.log(newTodo);
   }
 
