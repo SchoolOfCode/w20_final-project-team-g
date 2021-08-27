@@ -4,14 +4,11 @@ import CountdownAnimation from './CountDownAnimation';
 import { PomodoroContext } from '../../Store/PomodoroContext';
 import PomodoroSettings from './PomodoroSettings';
 import { useContext } from 'react';
-import { PomoStatus } from '../../Store/PomodoroContext';
 import Modal from '../../Layout/Modal';
-import { NewTodo } from '../Todos/NewTodo';
 import YesNoModal from '../YesNoModal/YesNoModal';
 
 const PomodoroTimer = () => {
   const pomodoroCtx = useContext(PomodoroContext);
-  const [showButtons, setShowButtons] = useState(true);
   const [fetchModal, setFetchModal] = useState(false);
 
   const presentModal = () => {

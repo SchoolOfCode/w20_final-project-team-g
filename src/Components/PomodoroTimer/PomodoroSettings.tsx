@@ -1,7 +1,6 @@
 import { useState, useContext } from 'react';
 import styles from './Pomodoro.module.css';
 import { PomodoroContext } from '../../Store/PomodoroContext';
-import { PomoStatus } from '../../Store/PomodoroContext';
 import CardWrapper from '../../Layout/CardWrapper';
 const PomodoroSettings = () => {
   const [newTimer, setNewTimer] = useState({
