@@ -97,8 +97,7 @@ const PomodoroContextProvider: React.FC = (props) => {
       setIsTimerFinished(true);
     }
 
-    if (remainingTime)
-      return `${zeroDisplayerMinutes}${minutes}:${zeroDisplayerSeconds}${seconds}`;
+    return `${zeroDisplayerMinutes}${minutes}:${zeroDisplayerSeconds}${seconds}`;
   };
 
   const contextValue = {
