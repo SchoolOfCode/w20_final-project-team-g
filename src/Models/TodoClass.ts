@@ -12,9 +12,9 @@ class TodoClass {
   createdBy?: string;
   status?: TodoStatus;
 
-  constructor(todoTitle: string, createdBy: string) {
+  constructor(todoTitle: string, createdBy: string, todoBody: string) {
     this.todoTitle = todoTitle;
-    this.todoBody = "";
+    this.todoBody = todoBody;
     this.id = new Date().toISOString();
     this.date = new Date().toISOString();
     this.createdBy = createdBy; // later change to signed in user name/ID ?
@@ -29,3 +29,4 @@ export default TodoClass;
 // NewTodo line 20, add as parameter
 // ToDosContext.tsx line 11(add todo) add parameter
 //ibid line 43 (addTodoHandler)
+//ibid line 37 (addTodoHandler in the params)
