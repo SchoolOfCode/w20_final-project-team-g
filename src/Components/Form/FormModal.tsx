@@ -13,7 +13,14 @@ const FormModal = (props: any) => {
   };
   return (
     <div>
-      <button onClick={() => setModalIsOpen(true)}>Add Todo</button>
+      <button
+        className="h-10 w-36 bg-blue-400 text-white font-bold tracking-wide rounded-2xl shadow-lg"
+        onClick={() => setModalIsOpen(true)}
+      >
+        + New Task
+      </button>
+
+      {/* <button className="h-10 w-36 bg-blue-400 text-white font-bold tracking-wide rounded-2xl shadow-lg">+   New Task</button> */}
 
       {modalIsOpen && (
         <Modal onCancel={closeModalHandler}>

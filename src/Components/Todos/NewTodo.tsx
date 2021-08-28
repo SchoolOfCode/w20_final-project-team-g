@@ -56,7 +56,7 @@ export const NewTodo: React.FC<{ onCancel: () => void }> = (props: any) => {
           onChange={(e) => setRadioValue(Number(e.target.value))}
         />
       </div>
-      <button onClick={props.onCancel}>Add todo</button>
+      <button onClick={props.onCancel && submitHandler}>Add todo</button>
     </form>
   );
 };

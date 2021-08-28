@@ -2,12 +2,12 @@
 import { BrowserRouter as Router, Link } from "react-router-dom";
 import { UserContext } from "../Store/UserContext";
 import { useAuthState } from "react-firebase-hooks/auth";
-
+import FormModal from "../Components/Form/FormModal";
 import React, { useContext } from "react";
 import Dashboard from "../Components/Login/Dashboard";
 import { auth } from "../utilities/firebase";
 
-import logo from "../images/kaizen-logo.png"
+import logo from "../images/kaizen-logo.png";
 
 const Navbar = () => {
   const [user, loading, error] = useAuthState(auth);
@@ -18,7 +18,7 @@ const Navbar = () => {
   if (user) {
     return (
       <>
-          {/* <>
+        {/* <>
             <div className="loginState">{user && <Dashboard></Dashboard>}</div>
           </> */}
         <nav className="max-w-7xl mx-auto px-20">
@@ -36,7 +36,7 @@ const Navbar = () => {
               <Link to="/profile">My profile</Link>
             </li>
             <li>
-              <button className="h-10 w-36 bg-blue-400 text-white font-bold tracking-wide rounded-2xl shadow-lg">+   New Task</button>
+              <FormModal></FormModal>
             </li>
           </ul>
         </nav>
