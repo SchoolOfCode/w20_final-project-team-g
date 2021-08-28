@@ -7,10 +7,13 @@ import no from '../../images/yes-no/no.png';
 import helpIcon from '../../images/modal-buttons/help.png';
 import styles from './YesNoModal.module.css';
 import closeTabIcon from '../../images/modal-buttons/close.png';
-
+import { PomodoroContext } from '../../Store/PomodoroContext';
+import { useEffect } from 'react';
 const YesNoModal = () => {
   const [presentBreak, setPresentBreak] = useState(false);
   const todoCtx = useContext(TodosContext);
+  const pomodoroCtx = useContext(PomodoroContext);
+
 
   function closeModalHandler() {
     todoCtx.closeModal();

@@ -27,7 +27,9 @@ const PomodoroTimer = () => {
         <img src={closeTabIcon} alt="close tab" onClick={closeModalHandler} />
       </div> */}
       <small>You got this</small>
-      {pomodoroCtx.pomodoro !== 0 ? (
+      {pomodoroCtx.pomodoro === 0 ? (
+        <PomodoroSettings />
+      ) : (
         <>
           <div className={styles.timeContainer}>
             <div className={styles.timeWrapper}>
@@ -41,8 +43,6 @@ const PomodoroTimer = () => {
             </div>
           </div>
         </>
-      ) : (
-        <PomodoroSettings />
       )}
 
       {/* new extra conditional rendering*/}

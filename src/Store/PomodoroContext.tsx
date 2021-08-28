@@ -1,10 +1,10 @@
-import { useState, createContext } from "react";
+import { useState, createContext } from 'react';
 
 export enum PomoStatus {
-  work = "work",
-  short = "short",
-  long = "long",
-  nothing = "null",
+  work = 'work',
+  short = 'short',
+  long = 'long',
+  nothing = 'null',
 }
 
 export const PomodoroContext = createContext({
@@ -16,7 +16,7 @@ export const PomodoroContext = createContext({
   startTimer: (updatedSettings: any) => {},
   pauseTimer: (updatedSettings: any) => {},
   children: (updatedSettings: any) => {},
-  resetSettings: (updatedSettings: any) => {},
+  resetSettings: () => {},
   setSession: (updatedSettings: any) => {},
   stopTimer: () => {},
 });
@@ -29,6 +29,7 @@ const PomodoroContextProvider: React.FC = (props) => {
 
   function startTimer() {
     setStartAnimate(true);
+    setIsTimerFinished(false);
   }
   function pauseTimer() {
     setStartAnimate(false);
@@ -48,13 +49,13 @@ const PomodoroContextProvider: React.FC = (props) => {
     switch (
       evaluate.session // frm settings
     ) {
-      case "work":
+      case 'work':
         setPomodoro(evaluate.work);
         break;
-      case "short":
+      case 'short':
         setPomodoro(evaluate.short);
         break;
-      case "long":
+      case 'long':
         setPomodoro(evaluate.long);
         break;
       default:
@@ -66,8 +67,7 @@ const PomodoroContextProvider: React.FC = (props) => {
   const resetSettings = () => {
     setsettings({});
     setPomodoro(0);
-
-    console.log("resetsettings function called");
+    console.log('resetsettings function called');
   };
 
   function setSession(chosenSession: {}) {
@@ -82,22 +82,21 @@ const PomodoroContextProvider: React.FC = (props) => {
   const children = ({ remainingTime }) => {
     const minutes = Math.floor(remainingTime / 60); // change display here
     const seconds = remainingTime % 60;
-    let zeroDisplayerSeconds = "";
-    let zeroDisplayerMinutes = "";
+    let zeroDisplayerSeconds = '';
+    let zeroDisplayerMinutes = '';
 
     if (seconds < 10) {
-      zeroDisplayerSeconds = "0";
+      zeroDisplayerSeconds = '0';
     }
 
     if (minutes < 10) {
-      zeroDisplayerMinutes = "0";
+      zeroDisplayerMinutes = '0';
     }
 
     if (remainingTime === 0) {
       setIsTimerFinished(true);
       setsettings({});
-
-      setPomodoro(0) // cuasing rendering issue 
+      setPomodoro(0); // cuasing rendering issue
     }
 
     return `${zeroDisplayerMinutes}${minutes}:${zeroDisplayerSeconds}${seconds}`;
