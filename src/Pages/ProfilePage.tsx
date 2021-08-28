@@ -28,7 +28,7 @@ const Profile = () => {
   //   // fetchUserName();
   // }, []);
   return (
-    <div>
+    <div  className="m-0">
       <h1>{name}</h1>
       <h1>PROFILE PAGE</h1>
       <h2>Name: {name}</h2>

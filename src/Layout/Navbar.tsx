@@ -7,6 +7,8 @@ import React, { useContext } from "react";
 import Dashboard from "../Components/Login/Dashboard";
 import { auth } from "../utilities/firebase";
 
+import logo from "../images/kaizen-logo.png"
+
 const Navbar = () => {
   const [user, loading, error] = useAuthState(auth);
   const {
@@ -16,19 +18,25 @@ const Navbar = () => {
   if (user) {
     return (
       <>
-        <nav>
-          <>
+          {/* <>
             <div className="loginState">{user && <Dashboard></Dashboard>}</div>
-          </>
-          <ul>
+          </> */}
+        <nav className="max-w-7xl mx-auto px-20">
+          <ul className="relative flex items-center justify-between h-16">
             <li>
+              <img src={logo} className="max-h-10 inset-y-4"></img>
+            </li>
+            <li className="text-gray-500 font-medium tracking-wider hover:text-blue-400 active:text-blue-400">
               <Link to="/">Kanban</Link>
             </li>
-            <li>
-              <Link to="/kumospace">Kumospace</Link>
+            <li className="text-gray-500 font-medium tracking-wider hover:text-blue-400 active:text-blue-400">
+              <Link to="/kumospace">Coffee Room</Link>
+            </li>
+            <li className="text-gray-500 font-medium tracking-wider hover:text-blue-400 active:text-blue-400">
+              <Link to="/profile">My profile</Link>
             </li>
             <li>
-              <Link to="/profile">My profile</Link>
+              <button className="h-10 w-36 bg-blue-400 text-white font-bold tracking-wide rounded-2xl shadow-lg">+   New Task</button>
             </li>
           </ul>
         </nav>
