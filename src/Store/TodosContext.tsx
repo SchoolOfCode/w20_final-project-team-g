@@ -3,17 +3,13 @@ import React, { useState, useContext } from 'react';
 import firebase from '../utilities/firebase';
 import { TodoStatus } from '../Models/TodoClass';
 import { PomodoroContext } from './PomodoroContext';
+import { UserContext } from "../Store/UserContext";
 
 type TodosContextObj = {
   items: TodoClass[];
   reloadRequired: boolean;
   modal: boolean;
-  addTodo: (
-    text: string,
-    createdBy: string,
-    todoBody: string,
-    todoUrgency: number
-  ) => void;
+  addTodo: (text: string, createdBy: string, todoBody: string, todoUrgency: number) => void;
   removeTodo: (selectedTodo: TodoClass) => void;
   startTodo: (selectedTodo: TodoClass) => void;
   finishTodo: (selectedTodo: TodoClass) => void;
@@ -38,25 +34,13 @@ export const TodosContext = React.createContext<TodosContextObj>({
 const TodosContextProvider: React.FC = (props) => {
   const [todos, setTodos] = useState<TodoClass[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const todoRef = firebase.firestore().collection('todos');
+  const todoRef = firebase.firestore().collection("todos");
   const [modalIsOpen, setModalIsOpen] = useState(false);
   // const [inProgressTodo, setInProgressTodo] = useState<TodoClass>();
   const pomodoroCtx = useContext(PomodoroContext);
 
-  console.log('ALL TODO STATE', todos);
-
-  function addTodoHandler(
-    newTodoInput: string,
-    createdBy: string,
-    todoBody: string,
-    todoUrgency
-  ) {
-    const newTodo = new TodoClass(
-      newTodoInput,
-      createdBy,
-      todoBody,
-      todoUrgency
-    );
+  function addTodoHandler(newTodoInput: string, createdBy: string, todoBody: string, todoUrgency) {
+    const newTodo = new TodoClass(newTodoInput, createdBy, todoBody, todoUrgency);
     todoRef
       .doc(newTodo.id)
       .set(Object.assign({}, newTodo))
@@ -85,11 +69,11 @@ const TodosContextProvider: React.FC = (props) => {
         console.error(err);
       });
 
-    console.log('todo deleted from database');
+    console.log("todo deleted from database");
   }
 
   function startTodoHandler(selectedTodo: TodoClass) {
-    console.log('STARTED TODO IS', selectedTodo);
+    console.log("STARTED TODO IS", selectedTodo);
     todoRef.doc(selectedTodo.id).update({ status: TodoStatus.inProgress });
     setModalIsOpen(true);
     pomodoroCtx.resetSettings();
@@ -118,10 +102,6 @@ const TodosContextProvider: React.FC = (props) => {
     // inProgressTodo: inProgressTodo,
   };
 
-  return (
-    <TodosContext.Provider value={contextValue}>
-      {props.children}
-    </TodosContext.Provider>
-  );
+  return <TodosContext.Provider value={contextValue}>{props.children}</TodosContext.Provider>;
 };
 export default TodosContextProvider;

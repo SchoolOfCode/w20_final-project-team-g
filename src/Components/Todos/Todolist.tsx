@@ -1,11 +1,11 @@
 import React, { Fragment, useContext, useEffect } from 'react';
-import styles from './Todolist.module.css';
 import TodoItem from './TodoItem';
 import { TodosContext } from '../../Store/TodosContext';
 import { TodoStatus } from '../../Models/TodoClass';
 import Modal from '../../Layout/Modal';
 import Backdrop from '../../Layout/Backdrop';
 import PomodoroTimer from '../PomodoroTimer/PomodoroTimer';
+import styles from "./Todolist.module.css";
 
 const TodoList: React.FC = () => {
   const todoCtx = useContext(TodosContext);
@@ -27,8 +27,10 @@ const TodoList: React.FC = () => {
             (item) =>
               item.status === TodoStatus.todo && (
                 <TodoItem
+                  urgency={item.urgency}
                   key={item.id}
                   text={item.todoTitle}
+                  createdBy={item.createdBy}
                   onStartTodo={todoCtx.startTodo.bind(null, item)}
                   onFinish={todoCtx.finishTodo.bind(null, item)}
                   onRemoveTodo={todoCtx.removeTodo.bind(null, item)}
