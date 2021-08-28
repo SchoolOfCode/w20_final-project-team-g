@@ -76,10 +76,10 @@ const PomodoroTimer = () => {
         </div>
       )}
 
-      {pomodoroCtx.isTimerFinished && (
+      {/* {pomodoroCtx.isTimerFinished && (
         <button onClick={presentModal}>Click here to continue</button>
-      )}
-      {fetchModal && (
+      )} */}
+      {pomodoroCtx.isTimerFinished && (
         <Modal>
           <YesNoModal />
         </Modal>
