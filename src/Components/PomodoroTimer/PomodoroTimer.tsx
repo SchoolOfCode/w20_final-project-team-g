@@ -27,9 +27,12 @@ const PomodoroTimer = () => {
         <img src={closeTabIcon} alt="close tab" onClick={closeModalHandler} />
       </div> */}
       <small>You got this</small>
-      {pomodoroCtx.pomodoro === 0 ? (
+
+      {pomodoroCtx.pomodoro === 0 && !pomodoroCtx.isTimerFinished && (
         <PomodoroSettings />
-      ) : (
+      )}
+
+      {pomodoroCtx.pomodoro !== 0 && (
         <>
           <div className={styles.timeContainer}>
             <div className={styles.timeWrapper}>
@@ -46,7 +49,7 @@ const PomodoroTimer = () => {
       )}
 
       {/* new extra conditional rendering*/}
-      {pomodoroCtx.pomodoro !== 0 && !pomodoroCtx.isTimerFinished && (
+      {pomodoroCtx.pomodoro !== 0 && (
         <div className={styles.buttonWrapper}>
           <button
             className={
@@ -72,10 +75,10 @@ const PomodoroTimer = () => {
           <button onClick={pomodoroCtx.resetSettings}> Reset </button>
         </div>
       )}
-      {pomodoroCtx.isTimerFinished && !fetchModal && (
+
+      {pomodoroCtx.isTimerFinished && (
         <button onClick={presentModal}>Click here to continue</button>
       )}
-
       {fetchModal && (
         <Modal>
           <YesNoModal />

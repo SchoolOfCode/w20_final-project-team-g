@@ -13,21 +13,21 @@ const PomodoroSettings = () => {
 
   const handleClick = (selectedTime) => {
     selectedTime.preventDefault();
-
     let breakTime;
 
-    if (selectedTime === '25') {
+    const { name, value } = selectedTime.target;
+    if (value === '25') {
       breakTime = '5';
     } else {
       breakTime = '10';
     }
 
-    const { name, value } = selectedTime.target; // extract name and value property of button
     switch (name) {
       case 'work':
         setNewTimer({
           ...newTimer,
           work: +value,
+          break: +breakTime,
         });
         break;
       case 'break':
@@ -38,7 +38,6 @@ const PomodoroSettings = () => {
         break;
     }
 
-    console.log(selectedTime.target.value);
     pomodoroCtx.updateSettings(newTimer); // passes object back to useCOntext
     console.log(newTimer);
   };
@@ -56,7 +55,7 @@ const PomodoroSettings = () => {
         </button>
       </CardWrapper>
       <CardWrapper>
-        <button name="work" value="0.05" onClick={handleClick}>
+        <button name="work" value="0.04" onClick={handleClick}>
           for quick test
         </button>
       </CardWrapper>

@@ -2,8 +2,7 @@ import { useState, createContext } from 'react';
 
 export enum PomoStatus {
   work = 'work',
-  short = 'short',
-  long = 'long',
+  break = 'break',
   nothing = 'null',
 }
 
@@ -28,21 +27,30 @@ const PomodoroContextProvider: React.FC = (props) => {
   const [isTimerFinished, setIsTimerFinished] = useState(false);
 
   function startTimer() {
-    setStartAnimate(true);
     setIsTimerFinished(false);
+    setStartAnimate(true);
+    console.log('pomodoro state is', pomodoro);
+    setIsTimerFinished(false);
+    console.log('is Timerfinished value is', isTimerFinished);
   }
+
   function pauseTimer() {
     setStartAnimate(false);
+    setPomodoro(0);
   }
 
   function stopTimer() {
     setStartAnimate(false);
+    setsettings({});
+    setPomodoro(0);
+    console.log('timer stopped settings are', settings);
   }
 
   const updateSettings = (updatedSettings: {}) => {
     //obtained from PomodoroSettings
     setsettings(updatedSettings);
     setTimer(updatedSettings);
+    // setIsTimerFinished(false);
   };
 
   const setTimer = (evaluate) => {
@@ -52,12 +60,10 @@ const PomodoroContextProvider: React.FC = (props) => {
       case 'work':
         setPomodoro(evaluate.work);
         break;
-      case 'short':
-        setPomodoro(evaluate.short);
+      case 'break':
+        setPomodoro(evaluate.break);
         break;
-      case 'long':
-        setPomodoro(evaluate.long);
-        break;
+
       default:
         setPomodoro(0);
         break;
@@ -67,7 +73,13 @@ const PomodoroContextProvider: React.FC = (props) => {
   const resetSettings = () => {
     setsettings({});
     setPomodoro(0);
-    console.log('resetsettings function called');
+    setIsTimerFinished(false);
+
+    console.log(
+      'resetsettings function called, pomodoro state & settings is',
+      pomodoro,
+      settings
+    );
   };
 
   function setSession(chosenSession: {}) {
@@ -95,8 +107,10 @@ const PomodoroContextProvider: React.FC = (props) => {
 
     if (remainingTime === 0) {
       setIsTimerFinished(true);
-      setsettings({});
-      setPomodoro(0); // cuasing rendering issue
+      console.log('is Timerfinished value is', isTimerFinished);
+
+      // setsettings({});
+      // setPomodoro(0); // cuasing rendering issue
     }
 
     return `${zeroDisplayerMinutes}${minutes}:${zeroDisplayerSeconds}${seconds}`;
