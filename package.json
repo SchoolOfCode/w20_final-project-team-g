@@ -19,7 +19,6 @@
     "react-firebase-hooks": "^3.0.4",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
-    "react-simple-radio-button": "^1.0.14",
     "typescript": "^4.3.5",
     "web-vitals": "^1.1.2"
   },

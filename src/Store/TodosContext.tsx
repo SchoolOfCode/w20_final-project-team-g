@@ -2,7 +2,7 @@ import TodoClass from "../Models/TodoClass";
 import React, { useState, useContext } from "react";
 import firebase from "../utilities/firebase";
 import { TodoStatus } from "../Models/TodoClass";
-import { UserContext } from "../Store/UserContext";
+// import { UserContext } from "../Store/UserContext";
 
 type TodosContextObj = {
   items: TodoClass[];
@@ -14,6 +14,7 @@ type TodosContextObj = {
   finishTodo: (selectedTodo: TodoClass) => void; // changes status to "Done"
   retrieveCurrentTodo: () => void;
   closeModal: () => void;
+  openModal: () => void;
 };
 
 export const TodosContext = React.createContext<TodosContextObj>({
@@ -26,6 +27,7 @@ export const TodosContext = React.createContext<TodosContextObj>({
   retrieveCurrentTodo: () => {},
   modal: false,
   closeModal: () => {},
+  openModal: () => {},
 });
 
 const TodosContextProvider: React.FC = (props) => {
@@ -70,11 +72,14 @@ const TodosContextProvider: React.FC = (props) => {
   function startTodoHandler(selectedTodo: TodoClass) {
     console.log("STARTED TODO IS", selectedTodo);
     todoRef.doc(selectedTodo.id).update({ status: TodoStatus.inProgress });
-    setModalIsOpen(true);
+    openModalHandler();
   }
 
   function closeModalHandler() {
     setModalIsOpen(false);
+  }
+  function openModalHandler() {
+    setModalIsOpen(true);
   }
 
   function finishTodoHandler(selectedTodo: TodoClass) {
@@ -91,6 +96,7 @@ const TodosContextProvider: React.FC = (props) => {
     finishTodo: finishTodoHandler,
     retrieveCurrentTodo: retrieveCurrentTodoHandler,
     closeModal: closeModalHandler,
+    openModal: openModalHandler,
   };
 
   return <TodosContext.Provider value={contextValue}>{props.children}</TodosContext.Provider>;
