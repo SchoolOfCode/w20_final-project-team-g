@@ -8,6 +8,7 @@ import { UserContext } from "../Store/UserContext";
 import { auth } from "../utilities/firebase";
 import { Link, useHistory } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
+import AddTodoButton from "../Components/AddTodoButton";
 
 const HomePage = () => {
   const history = useHistory;
@@ -25,7 +26,7 @@ const HomePage = () => {
   return (
     <Fragment>
       <h4>Welcome {name}</h4>
-      <NewTodo />
+      <AddTodoButton></AddTodoButton>
       <div className={styles.flex}>
         <div className={styles.column}>
           <TodoList />

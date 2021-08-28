@@ -17,6 +17,7 @@ export const NewTodo: React.FC = () => {
     let toDoData = todoInputRef.current!.value;
     let todoBody = todoBodyInputRef.current!.value;
     todoCtx.addTodo(toDoData, name, todoBody, radioValue); // saves to firebase
+    todoCtx.closeModal();
   };
 
   return (
