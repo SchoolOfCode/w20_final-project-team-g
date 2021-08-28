@@ -2,7 +2,7 @@ import TodoClass from "../Models/TodoClass";
 import React, { useState, useContext } from "react";
 import firebase from "../utilities/firebase";
 import { TodoStatus } from "../Models/TodoClass";
-import { UserContext } from "../Store/UserContext";
+// import { UserContext } from "../Store/UserContext";
 
 type TodosContextObj = {
   items: TodoClass[];
@@ -79,7 +79,6 @@ const TodosContextProvider: React.FC = (props) => {
     setModalIsOpen(false);
   }
   function openModalHandler() {
-    console.log("hi");
     setModalIsOpen(true);
   }
 

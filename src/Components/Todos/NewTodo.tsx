@@ -3,7 +3,7 @@ import styles from "./NewTodo.module.css";
 import { TodosContext } from "../../Store/TodosContext";
 import { UserContext } from "../../Store/UserContext";
 
-export const NewTodo: React.FC = () => {
+export const NewTodo: React.FC<{ onCancel: () => void }> = (props: any) => {
   const todoInputRef = useRef<HTMLInputElement>(null);
   const todoBodyInputRef = useRef<HTMLInputElement>(null);
   const todoCtx = useContext(TodosContext);
@@ -56,7 +56,7 @@ export const NewTodo: React.FC = () => {
           onChange={(e) => setRadioValue(Number(e.target.value))}
         />
       </div>
-      <button>Add todo</button>
+      <button onClick={props.onCancel}>Add todo</button>
     </form>
   );
 };

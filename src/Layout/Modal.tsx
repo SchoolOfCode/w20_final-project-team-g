@@ -4,10 +4,11 @@ import { NewTodo } from "../Components/Todos/NewTodo";
 const Modal = (props: any) => {
   return (
     <div className={styles.modal}>
-      <NewTodo />
-      <PomodoroTimer />
+      {props.children}
+      {/* <NewTodo /> */}
+      {/* <PomodoroTimer /> */}
       <button className="btn btn--alt" onClick={props.onCancel}>
-        Cancel
+        CANCEL
       </button>
     </div>
   );
