@@ -1,7 +1,8 @@
-import TodoClass from "../Models/TodoClass";
-import React, { useState, useContext } from "react";
-import firebase from "../utilities/firebase";
-import { TodoStatus } from "../Models/TodoClass";
+import TodoClass from '../Models/TodoClass';
+import React, { useState, useContext } from 'react';
+import firebase from '../utilities/firebase';
+import { TodoStatus } from '../Models/TodoClass';
+
 // import { UserContext } from "../Store/UserContext";
 import { PomodoroContext } from './PomodoroContext';
 import { UserContext } from '../Store/UserContext';
