@@ -1,0 +1,99 @@
+.container {
+  color: #c9ccea;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 50rem;
+  height: 25rem;
+}
+
+.container h1 {
+  font-size: 2.6rem;
+  margin-bottom: 0.2rem;
+}
+
+.container .labels {
+  list-style: none;
+  display: flex;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  padding: 0.3rem 0.3rem;
+  background-color: #f9fafb;;
+  border-radius: 1.5rem;
+}
+
+.activeLabel {
+  color: #00000c;
+  background-color: #fe6f6b;
+}
+
+.timerContainer {
+  display: flex;
+  flex: 2;
+  align-items: center;
+  justify-content: center;
+}
+
+.timeWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 15rem;
+  width: 15rem;
+  border-radius: 7.5rem;
+  color: #efefef;
+  background: #34D399;
+  font-size: 3.5rem;
+  box-shadow: 1rem 1.5rem 2rem rgba(0, 0, 0, 0.6);
+}
+
+.buttonWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.specialButton {
+  color: #efefef;
+  font-size: 0.8rem;
+  padding: 0.5rem 1.2rem;
+  border: none;
+  border-radius: 3rem;
+  margin: 0.2rem;
+  background: #0c0e1b;
+  min-width: 80px;
+  cursor: pointer;
+}
+
+.buttonWrapper button.active {
+  color: #0c0e1b;
+  background-color: #c9ccea;
+  border: 1px solid #223bdf;
+}
+.formContainer {
+  text-align: center;
+}
+.inputWrapper {
+  margin: 1.5rem;
+}
+.inputWrapper input {
+  height: 30px;
+  width: 30px;
+  padding: 2rem;
+  color: #c9ccea;
+  background-color: #0c0e1b;
+  border: none;
+  border-radius: 50%;
+  margin-right: 0.3rem;
+  text-align: center;
+  font-size: 14pt;
+}
+
+.closeIcon {
+  position: relative;
+  display: flex;
+
+  justify-content: flex-end;
+}

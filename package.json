@@ -20,7 +20,8 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "typescript": "^4.3.5",
-    "web-vitals": "^1.1.2"
+    "web-vitals": "^1.1.2",
+    "react-countdown-circle-timer": "^2.5.3"
   },
   "scripts": {
     "start": "craco start",

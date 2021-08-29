@@ -1,103 +1,91 @@
-import { useState, useEffect } from "react";
-import "./PomodoroTimer.css";
-
+import styles from './Pomodoro.module.css';
+import { useState } from 'react';
+import CountdownAnimation from './CountDownAnimation';
+import { PomodoroContext } from '../../Store/PomodoroContext';
+import PomodoroSettings from './PomodoroSettings';
+import { useContext } from 'react';
+import Modal from '../../Layout/Modal';
+import YesNoModal from '../YesNoModal/YesNoModal';
+// import closeTabIcon from '../../images/modal-buttons/close.png';
+// import { TodosContext } from '../../Store/TodosContext';
 const PomodoroTimer = () => {
-  //break code
-  const [breakLength, setBreakLength] = useState(300);
+  const pomodoroCtx = useContext(PomodoroContext);
+  const [fetchModal, setFetchModal] = useState(false);
+  // const todoCtx = useContext(TodosContext);
 
-  const decrementBreakLengthByOneMin = () => {
-    const newBreakLength = breakLength - 60;
-    if (newBreakLength < 0) {
-      setBreakLength(0);
-    } else {
-      setBreakLength(newBreakLength);
-    }
+  // function closeModalHandler() {
+  //   todoCtx.closeModal();
+  // }
+  const presentModal = () => {
+    setFetchModal(true);
   };
 
-  const incrementBreakLengthByOneMin = () => {
-    setBreakLength(breakLength + 60);
-  };
-
-  const breakLengthInMinutes = Math.floor(breakLength / 60);
-
-  //session code
-
-  const [sessionLength, setSessionLength] = useState(60 * 25);
-
-  const decrementSessionLengthByOneMin = () => {
-    const newSessionLength = sessionLength - 60;
-    if (newSessionLength < 0) {
-      setSessionLength(0);
-    } else {
-      setSessionLength(newSessionLength);
-    }
-  };
-
-  const incrementSessionLengthByOneMin = () => {
-    setSessionLength(sessionLength + 60);
-  };
-
-  const sessionLengthInMinutes = Math.floor(sessionLength / 60);
-
-  //time left code
-
-  const [timeLeft, setTimeLeft] = useState(sessionLength);
-
-  let minutes = Math.floor(timeLeft / 60);
-  let seconds = timeLeft - minutes * 60;
-  let secondZeroString = "";
-  let minuteZeroString = "";
-
-  if (seconds < 10) {
-    secondZeroString = "0";
-  }
-
-  if (minutes < 10) {
-    minuteZeroString = "0";
-  }
-
-  useEffect(() => {
-    setTimeLeft(sessionLength);
-  }, [sessionLength]);
-
-  const handleClick = () => {
-    setInterval(() => {
-      setTimeLeft((prevTimeLeft) => {
-        const newTimeLeft = prevTimeLeft - 1;
-        if (newTimeLeft >= 0) {
-          return prevTimeLeft - 1;
-        }
-        return prevTimeLeft;
-      });
-    }, 1000);
-  };
-
+  // removed the close icon from here due to lack of CSS knowledge
   return (
-    <div>
-      <h2>Pomodoro Timer</h2>
+    <div className={styles.container}>
+      {/* <div className={styles.closeIcon}>
+        <img src={closeTabIcon} alt="close tab" onClick={closeModalHandler} />
+      </div> */}
+      <small>You got this</small>
 
-      <section id="break-section">
-        <p id="break-label">Break</p>
-        <p id="break-length">{breakLengthInMinutes}</p>
-        <button onClick={decrementBreakLengthByOneMin}>-</button>
-        <button onClick={incrementBreakLengthByOneMin}>+</button>
-      </section>
+      {pomodoroCtx.pomodoro === 0 && !pomodoroCtx.isTimerFinished && (
+        <PomodoroSettings />
+      )}
 
-      <section id="time-left">
-        <div>
-          {minuteZeroString}
-          {minutes} : {secondZeroString}
-          {seconds}
+      {pomodoroCtx.pomodoro !== 0 && (
+        <>
+          <div className={styles.timeContainer}>
+            <div className={styles.timeWrapper}>
+              <CountdownAnimation
+                key={pomodoroCtx.pomodoro}
+                timer={pomodoroCtx.pomodoro}
+                animate={pomodoroCtx.startAnimate}
+              >
+                {pomodoroCtx.children}
+              </CountdownAnimation>
+            </div>
+          </div>
+        </>
+      )}
+
+      {/* new extra conditional rendering*/}
+      {pomodoroCtx.pomodoro !== 0 && (
+        <div className={styles.buttonWrapper}>
+          <button
+            className={
+              !pomodoroCtx.startAnimate
+                ? styles.active && styles.specialButton
+                : undefined
+            }
+            onClick={pomodoroCtx.startTimer}
+          >
+            Start
+          </button>
+
+          <button
+            className={
+              pomodoroCtx.startAnimate
+                ? styles.active && styles.specialButton
+                : undefined
+            }
+            onClick={pomodoroCtx.pauseTimer}
+          >
+            Pause
+          </button>
+          <button onClick={pomodoroCtx.resetSettings}> Reset </button>
         </div>
-      </section>
-      <button onClick={handleClick}>Start</button>
-      <section id="session-section">
-        <p id="session-label">Session</p>
-        <p id="session-length">{sessionLengthInMinutes}</p>
-        <button onClick={decrementSessionLengthByOneMin}>-</button>
-        <button onClick={incrementSessionLengthByOneMin}>+</button>
-      </section>
+      )}
+
+      {/* {pomodoroCtx.isTimerFinished && (
+        <button onClick={presentModal}>Click here to continue</button>
+      )} */}
+      {pomodoroCtx.isTimerFinished && (
+        <Modal>
+          <YesNoModal />
+        </Modal>
+      )}
     </div>
   );
 };
+
 export default PomodoroTimer;

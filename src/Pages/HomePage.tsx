@@ -1,13 +1,13 @@
-import { NewTodo } from "../Components/Todos/NewTodo";
-import TodoList from "../Components/Todos/Todolist";
-import InProgress from "../Components/Todos/InProgress";
-import styles from "./HomePage.module.css";
-import CompletedTodos from "../Components/Todos/CompletedTodos";
-import { Fragment, useState, useContext } from "react";
-import { UserContext } from "../Store/UserContext";
-import { auth } from "../utilities/firebase";
-import { Link, useHistory } from "react-router-dom";
-import { useAuthState } from "react-firebase-hooks/auth";
+import { NewTodo } from '../Components/Todos/NewTodo';
+import TodoList from '../Components/Todos/Todolist';
+import InProgress from '../Components/Todos/InProgress';
+import styles from './HomePage.module.css';
+import CompletedTodos from '../Components/Todos/CompletedTodos';
+import { Fragment, useState, useContext } from 'react';
+import { UserContext } from '../Store/UserContext';
+import { auth } from '../utilities/firebase';
+import { Link, useHistory } from 'react-router-dom';
+import { useAuthState } from 'react-firebase-hooks/auth';
 
 const HomePage = () => {
   const history = useHistory;
