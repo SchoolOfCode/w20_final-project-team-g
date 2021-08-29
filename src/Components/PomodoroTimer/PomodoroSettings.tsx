@@ -2,6 +2,7 @@ import { useState, useContext } from 'react';
 import styles from './Pomodoro.module.css';
 import { PomodoroContext } from '../../Store/PomodoroContext';
 import CardWrapper from '../../Layout/CardWrapper';
+
 const PomodoroSettings = () => {
   const [newTimer, setNewTimer] = useState({
     work: 0,
@@ -12,7 +13,7 @@ const PomodoroSettings = () => {
   const pomodoroCtx = useContext(PomodoroContext);
 
   const handleClick = (selectedTime) => {
-    selectedTime.preventDefault();
+    // selectedTime.preventDefault();
     let breakTime;
 
     const { name, value } = selectedTime.target;
@@ -22,13 +23,22 @@ const PomodoroSettings = () => {
       breakTime = '10';
     }
 
+    let a = 0 + breakTime;
+
+    console.log({ break: a });
+    console.log({ break: +breakTime });
+
+    const newVal = {
+      ...newTimer,
+      work: +value,
+      break: +breakTime,
+    };
+
+    console.log(newVal);
+
     switch (name) {
       case 'work':
-        setNewTimer({
-          ...newTimer,
-          work: +value,
-          break: +breakTime,
-        });
+        setNewTimer(newVal);
         break;
       case 'break':
         setNewTimer({
@@ -38,8 +48,8 @@ const PomodoroSettings = () => {
         break;
     }
 
-    pomodoroCtx.updateSettings(newTimer); // passes object back to useCOntext
-    console.log(newTimer);
+    pomodoroCtx.updateSettings(newVal); // passes object back to useCOntext
+    console.log(newVal);
   };
 
   return (
