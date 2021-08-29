@@ -14,7 +14,6 @@ const YesNoModal = () => {
   const todoCtx = useContext(TodosContext);
   const pomodoroCtx = useContext(PomodoroContext);
 
-
   function closeModalHandler() {
     todoCtx.closeModal();
   }
@@ -25,7 +24,8 @@ const YesNoModal = () => {
 
   const presentBreakCardUpdateTodo = () => {
     setPresentBreak(true);
-    //todoCtx.finishTodo(todoCtx.items); // the selected class needs to be passed here but idk how
+    todoCtx.finishTodo(todoCtx.inProgressTodo);
+    // the selected class needs to be passed here but idk how
   };
   return (
     <div className={styles.parentFlex}>
