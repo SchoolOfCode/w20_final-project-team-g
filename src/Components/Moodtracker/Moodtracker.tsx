@@ -11,25 +11,25 @@ export const DUMMY_DATA = [
   {
     day: 'Sun Aug 29',
     time: 13,
-    mood: '4',
+    mood: '0',
     id: '0.6565343548044056',
   },
   {
     day: 'Sun Aug 29',
     time: 13,
-    mood: '4',
+    mood: '3',
     id: '0.4939088636665043',
   },
   {
     day: 'Sun Aug 29',
     time: 13,
-    mood: '4',
+    mood: '1',
     id: '0.19334076676160783',
   },
   {
     day: 'Sun Aug 29',
     time: 13,
-    mood: '4',
+    mood: '2',
     id: '0.45948329320274794',
   },
   {

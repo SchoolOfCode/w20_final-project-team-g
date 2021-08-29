@@ -10,6 +10,7 @@ const MoodChart = () => {
 
   let moodCollection = DUMMY_DATA.map((data) => data.mood && data.time);
   let timeCollection = DUMMY_DATA.map((data) => data.time);
+  console.log(timeCollection)
   console.log(moodCollection);
   function removeRepitiveVals(array: number[]) {
     var newarray = [],
@@ -23,6 +24,7 @@ const MoodChart = () => {
     return newarray;
   }
 
+  let workTimeArray = [9, 10, 11, 12, 13, 14, 15, 16, 17, 18]
   let filteredTimeCollectiom = removeRepitiveVals(timeCollection);
   console.log('new time collection is', filteredTimeCollectiom);
 
@@ -40,7 +42,7 @@ const MoodChart = () => {
       },
     },
     xaxis: {
-      categories: filteredTimeCollectiom, // time of day
+      categories: workTimeArray, // time of day
     },
   };
 
