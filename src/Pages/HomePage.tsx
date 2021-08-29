@@ -25,7 +25,6 @@ const HomePage = () => {
   return (
     <Fragment>
       <h4>Welcome {name}</h4>
-      <NewTodo />
       <div className={styles.flex}>
         <div className={styles.column}>
           <TodoList />

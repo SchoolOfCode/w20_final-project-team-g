@@ -2,6 +2,8 @@ import TodoClass from '../Models/TodoClass';
 import React, { useState, useContext } from 'react';
 import firebase from '../utilities/firebase';
 import { TodoStatus } from '../Models/TodoClass';
+
+// import { UserContext } from "../Store/UserContext";
 import { PomodoroContext } from './PomodoroContext';
 import { UserContext } from '../Store/UserContext';
 
@@ -20,6 +22,7 @@ type TodosContextObj = {
   finishTodo: (selectedTodo: TodoClass) => void;
   retrieveCurrentTodo: () => void;
   closeModal: () => void;
+  openModal: () => void;
   inProgressTodo: TodoClass;
 };
 
@@ -33,6 +36,7 @@ export const TodosContext = React.createContext<TodosContextObj>({
   retrieveCurrentTodo: () => {},
   modal: false,
   closeModal: () => {},
+  openModal: () => {},
   inProgressTodo: { todoTitle: '', id: '', date: '' },
 });
 
@@ -93,12 +97,16 @@ const TodosContextProvider: React.FC = (props) => {
     console.log('moved to in progress is', inProgressTodo);
 
     todoRef.doc(selectedTodo.id).update({ status: TodoStatus.inProgress });
+    openModalHandler();
     setModalIsOpen(true);
     pomodoroCtx.resetSettings();
   }
 
   function closeModalHandler() {
     setModalIsOpen(false);
+  }
+  function openModalHandler() {
+    setModalIsOpen(true);
   }
 
   function finishTodoHandler(selectedTodo: TodoClass) {
@@ -115,6 +123,7 @@ const TodosContextProvider: React.FC = (props) => {
     finishTodo: finishTodoHandler,
     retrieveCurrentTodo: retrieveCurrentTodoHandler,
     closeModal: closeModalHandler,
+    openModal: openModalHandler,
     inProgressTodo: inProgressTodo,
   };
 
