@@ -9,7 +9,7 @@ const CompletedTodos: React.FC = () => {
 
   return (
     <Fragment>
-      <h3>DONE </h3>
+      <h3>Complete</h3>
       <ul className={styles.todos}>
         {todoCtx.items.map(
           (item) =>
