@@ -1,7 +1,7 @@
-import React, { useRef, useContext, useState } from "react";
-import styles from "./NewTodo.module.css";
-import { TodosContext } from "../../Store/TodosContext";
-import { UserContext } from "../../Store/UserContext";
+import React, { useRef, useContext, useState } from 'react';
+import styles from './NewTodo.module.css';
+import { TodosContext } from '../../Store/TodosContext';
+import { UserContext } from '../../Store/UserContext';
 
 export const NewTodo: React.FC<{ onCancel: () => void }> = (props: any) => {
   const todoInputRef = useRef<HTMLInputElement>(null);
@@ -17,19 +17,19 @@ export const NewTodo: React.FC<{ onCancel: () => void }> = (props: any) => {
     let toDoData = todoInputRef.current!.value;
     let todoBody = todoBodyInputRef.current!.value;
     todoCtx.addTodo(toDoData, name, todoBody, radioValue); // saves to firebase
-    todoCtx.closeModal();
+    props.onCancel();
   };
 
   return (
     <form onSubmit={submitHandler} className={styles.form}>
       <label htmlFor="text">Enter todo</label>
-      <input ref={todoInputRef} type="text" id="text" placeholder={"Title "} />
+      <input ref={todoInputRef} type="text" id="text" placeholder={'Title '} />
       <input
         ref={todoBodyInputRef}
         type="text"
         name="body"
         id="body"
-        placeholder={"Body/notes goes here"}
+        placeholder={'Body/notes goes here'}
       />
       <div className="radio-buttons">
         <p>Urgency: Default is 3</p>
@@ -56,7 +56,7 @@ export const NewTodo: React.FC<{ onCancel: () => void }> = (props: any) => {
           onChange={(e) => setRadioValue(Number(e.target.value))}
         />
       </div>
-      <button onClick={props.onCancel && submitHandler}>Add todo</button>
+      <button onClick={submitHandler}>Add todo</button>
     </form>
   );
 };
