@@ -1,0 +1,62 @@
+.parentFlex {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
+  background-color: white;
+  padding: 1rem;
+  text-align: center;
+  width: 50rem;
+  height: 25rem;
+  z-index: 20;
+  position: fixed;
+  top: 20vh;
+  left: calc(50% - 25rem);
+}
+
+.textDiv {
+  /* margin: 3rem; */
+  color: #4b5563;
+  font-family: Segoe UI;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+}
+.iconDiv {
+  /* margin: 2rem; */
+}
+
+.tooltip {
+  font-weight: 200;
+
+  position: relative;
+  display: flex;
+
+  justify-content: flex-end;
+}
+
+.closeIcon {
+  position: relative;
+  display: flex;
+
+  justify-content: flex-end;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}

@@ -1,5 +1,0 @@
-// user adds a new todo
-// todo is added via todoCTX function "add" - send its to firebase 
-// ToDoList fetches from firebase 
-// ToDoList: onClick pomodoro popup. On start: todoCTX function "startTask", which changes status, pushes that task id to firebase
-// AGAIN but to inprogress. 

@@ -9,9 +9,9 @@ import emoji5 from './images/emoji5.png';
 
 export const DUMMY_DATA = [
   {
-    day: 'Sun Aug 29',
+    day: 'Mon Aug 30',
     time: 13,
-    mood: '0',
+    mood: '1',
     id: '0.6565343548044056',
   },
   {
@@ -172,7 +172,6 @@ const Moodtracker = () => {
     // "Sun Aug 29"
 
     let dayInt = new Date();
-    // let userSystemDay = weekday[dayInt.getDay()];
     let userSystemTime = dayInt.getHours();
 
     const moodData = {
