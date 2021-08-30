@@ -1,9 +1,8 @@
-import React, { useRef, useContext, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import styles from './NewTodo.module.css';
 import { TodosContext } from '../../Store/TodosContext';
 import { UserContext } from '../../Store/UserContext';
 import { useForm } from 'react-hook-form';
-import { spawn } from 'child_process';
 
 type FormValues = {
   title: string;
@@ -24,7 +23,7 @@ export const NewTodo: React.FC<{ onCancel: () => void }> = (props: any) => {
     formState: { errors },
   } = useForm<FormValues>();
 
-  const submitHandler = (data, event: React.FormEvent) => {
+  const submitHandler = (data: FormValues, event: React.FormEvent) => {
     event.preventDefault();
     let { title, body } = data;
     todoCtx.addTodo(title, name, body, radioValue); // saves to firebase
@@ -36,15 +35,15 @@ export const NewTodo: React.FC<{ onCancel: () => void }> = (props: any) => {
       <label htmlFor="title">Title</label>
       <input
         type="text"
-        placeholder="Title"
+        placeholder="Title (Now set to required)"
         id="title"
         {...register('title', { required: true, maxLength: 60 })}
       />
-      {errors?.title?.type === 'required' && <p>this field is required</p>}
+      {errors?.title?.type === 'required' && <p>This field is required</p>}
       <label htmlFor="body">Body</label>
       <input
         type="text"
-        placeholder="body"
+        placeholder="Body (not set to required)"
         id="body"
         {...register('body', { required: false, maxLength: 1000 })}
       />
@@ -80,7 +79,7 @@ export const NewTodo: React.FC<{ onCancel: () => void }> = (props: any) => {
   );
 };
 
-//OLD FORM
+//OLD FORM//
 // return (
 //   <form onSubmit={handleSubmit(submitHandler)} className={styles.form}>
 //     <input type="text" {...register('example', { required: true })} />
