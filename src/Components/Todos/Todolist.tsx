@@ -21,7 +21,7 @@ const TodoList: React.FC = () => {
   return (
     <Fragment>
       <h3>Backlog</h3>
-      <ul className={styles.todos}>
+      <ul className="w-72">
         {todoCtx.items &&
           todoCtx.items.map(
             (item) =>

@@ -10,7 +10,7 @@ const InProgress: React.FC = () => {
   return (
     <Fragment>
       <h3>In Progress</h3>
-      <ul className={styles.todos}>
+      <ul className="w-72">
         {todoCtx.items.map(
           (item) =>
             item.status === TodoStatus.inProgress && (

@@ -16,15 +16,16 @@ const TodoItem: React.FC<{
 }> = (props) => {
   return (
     <Fragment>
-      <li className={styles.todoItem}>
-        <h3>{props.text}</h3>
-        <h5>Urgency {props.urgency}</h5>
-        {props.urgency === 1 && <div className="bg-red-400 h-4 w-4"></div>}
-        {props.urgency === 2 && <div className="bg-yellow-300 h-4 w-4"></div>}
-        {props.urgency === 3 && <div className="bg-green-400 h-4 w-4"></div>}
-        {/* {console.log("urgency", props.urgency.valueOf)} */}
-        <p>Created By: {props.createdBy}</p>
-        <button onClick={props.onStartTodo}>Start</button>
+      <li onClick={props.onStartTodo} className="mb-10 p-6 shadow-lg rounded-2xl cursor-pointer">
+        {props.urgency === 1 && <div className="bg-red-400 h-2 w-14 rounded-full"></div>}
+        {props.urgency === 2 && <div className="bg-yellow-300 h-2 w-14 rounded-full"></div>}
+        {props.urgency === 3 && <div className="bg-green-400 h-2 w-14 rounded-full"></div>}
+        <h3 className="text-base text-gray-600 font-semibold mt-2">{props.text}</h3>
+        <p>Can't get the notes to render :(</p>
+        <div className="flex justify-center bg-blue-400 h-10 w-10 rounded-full">
+          <p className="text-white self-center text-base font-semibold tracking-wider">{props.createdBy.match(/\b(\w)/g).join('')}</p>
+        </div>
+        {/* <button onClick={props.onStartTodo}>Start</button> */}
         <button onClick={props.onRemoveTodo}>Delete</button>
         <button onClick={props.onFinish}>Finish</button>
       </li>
