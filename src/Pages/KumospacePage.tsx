@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
-
-import MoodChart from '../Components/Moodtracker/MoodChart';
 import Moodtracker from '../Components/Moodtracker/Moodtracker';
+
+
 import { UserContext } from '../Store/UserContext';
 
 const KumospacePage = () => {
@@ -9,7 +9,6 @@ const KumospacePage = () => {
     userProfile: { name, email, uniqueID },
   } = useContext(UserContext);
   // const { name, email, uniqueID } = userProfile
-  console.log(name);
   return (
     <div>
       <h1>{name}</h1>
@@ -17,7 +16,7 @@ const KumospacePage = () => {
       <h1> ID : {uniqueID}</h1>
       <h1>KumospacePage</h1>;<div>{/* <Moodtracker /> */}</div>
       <div>
-        <MoodChart />
+        <Moodtracker />
       </div>
     </div>
   );

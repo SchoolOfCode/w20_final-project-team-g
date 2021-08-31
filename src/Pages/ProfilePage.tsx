@@ -1,6 +1,8 @@
 // import Login from "../Components/Login/Login";
 import React, { useEffect, useState, useContext } from 'react';
 import { useHistory } from 'react-router';
+import MoodChart from '../Components/Moodtracker/MoodChart';
+import Moodtracker from '../Components/Moodtracker/Moodtracker';
 import { UserContext } from '../Store/UserContext';
 import { auth, db } from '../utilities/firebase';
 
@@ -24,7 +26,14 @@ const Profile = () => {
   //   // if (!user) return history.replace("/");
   //   // fetchUserName();
   // }, []);
-  return <div className="m-0"></div>;
+  return (
+    <div className="m-0">
+    
+      <div>
+        <MoodChart />
+      </div>
+    </div>
+  );
 };
 
 export default Profile;
