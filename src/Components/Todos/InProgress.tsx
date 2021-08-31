@@ -9,7 +9,7 @@ const InProgress: React.FC = () => {
 
   return (
     <Fragment>
-      <h3>In Progress</h3>
+      <h3 className="text-gray-500 tracking-wide font-medium text-2xl mt-4 mb-4">In Progress</h3>
       <ul className="w-72">
         {todoCtx.items.map(
           (item) =>
