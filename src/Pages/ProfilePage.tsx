@@ -1,11 +1,12 @@
 // import Login from "../Components/Login/Login";
 import React, { useEffect, useState, useContext } from 'react';
 import { useHistory } from 'react-router';
+import styles from './HomePage.module.css'
 import MoodChart from '../Components/Moodtracker/MoodChart';
-import Moodtracker from '../Components/Moodtracker/Moodtracker';
 import { UserContext } from '../Store/UserContext';
 import { auth, db } from '../utilities/firebase';
-
+import { PieChart } from 'recharts';
+import Example from '../Components/Moodtracker/Example';
 const Profile = () => {
   const history = useHistory();
   // instead of fetching below I am using useContext.
@@ -27,10 +28,12 @@ const Profile = () => {
   //   // fetchUserName();
   // }, []);
   return (
-    <div className="m-0">
-    
-      <div>
+    <div className={styles.flex}>
+      <div className={styles.colum1}>
         <MoodChart />
+      </div>
+      <div className={styles.colum1}>
+        <Example />
       </div>
     </div>
   );
