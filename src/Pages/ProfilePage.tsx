@@ -5,8 +5,7 @@ import styles from './HomePage.module.css'
 import MoodChart from '../Components/Moodtracker/MoodChart';
 import { UserContext } from '../Store/UserContext';
 import { auth, db } from '../utilities/firebase';
-import { PieChart } from 'recharts';
-import Example from '../Components/Moodtracker/Example';
+import DoughnutChart from '../Components/Moodtracker/DoughnutChart';
 const Profile = () => {
   const history = useHistory();
   // instead of fetching below I am using useContext.
@@ -33,10 +32,21 @@ const Profile = () => {
         <MoodChart />
       </div>
       <div className={styles.colum1}>
-        <Example />
+        <DoughnutChart />
       </div>
     </div>
   );
 };
 
 export default Profile;
+
+
+
+// Kates colours 
+// const COLORS = [
+//   'rgba(96, 165, 250, 1)',
+//   'rgba(167, 139, 250, 1)',
+//   'rgba(248, 113, 113, 1)',
+//   '#FCD34D',
+//   '#34D399',
+// ]

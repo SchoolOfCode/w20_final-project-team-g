@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import firebase from 'firebase';
 import { Line } from 'react-chartjs-2';
+
 import { useEffect } from 'react';
 
 const MoodChart = () => {
@@ -8,10 +9,10 @@ const MoodChart = () => {
   const [mood, setMood] = useState([]);
 
   useEffect(() => {
-    fetchData();
+    fetchAndModifyData();
   }, []);
 
-  const fetchData = () => {
+  const fetchAndModifyData = () => {
     moodRef.onSnapshot((querySnapshot) => {
       const newObj = [];
       querySnapshot.forEach((doc) => {
@@ -78,30 +79,18 @@ const MoodChart = () => {
   let timeCollection = avgMoodForEachHour.map((data) => data.time);
   console.log('all times', timeCollection);
 
+  // for pie chart
   const allMoodsEver = mood.map((item) => item.mood).sort((a, b) => a - b);
   console.log('all moods ever', allMoodsEver);
 
-  // NEXT STEP: Get the number of occurances for each mood, so we get an object like this:
-  // {
-  //   mood: 1,
-  //     numOfOc: 56,
-
-  // }, 
-  //{
-  //   mood: 2,
-  //     numOfOc: 23,
-
-  // }
-
-// POTENTIAL CODE 
-  allMoodsEver.forEach((entry) => {
-    console.log(entry);
-    // let count;
-    // if (entry)
-    //   const newObj = { mood: entry, numOfOccurances: count + 1 }
+  const allTimeMoodCounts = {};
+  allMoodsEver.forEach(function (item) {
+    allTimeMoodCounts[item] = (allTimeMoodCounts[item] || 0) + 1;
   });
+  console.log(allTimeMoodCounts);
 
   const data = {
+    
     labels: timeCollection, // x-axis
     datasets: [
       {
@@ -109,7 +98,7 @@ const MoodChart = () => {
         data: averageMood,
         fill: false,
         tension: 0.4,
-        backgroundColor: ['rgba(248, 113, 113, 1)'], // The line fill color/ dots
+        backgroundColor: ['rgba(167, 139, 250, 1)'], // The line fill color/ dots
         borderColor: ['rgba(248, 113, 113, 1)'], // The line color.
       },
     ],
@@ -117,36 +106,17 @@ const MoodChart = () => {
 
   const options = {
     scales: {
-      yAxes: [
-        {
-          ticks: {
-            precision: 0,
-            stepSize: 0,
-            beginAtZero: true,
-            userCallback: function (label, index, labels) {
-              // when the floored value is the same as the value we have a whole number
-              if (Math.floor(label) === label) {
-                return label;
-              }
-            },
-          },
-        },
-      ],
+      y: {
+        suggestedMin: 0,
+        suggestedMax: 5,
+      },
     },
   };
 
   return (
     <>
-      <div className="header">
-        <h1 className="title">Line Chart</h1>
-        <div className="links">
-          <a
-            className="btn btn-gh"
-            href="https://github.com/reactchartjs/react-chartjs-2/blob/master/example/src/charts/Line.js"
-          >
-            Github Source
-          </a>
-        </div>
+      <div>
+        <h1 className="title">Today's Moods</h1>
       </div>
       <Line data={data} options={options} />
     </>
@@ -155,32 +125,17 @@ const MoodChart = () => {
 
 export default MoodChart;
 
-// Apex charts. wont use 
-//import Chart from 'react-apexcharts';
-// const series = [
-//   {
-//     name: 'mood',
-//     data: averageMood, // put emojis here T_T
-//   },
-// ];
 // const options = {
-//   chart: {
-//     id: 'line',
-//     stroke: {
-//       curve: 'smooth',
-//     },
-//     colors: ['#2E93fA', '#66DA26', '#546E7A', '#E91E63', '#FF9800'],
-//   },
-//   xaxis: {
-//     categories: timeCollection, // time of day
+//   scales: {
+//     yAxes: [
+//       {
+//         ticks: {
+//           precision: 0,
+//           stepSize: 0,
+//           beginAtZero: true,
+//           min: 0,
+//         },
+//       },
+//     ],
 //   },
 // };
-
-// return (
-//   <>
-//     <div>This is the chart </div>
-//     <Chart options={options} series={series} type="line" width="500" />
-//   </>
-// );
-
-// chart js
