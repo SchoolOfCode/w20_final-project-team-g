@@ -1,7 +1,7 @@
 // import Login from "../Components/Login/Login";
 import React, { useEffect, useState, useContext } from 'react';
 import { useHistory } from 'react-router';
-import styles from './HomePage.module.css'
+import styles from './HomePage.module.css';
 import MoodChart from '../Components/Moodtracker/MoodChart';
 import { UserContext } from '../Store/UserContext';
 import { auth, db } from '../utilities/firebase';
@@ -40,9 +40,7 @@ const Profile = () => {
 
 export default Profile;
 
-
-
-// Kates colours 
+// Kates colours
 // const COLORS = [
 //   'rgba(96, 165, 250, 1)',
 //   'rgba(167, 139, 250, 1)',

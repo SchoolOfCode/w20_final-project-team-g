@@ -46,29 +46,24 @@ const MoodChart = () => {
   let split = day.split(' ');
   let splice = split.splice(0, 3);
   let userSystemDate = splice.join(' ');
-  console.log('userSystem date', userSystemDate);
+  // console.log('userSystem date', userSystemDate);
   // 2 compare and get array matching today's date (currently ! since no data for Tuesday)
   let todaysData = mood.filter((item) => item.day === userSystemDate);
-  console.log('today data:', todaysData);
+  // console.log('today data:', todaysData);
   // 3 for each mood entry, remove duplicate hour value but combine their score values
-  const specificHour = todaysData.reduce(
-    (specificHour, { day, time, mood }) => {
-      const eachHour = specificHour[time];
-      const current = eachHour || { day, time, moods: [+mood] };
-      if (eachHour) current.mood = eachHour.moods.push(+mood); // if [time] property exists add up scores
+  const specificHour = todaysData.reduce((specificHour, { day, time, mood }) => {
+    const eachHour = specificHour[time];
+    const current = eachHour || { day, time, moods: [+mood] };
+    if (eachHour) current.mood = eachHour.moods.push(+mood); // if [time] property exists add up scores
 
-      return Object.assign(specificHour, { [time]: current });
-    },
-    {}
-  );
+    return Object.assign(specificHour, { [time]: current });
+  }, {});
 
-  const avgMoodForEachHour = Object.values(specificHour).map(
-    ({ day, time, moods }) => ({
-      day,
-      time,
-      mood: moods.reduce((a, b) => a + b) / moods.length,
-    })
-  );
+  const avgMoodForEachHour = Object.values(specificHour).map(({ day, time, moods }) => ({
+    day,
+    time,
+    mood: moods.reduce((a, b) => a + b) / moods.length,
+  }));
 
   let averageMood = avgMoodForEachHour.map((data) => +data.mood.toFixed());
   let timeCollection = avgMoodForEachHour.map((data) => data.time);
