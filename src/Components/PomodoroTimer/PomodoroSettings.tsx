@@ -15,6 +15,7 @@ const PomodoroSettings = () => {
   const handleClick = (selectedTime) => {
     // console.log(selectedTime);
     // selectedTime.preventDefault();
+    pomodoroCtx.resetSettings();
     let breakTime;
 
     if (selectedTime === '25') {
