@@ -8,6 +8,7 @@ import { UserContext } from '../Store/UserContext';
 import { auth } from '../utilities/firebase';
 import { Link, useHistory } from 'react-router-dom';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const HomePage = () => {
   const history = useHistory;
@@ -17,9 +18,18 @@ const HomePage = () => {
   } = useContext(UserContext);
   if (!user) {
     return (
-      <p>
-        please <Link to="/login">Login</Link>
-      </p>
+      <div
+        style={{
+          padding: '50px',
+          height: '100%',
+          alignItems: 'center',
+          display: 'flex',
+          justifyContent: 'center',
+          // alignContent: 'center',
+        }}
+      >
+        <CircularProgress></CircularProgress>
+      </div>
     );
   }
   return (

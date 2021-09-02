@@ -1,13 +1,13 @@
 // import { Link } from "react-router-dom";
-import { BrowserRouter as Router, Link } from "react-router-dom";
-import { UserContext } from "../Store/UserContext";
-import { useAuthState } from "react-firebase-hooks/auth";
-import FormModal from "../Components/Form/FormModal";
-import React, { useContext } from "react";
-import Dashboard from "../Components/Login/Dashboard";
-import { auth } from "../utilities/firebase";
+import { BrowserRouter as Router, Link } from 'react-router-dom';
+import { UserContext } from '../Store/UserContext';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import FormModal from '../Components/Form/FormModal';
+import React, { useContext } from 'react';
+import Dashboard from '../Components/Login/Dashboard';
+import { auth } from '../utilities/firebase';
 
-import logo from "../images/kaizen-logo.png";
+import logo from '../images/kaizen-logo.png';
 
 const Navbar = () => {
   const [user, loading, error] = useAuthState(auth);
@@ -49,9 +49,7 @@ const Navbar = () => {
   }
   return (
     <div>
-      <p>
-        Please <Link to="/login">Login</Link>
-      </p>
+      <p>{/* Please <Link to="/login">Login</Link> */}</p>
     </div>
   );
 };
