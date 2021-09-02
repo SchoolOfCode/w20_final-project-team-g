@@ -23,7 +23,6 @@ const MoodChart = () => {
       setMood(editedObj);
     });
   };
-  console.log('state moods', mood);
 
   function removeJSONString(obj) {
     // store all keys of this object for later use
@@ -47,8 +46,7 @@ const MoodChart = () => {
   let split = day.split(' ');
   let splice = split.splice(0, 3);
   let userSystemDate = splice.join(' ');
-  console.log(userSystemDate);
-  console.log('mood', mood);
+  console.log('userSystem date', userSystemDate);
   // 2 compare and get array matching today's date (currently ! since no data for Tuesday)
   let todaysData = mood.filter((item) => item.day === userSystemDate);
   console.log('today data:', todaysData);
@@ -63,7 +61,6 @@ const MoodChart = () => {
     },
     {}
   );
-  console.log(specificHour);
 
   const avgMoodForEachHour = Object.values(specificHour).map(
     ({ day, time, moods }) => ({
@@ -72,36 +69,33 @@ const MoodChart = () => {
       mood: moods.reduce((a, b) => a + b) / moods.length,
     })
   );
-  console.log(avgMoodForEachHour);
 
   let averageMood = avgMoodForEachHour.map((data) => +data.mood.toFixed());
-  console.log('averageMood', averageMood);
   let timeCollection = avgMoodForEachHour.map((data) => data.time);
-  console.log('all times', timeCollection);
 
-  // for pie chart
-  const allMoodsEver = mood.map((item) => item.mood).sort((a, b) => a - b);
-  console.log('all moods ever', allMoodsEver);
+  const data = (canvas) => {
+    const ctx = canvas.getContext('2d');
+    const gradient = ctx.createLinearGradient(0, 90, 100, 0);
+    gradient.addColorStop(1, 'rgba(96, 165, 250, 1)');
+    gradient.addColorStop(0.8, 'rgba(96, 165, 250, 1)');
+    gradient.addColorStop(0.6, 'rgba(167, 139, 250, 1)');
+    gradient.addColorStop(0.4, 'rgba(248, 113, 113, 1)');
+    gradient.addColorStop(0.2, '#FCD34D');
+    gradient.addColorStop(0, 'rgb(20, 1, 1)');
 
-  const allTimeMoodCounts = {};
-  allMoodsEver.forEach(function (item) {
-    allTimeMoodCounts[item] = (allTimeMoodCounts[item] || 0) + 1;
-  });
-  console.log(allTimeMoodCounts);
-
-  const data = {
-    
-    labels: timeCollection, // x-axis
-    datasets: [
-      {
-        label: 'Average mood for today',
-        data: averageMood,
-        fill: false,
-        tension: 0.4,
-        backgroundColor: ['rgba(167, 139, 250, 1)'], // The line fill color/ dots
-        borderColor: ['rgba(248, 113, 113, 1)'], // The line color.
-      },
-    ],
+    return {
+      labels: timeCollection, // x-axis
+      datasets: [
+        {
+          label: 'Average mood for today',
+          data: averageMood,
+          fill: false,
+          tension: 0.4,
+          borderColor: gradient,
+          borderWidth: 2,
+        },
+      ],
+    };
   };
 
   const options = {
@@ -125,17 +119,26 @@ const MoodChart = () => {
 
 export default MoodChart;
 
+// working graph options in case needed for future use
 // const options = {
 //   scales: {
-//     yAxes: [
-//       {
-//         ticks: {
-//           precision: 0,
-//           stepSize: 0,
-//           beginAtZero: true,
-//           min: 0,
-//         },
-//       },
-//     ],
+//     y: {
+//       suggestedMin: 0,
+//       suggestedMax: 5,
+//     },
 //   },
+// };
+
+// const data = {
+//   labels: timeCollection, // x-axis
+//   datasets: [
+//     {
+//       label: 'Average mood for today',
+//       data: averageMood,
+//       fill: false,
+//       tension: 0.4,
+//       backgroundColor: ['rgba(167, 139, 250, 1)'], // The line fill color/ dots
+//       borderColor: ['rgba(248, 113, 113, 1)'], // The line color.
+//     },
+//   ],
 // };
