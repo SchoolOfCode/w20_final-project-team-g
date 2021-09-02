@@ -13,11 +13,11 @@ const PomodoroSettings = () => {
   const pomodoroCtx = useContext(PomodoroContext);
 
   const handleClick = (selectedTime) => {
+    // console.log(selectedTime);
     // selectedTime.preventDefault();
     let breakTime;
 
-    const { name, value } = selectedTime.target;
-    if (value === '25') {
+    if (selectedTime === '25') {
       breakTime = '5';
     } else {
       breakTime = '10';
@@ -25,18 +25,13 @@ const PomodoroSettings = () => {
 
     let a = 0 + breakTime;
 
-    console.log({ break: a });
-    console.log({ break: +breakTime });
-
     const newVal = {
       ...newTimer,
-      work: +value,
+      work: +selectedTime,
       break: +breakTime,
     };
 
-    console.log(newVal);
-
-    switch (name) {
+    switch (selectedTime) {
       case 'work':
         setNewTimer(newVal);
         break;
@@ -47,25 +42,23 @@ const PomodoroSettings = () => {
         });
         break;
     }
-
-    pomodoroCtx.updateSettings(newVal); // passes object back to useCOntext
-    console.log(newVal);
+    pomodoroCtx.updateSettings(newVal); // passes object back to useContext
   };
 
   return (
     <div className={styles.formContainer}>
       <CardWrapper>
-        <button name="work" value="25" onClick={handleClick}>
+        <button name="work" value="25" onClick={() => handleClick('25')}>
           25 minutes
         </button>
       </CardWrapper>
       <CardWrapper>
-        <button name="work" value="50" onClick={handleClick}>
+        <button name="work" value="50" onClick={() => handleClick('50')}>
           50 minutes
         </button>
       </CardWrapper>
       <CardWrapper>
-        <button name="work" value="0.04" onClick={handleClick}>
+        <button name="work" value="0.04" onClick={() => handleClick('0.04')}>
           for quick test
         </button>
       </CardWrapper>

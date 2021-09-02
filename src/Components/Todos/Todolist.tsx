@@ -5,7 +5,7 @@ import { TodoStatus } from '../../Models/TodoClass';
 import Modal from '../../Layout/Modal';
 import Backdrop from '../../Layout/Backdrop';
 import PomodoroTimer from '../PomodoroTimer/PomodoroTimer';
-import styles from "./Todolist.module.css";
+import styles from './Todolist.module.css';
 
 const TodoList: React.FC = () => {
   const todoCtx = useContext(TodosContext);

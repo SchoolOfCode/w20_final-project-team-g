@@ -20,11 +20,13 @@ const YesNoModal = () => {
 
   const presentBreakCard = () => {
     setPresentBreak(true);
+    // pomodoroCtx.resetSettings();
   };
 
   const presentBreakCardUpdateTodo = () => {
     setPresentBreak(true);
     todoCtx.finishTodo(todoCtx.inProgressTodo);
+    // pomodoroCtx.resetSettings();
     // the selected class needs to be passed here but idk how
   };
   return (
@@ -38,8 +40,7 @@ const YesNoModal = () => {
         <img src={no} alt="no" onClick={presentBreakCard} />
       </div>
       <span className={styles.textDiv}>
-        Don’t worry if you didn’t, sometimes things take longer than we expect
-        them to
+        Don’t worry if you didn’t, sometimes things take longer than we expect them to
       </span>
       <div className={styles.tooltip}>
         <img src={helpIcon} alt="help tool" />

@@ -27,10 +27,8 @@ const PomodoroTimer = () => {
         <img src={closeTabIcon} alt="close tab" onClick={closeModalHandler} />
       </div> */}
       <small>You got this</small>
-
-      {pomodoroCtx.pomodoro === 0 && !pomodoroCtx.isTimerFinished && (
-        <PomodoroSettings />
-      )}
+      {/* here! do break logic? */}
+      {pomodoroCtx.pomodoro === 0 && !pomodoroCtx.isWorkTimerFinished && <PomodoroSettings />}
 
       {pomodoroCtx.pomodoro !== 0 && (
         <>
@@ -53,9 +51,7 @@ const PomodoroTimer = () => {
         <div className={styles.buttonWrapper}>
           <button
             className={
-              !pomodoroCtx.startAnimate
-                ? styles.active && styles.specialButton
-                : undefined
+              !pomodoroCtx.startAnimate ? styles.active && styles.specialButton : undefined
             }
             onClick={pomodoroCtx.startTimer}
           >
@@ -63,11 +59,7 @@ const PomodoroTimer = () => {
           </button>
 
           <button
-            className={
-              pomodoroCtx.startAnimate
-                ? styles.active && styles.specialButton
-                : undefined
-            }
+            className={pomodoroCtx.startAnimate ? styles.active && styles.specialButton : undefined}
             onClick={pomodoroCtx.pauseTimer}
           >
             Pause
@@ -76,10 +68,10 @@ const PomodoroTimer = () => {
         </div>
       )}
 
-      {/* {pomodoroCtx.isTimerFinished && (
+      {/* {pomodoroCtx.isWorkTimerFinished && (
         <button onClick={presentModal}>Click here to continue</button>
       )} */}
-      {pomodoroCtx.isTimerFinished && (
+      {pomodoroCtx.isWorkTimerFinished && !pomodoroCtx.isBreakTimerFinished && (
         <Modal>
           <YesNoModal />
         </Modal>

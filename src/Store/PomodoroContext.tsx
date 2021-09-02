@@ -11,27 +11,31 @@ export const PomodoroContext = createContext({
   settings: {},
   updateSettings: (updatedSettings: any) => {},
   startAnimate: false,
-  isTimerFinished: false,
+  isWorkTimerFinished: false,
+  isBreakTimerFinished: false,
   startTimer: (updatedSettings: any) => {},
   pauseTimer: (updatedSettings: any) => {},
   children: (updatedSettings: any) => {},
   resetSettings: () => {},
+  resetAfterBreakSettings: () => {},
+
   setSession: (updatedSettings: any) => {},
   stopTimer: () => {},
 });
 
 const PomodoroContextProvider: React.FC = (props) => {
   const [pomodoro, setPomodoro] = useState(0); // the number of minutes picked
-  const [settings, setsettings] = useState({});
+  const [settings, setSettings] = useState({});
   const [startAnimate, setStartAnimate] = useState(false);
-  const [isTimerFinished, setIsTimerFinished] = useState(false);
+  const [isWorkTimerFinished, setIsWorkTimerFinished] = useState(false);
+  const [isBreakTimerFinished, setIsBreakTimerFinished] = useState(false);
 
   function startTimer() {
-    setIsTimerFinished(false);
+    setIsWorkTimerFinished(false);
     setStartAnimate(true);
     console.log('pomodoro state is', pomodoro);
-    setIsTimerFinished(false);
-    console.log('is Timerfinished value is', isTimerFinished);
+    setIsWorkTimerFinished(false);
+    console.log('is Timerfinished value is', isWorkTimerFinished);
   }
 
   function pauseTimer() {
@@ -41,16 +45,15 @@ const PomodoroContextProvider: React.FC = (props) => {
 
   function stopTimer() {
     setStartAnimate(false);
-    setsettings({});
+    setSettings({});
     setPomodoro(0);
-    console.log('timer stopped settings are', settings);
   }
 
-  const updateSettings = (updatedSettings: {}) => {
+  const updateSettings = (updatedSettings) => {
     //obtained from PomodoroSettings
-    setsettings(updatedSettings);
+    setSettings(updatedSettings);
     setTimer(updatedSettings);
-    // setIsTimerFinished(false);
+    // setisWorkTimerFinished(false);
   };
 
   const setTimer = (evaluate) => {
@@ -71,15 +74,18 @@ const PomodoroContextProvider: React.FC = (props) => {
   };
 
   const resetSettings = () => {
-    setsettings({});
+    setSettings({});
     setPomodoro(0);
-    setIsTimerFinished(false);
+    setIsWorkTimerFinished(false);
+    setIsBreakTimerFinished(false);
+  };
+  const resetAfterBreakSettings = () => {
+    setSettings({});
+    setPomodoro(0);
+    setIsWorkTimerFinished(false);
+    setIsBreakTimerFinished(true);
 
-    console.log(
-      'resetsettings function called, pomodoro state & settings is',
-      pomodoro,
-      settings
-    );
+    console.log('resetsettings function called, pomodoro state & settings is', pomodoro, settings);
   };
 
   function setSession(chosenSession: {}) {
@@ -106,8 +112,9 @@ const PomodoroContextProvider: React.FC = (props) => {
     }
 
     if (remainingTime === 0) {
-      setIsTimerFinished(true);
-      console.log('is Timerfinished value is', isTimerFinished);
+      setIsWorkTimerFinished(true);
+      // setIsBreakTimerFinished(true);
+      // console.log('is Timerfinished value is', isWorkTimerFinished);
 
       // setsettings({});
       // setPomodoro(0); // cuasing rendering issue
@@ -119,22 +126,20 @@ const PomodoroContextProvider: React.FC = (props) => {
   const contextValue = {
     pomodoro,
     settings,
-    isTimerFinished,
+    isWorkTimerFinished,
+    isBreakTimerFinished,
     updateSettings,
     startAnimate,
     startTimer,
     pauseTimer,
     children,
     resetSettings,
+    resetAfterBreakSettings,
     setSession,
     stopTimer,
   };
 
-  return (
-    <PomodoroContext.Provider value={contextValue}>
-      {props.children}
-    </PomodoroContext.Provider>
-  );
+  return <PomodoroContext.Provider value={contextValue}>{props.children}</PomodoroContext.Provider>;
 };
 
 export default PomodoroContextProvider;
