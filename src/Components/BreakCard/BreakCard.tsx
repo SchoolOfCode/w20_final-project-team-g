@@ -23,8 +23,8 @@ const BreakCard = () => {
   const presentBreakTimer = (selectedTime) => {
     // here be thy magic
 
-    pomodoroCtx.resetSettings(); //reset timer
-    // pomodoroCtx.resetAfterBreakSettings();
+    // pomodoroCtx.resetSettings(); //reset timer
+    pomodoroCtx.resetAfterBreakSettings();
     pomodoroCtx.updateSettings(breakTime); // passes object back to useContext
   };
 

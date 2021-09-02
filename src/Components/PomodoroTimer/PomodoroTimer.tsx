@@ -71,7 +71,7 @@ const PomodoroTimer = () => {
       {/* {pomodoroCtx.isWorkTimerFinished && (
         <button onClick={presentModal}>Click here to continue</button>
       )} */}
-      {pomodoroCtx.isWorkTimerFinished && !pomodoroCtx.isBreakTimerFinished && (
+      {pomodoroCtx.isWorkTimerFinished && (
         <Modal>
           <YesNoModal />
         </Modal>

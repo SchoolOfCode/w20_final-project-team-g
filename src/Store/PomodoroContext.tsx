@@ -34,7 +34,7 @@ const PomodoroContextProvider: React.FC = (props) => {
     setIsWorkTimerFinished(false);
     setStartAnimate(true);
     console.log('pomodoro state is', pomodoro);
-    setIsWorkTimerFinished(false);
+    // setIsWorkTimerFinished(false);
     console.log('is Timerfinished value is', isWorkTimerFinished);
   }
 
@@ -110,14 +110,11 @@ const PomodoroContextProvider: React.FC = (props) => {
     if (minutes < 10) {
       zeroDisplayerMinutes = '0';
     }
-
-    if (remainingTime === 0) {
+    ///HERE BE THY PROBLEM ????????//////
+    if (remainingTime === 0 && isBreakTimerFinished) {
+      setIsWorkTimerFinished(false);
+    } else if (remainingTime === 0 && !isBreakTimerFinished) {
       setIsWorkTimerFinished(true);
-      // setIsBreakTimerFinished(true);
-      // console.log('is Timerfinished value is', isWorkTimerFinished);
-
-      // setsettings({});
-      // setPomodoro(0); // cuasing rendering issue
     }
 
     return `${zeroDisplayerMinutes}${minutes}:${zeroDisplayerSeconds}${seconds}`;
