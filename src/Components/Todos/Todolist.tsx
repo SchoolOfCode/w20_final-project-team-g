@@ -5,7 +5,7 @@ import { TodoStatus } from '../../Models/TodoClass';
 import Modal from '../../Layout/Modal';
 import Backdrop from '../../Layout/Backdrop';
 import PomodoroTimer from '../PomodoroTimer/PomodoroTimer';
-import styles from "./Todolist.module.css";
+import styles from './Todolist.module.css';
 
 const TodoList: React.FC = () => {
   const todoCtx = useContext(TodosContext);
@@ -31,6 +31,7 @@ const TodoList: React.FC = () => {
                   key={item.id}
                   text={item.todoTitle}
                   createdBy={item.createdBy}
+                  todoBody={item.todoBody}
                   onStartTodo={todoCtx.startTodo.bind(null, item)}
                   onFinish={todoCtx.finishTodo.bind(null, item)}
                   onRemoveTodo={todoCtx.removeTodo.bind(null, item)}

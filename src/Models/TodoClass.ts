@@ -15,7 +15,7 @@ class TodoClass {
 
   constructor(todoTitle: string, createdBy: string, todoBody: string, urgency: number) {
     this.todoTitle = todoTitle;
-    this.todoBody = todoBody;
+    this.todoBody = todoBody || 'example text';
     this.id = new Date().toISOString();
     this.date = new Date().toISOString();
     this.createdBy = createdBy; // later change to signed in user name/ID ?
