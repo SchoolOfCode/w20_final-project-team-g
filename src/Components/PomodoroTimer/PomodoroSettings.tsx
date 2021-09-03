@@ -13,6 +13,7 @@ const PomodoroSettings = () => {
   const pomodoroCtx = useContext(PomodoroContext);
 
   const handleClick = (selectedTime) => {
+    pomodoroCtx.setYesNoModalState(false);
     // selectedTime.preventDefault();
     let breakTime;
 
