@@ -6,25 +6,36 @@ import firebase from 'firebase';
 const DoughnutChart = () => {
   const moodRef = firebase.firestore().collection('moods');
   // const [allMoods, setAllMoods] = useState([]);
-  const [moodArrayNumbers, setMoodArrayNumbers] = useState([]);
+  // const [moodArrayNumbers, setMoodArrayNumbers] = useState([]);
+  // const [moodOccurencesObj, setMoodOccurencesObj] = useState([]);
   const [moodArrayData, setMoodArrayData] = useState(null);
-  const allMoodsObj = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
+  // const allMoodsObj = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
 
   useEffect(() => {
     const getMoodData = async () => {
+      const countOccurrences = (arr, val) => arr.reduce((a, v) => (v === val ? a + 1 : a), 0); // funciton to count each occurence of a number in database
+      //.map does not work in objects in TS? so pushing all items to an empty array first (unless we specify type in TS??)
       let fetchedMoodsNumbersOnly = [];
       let fetchedMoodsAllData = [];
       const data: any = await moodRef.get();
       data.forEach((doc) => {
         //Only mapping the 'mood' NUMBER to fetchedMoods.
+        //I tried converting the data to numbers to fix the pie chart issue but it didnt work so Number() could be removed?
         fetchedMoodsNumbersOnly.push(Number(doc.data().moodData.mood));
         //All data in an array if we want to use other data in future
         fetchedMoodsAllData.push(doc.data().moodData);
       });
-      const sortedMoods = fetchedMoodsNumbersOnly.sort((a, b) => a - b);
-      setMoodArrayNumbers(sortedMoods);
-      console.log(moodArrayNumbers);
+      // const sortedMoods = fetchedMoodsNumbersOnly.sort((a, b) => a - b); // not using this state
+      // setMoodArrayNumbers(sortedMoods); not usin this state
+      const num1Ocs = countOccurrences(fetchedMoodsNumbersOnly, 1);
+      const num2Ocs = countOccurrences(fetchedMoodsNumbersOnly, 2);
+      const num3Ocs = countOccurrences(fetchedMoodsNumbersOnly, 3);
+      const num4Ocs = countOccurrences(fetchedMoodsNumbersOnly, 4);
+      const num5Ocs = countOccurrences(fetchedMoodsNumbersOnly, 5);
+      setMoodArrayData([num1Ocs, num2Ocs, num3Ocs, num4Ocs, num5Ocs]);
+      console.log(moodArrayData);
     };
+
     getMoodData();
     // console.log(moodArray);
     // const allMoodsFromDB = mjMoodArray.map((item) => item.moodData.mood).sort((a, b) => a - b);
@@ -46,13 +57,7 @@ const DoughnutChart = () => {
   // extract all moods
   // console.log(allMoodsFromDB);
   // create the new mood object
-  // allMoodsFromDB.forEach(function (item) {
-  //   allMoodsObj[item] = (allMoodsObj[item] || 0) + 1;
-  // });
-  // convert object to array
-  // let converted = Object.keys(allMoodsObj).map(function (key) {
-  //   return allMoodsObj[key];
-  // });
+
   // console.log('NEW MOOD ARRAY FROM ASYNC: ' + moodArray);
   // console.log(moodArray);
   // console.log('moodArray inside fetchAndModifyData', moodArray);
@@ -83,7 +88,7 @@ const DoughnutChart = () => {
     datasets: [
       {
         label: '# of Votes',
-        data: moodArrayNumbers,
+        data: moodArrayData,
 
         backgroundColor: [
           'rgba(96, 165, 250, 1)',
