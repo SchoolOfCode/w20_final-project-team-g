@@ -15,16 +15,15 @@ const YesNoModal = () => {
   const pomodoroCtx = useContext(PomodoroContext);
   function closeModalHandler() {
     todoCtx.closeModal();
-    // console.log(pomodoroCtx.yesOrNoChosen);
   }
   const presentBreakCard = () => {
-    console.log('Before ' + pomodoroCtx.yesOrNoChosen);
+    // IF TRUE then a button has been selected so the modal does not appear
     pomodoroCtx.setYesNoModalState(true);
     setPresentBreak(true); // currently dbl click required
-    console.log('After:  ' + pomodoroCtx.yesOrNoChosen);
   };
 
   const presentBreakCardUpdateTodo = () => {
+    // IF TRUE then a button has been selected so the modal does not appear
     pomodoroCtx.setYesNoModalState(true);
 
     setPresentBreak(true);
@@ -34,7 +33,7 @@ const YesNoModal = () => {
 
   return (
     <div className={styles.parentFlex}>
-      {/* toggles the yes/no button selection state */}
+      {/* New conditional render. If the yes/no has been chosen then the choice no longer displays (it was displaying behind break flow card) */}
       {!pomodoroCtx.yesOrNoChosen && (
         <section>
           <div className={styles.closeIcon}>
