@@ -17,7 +17,7 @@ const TodoList: React.FC = () => {
   useEffect(() => {
     todoCtx.retrieveCurrentTodo();
   }, []);
-
+  todoCtx.items.sort((a, b) => (b.urgency > a.urgency ? -1 : 1));
   return (
     <Fragment>
       <h3 className="text-gray-500 tracking-wide font-medium text-2xl mt-4 mb-4">Backlog</h3>
