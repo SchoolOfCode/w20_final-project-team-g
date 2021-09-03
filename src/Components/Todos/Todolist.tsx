@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, useEffect } from 'react';
+import React, { Fragment, useContext, useEffect, useState } from 'react';
 import TodoItem from './TodoItem';
 import { TodosContext } from '../../Store/TodosContext';
 import { TodoStatus } from '../../Models/TodoClass';
@@ -6,9 +6,11 @@ import Modal from '../../Layout/Modal';
 import Backdrop from '../../Layout/Backdrop';
 import PomodoroTimer from '../PomodoroTimer/PomodoroTimer';
 import styles from './Todolist.module.css';
+import { Select } from '@material-ui/core';
 
 const TodoList: React.FC = () => {
   const todoCtx = useContext(TodosContext);
+  const [sorted, setSorted] = useState(null);
 
   function closeModalHandler() {
     todoCtx.closeModal();
@@ -17,9 +19,16 @@ const TodoList: React.FC = () => {
   useEffect(() => {
     todoCtx.retrieveCurrentTodo();
   }, []);
-  todoCtx.items.sort((a, b) => (b.urgency > a.urgency ? -1 : 1));
+  // todoCtx.items.sort((a, b) => (b.urgency > a.urgency ? -1 : 1));
   return (
     <Fragment>
+      <button
+        onClick={() => {
+          setSorted(todoCtx.items.sort((a, b) => (b.urgency > a.urgency ? -1 : 1)));
+        }}
+      >
+        Sort
+      </button>
       <h3 className="text-gray-500 tracking-wide font-medium text-2xl mt-4 mb-4">Backlog</h3>
       <ul className="w-72">
         {todoCtx.items &&
