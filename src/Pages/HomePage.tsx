@@ -34,7 +34,7 @@ const HomePage = () => {
   }
   return (
     <Fragment>
-      <h4>Welcome {name}</h4>
+      {/* <h4>Welcome {name}</h4> */}
       <div className={styles.flex}>
         <div className={styles.column}>
           <TodoList />

@@ -13,39 +13,47 @@ const YesNoModal = () => {
   const [presentBreak, setPresentBreak] = useState(false);
   const todoCtx = useContext(TodosContext);
   const pomodoroCtx = useContext(PomodoroContext);
-
   function closeModalHandler() {
     todoCtx.closeModal();
   }
-
   const presentBreakCard = () => {
-    setPresentBreak(true);
-    // pomodoroCtx.resetSettings();
+    // IF TRUE then a button has been selected so the modal does not appear
+    pomodoroCtx.setYesNoModalState(true);
+    setPresentBreak(true); // currently dbl click required
   };
 
   const presentBreakCardUpdateTodo = () => {
+    // IF TRUE then a button has been selected so the modal does not appear
+    pomodoroCtx.setYesNoModalState(true);
+
     setPresentBreak(true);
     todoCtx.finishTodo(todoCtx.inProgressTodo);
     // pomodoroCtx.resetSettings();
     // the selected class needs to be passed here but idk how
   };
+
   return (
     <div className={styles.parentFlex}>
-      <div className={styles.closeIcon}>
-        <img src={closeTabIcon} alt="close tab" onClick={closeModalHandler} />
-      </div>
-      <span className={styles.textDiv}>Did you finish the task?</span>
-      <div className={styles.iconDiv}>
-        <img src={yes} alt="yes" onClick={presentBreakCardUpdateTodo} />
-        <img src={no} alt="no" onClick={presentBreakCard} />
-      </div>
-      <span className={styles.textDiv}>
-        Don’t worry if you didn’t, sometimes things take longer than we expect them to
-      </span>
-      <div className={styles.tooltip}>
-        <img src={helpIcon} alt="help tool" />
-        <p className={styles.tooltiptext}>Don't touch me</p>
-      </div>
+      {/* New conditional render. If the yes/no has been chosen then the choice no longer displays (it was displaying behind break flow card) */}
+      {!pomodoroCtx.yesOrNoChosen && (
+        <section>
+          <div className={styles.closeIcon}>
+            <img src={closeTabIcon} alt="close tab" onClick={closeModalHandler} />
+          </div>
+          <span className={styles.textDiv}>Did you finish the task?</span>
+          <div className={styles.iconDiv}>
+            <img src={yes} alt="yes" onClick={presentBreakCardUpdateTodo} />
+            <img src={no} alt="no" onClick={presentBreakCard} />
+          </div>
+          <span className={styles.textDiv}>
+            Don’t worry if you didn’t, sometimes things take longer than we expect them to
+          </span>
+          <div className={styles.tooltip}>
+            <img src={helpIcon} alt="help tool" />
+            <p className={styles.tooltiptext}>Don't touch me</p>
+          </div>
+        </section>
+      )}
 
       {presentBreak && (
         <Modal>
