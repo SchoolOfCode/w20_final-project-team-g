@@ -7,12 +7,52 @@ import { Fragment, useState, useContext } from 'react';
 import { UserContext } from '../Store/UserContext';
 import { auth } from '../utilities/firebase';
 import { Link, useHistory } from 'react-router-dom';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import { green } from '@material-ui/core/colors';
 
 const HomePage = () => {
   const history = useHistory;
-
+  const [user, loading, error] = useAuthState(auth);
+  const {
+    userProfile: { name, email, uniqueID },
+  } = useContext(UserContext);
+  if (!user) {
+    return (
+      <div
+        style={{
+          padding: '50px',
+          height: '100%',
+          alignItems: 'center',
+          display: 'flex',
+          justifyContent: 'center',
+          // alignContent: 'center',
+        }}
+      >
+        <CircularProgress></CircularProgress>
+      </div>
+    );
+  }
   return (
     <Fragment>
+      {/* RICK SAYS HI */}
+      <button
+        onClick={() => {
+          console.log('rickroll is on HomePage.tsx to delete!');
+          window.open('https://www.youtube.com/watch?v=klfT41uZniI');
+        }}
+        style={{
+          color: 'white',
+          padding: '15px 32px',
+          backgroundColor: 'red',
+          fontSize: '24px',
+          borderRadius: '12px',
+          alignContent: 'center',
+        }}
+      >
+        {'>>'}FREE PIZZA ! click here{'<<'}
+      </button>
+      {/* RICK SAYS BYE */}
       <div className={styles.flex}>
         <div className={styles.column}>
           <TodoList />

@@ -20,7 +20,7 @@ class TodoClass {
     this.date = new Date().toISOString();
     this.createdBy = createdBy; // later change to signed in user name/ID ?
     this.status = TodoStatus.todo; // by default
-    this.urgency = urgency;
+    this.urgency = urgency || 3;
   }
 }
 
