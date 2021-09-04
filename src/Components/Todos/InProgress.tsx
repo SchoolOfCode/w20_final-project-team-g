@@ -1,8 +1,8 @@
-import React, { Fragment, useContext } from "react";
-import styles from "./Todolist.module.css";
-import TodoItem from "./TodoItem";
-import { TodosContext } from "../../Store/TodosContext";
-import { TodoStatus } from "../../Models/TodoClass";
+import React, { Fragment, useContext } from 'react';
+import styles from './Todolist.module.css';
+import TodoItem from './TodoItem';
+import { TodosContext } from '../../Store/TodosContext';
+import { TodoStatus } from '../../Models/TodoClass';
 
 const InProgress: React.FC = () => {
   const todoCtx = useContext(TodosContext);
@@ -18,6 +18,7 @@ const InProgress: React.FC = () => {
                 createdBy={item.createdBy}
                 key={item.id}
                 text={item.todoTitle}
+                todoBody={item.todoBody}
                 urgency={item.urgency}
                 onStartTodo={todoCtx.startTodo.bind(null, item)}
                 onFinish={todoCtx.finishTodo.bind(null, item)}
