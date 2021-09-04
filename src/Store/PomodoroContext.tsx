@@ -45,7 +45,6 @@ const PomodoroContextProvider: React.FC = (props) => {
 
   function pauseTimer() {
     setStartAnimate(false);
-    // setPomodoro(0);
   }
   function setYesNoModalState(boolean) {
     setYesOrNoChosen(boolean);
