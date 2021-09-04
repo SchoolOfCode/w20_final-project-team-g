@@ -4,7 +4,6 @@
 //   return <li>{props.text}</li>;
 // };
 import { Fragment } from 'react';
-import styles from './Todolist.module.css';
 
 const TodoItem: React.FC<{
   text: string;
