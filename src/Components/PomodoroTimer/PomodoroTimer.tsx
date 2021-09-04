@@ -28,9 +28,7 @@ const PomodoroTimer = () => {
       </div> */}
       <small>You got this</small>
 
-      {pomodoroCtx.pomodoro === 0 && !pomodoroCtx.isTimerFinished && (
-        <PomodoroSettings />
-      )}
+      {pomodoroCtx.pomodoro === 0 && !pomodoroCtx.isTimerFinished && <PomodoroSettings />}
 
       {pomodoroCtx.pomodoro !== 0 && (
         <>
@@ -53,9 +51,7 @@ const PomodoroTimer = () => {
         <div className={styles.buttonWrapper}>
           <button
             className={
-              !pomodoroCtx.startAnimate
-                ? styles.active && styles.specialButton
-                : undefined
+              !pomodoroCtx.startAnimate ? styles.active && styles.specialButton : undefined
             }
             onClick={pomodoroCtx.startTimer}
           >
@@ -63,11 +59,7 @@ const PomodoroTimer = () => {
           </button>
 
           <button
-            className={
-              pomodoroCtx.startAnimate
-                ? styles.active && styles.specialButton
-                : undefined
-            }
+            className={pomodoroCtx.startAnimate ? styles.active && styles.specialButton : undefined}
             onClick={pomodoroCtx.pauseTimer}
           >
             Pause
