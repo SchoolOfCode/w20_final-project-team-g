@@ -9,26 +9,26 @@ import styles from './YesNoModal.module.css';
 import closeTabIcon from '../../images/modal-buttons/close.png';
 import { PomodoroContext } from '../../Store/PomodoroContext';
 import { useEffect } from 'react';
+import Moodtracker from '../Moodtracker/Moodtracker';
 const YesNoModal = () => {
-  const [presentBreak, setPresentBreak] = useState(false);
+  const [isPresentingMoodCard, setIsPresentingMoodCard] = useState(false);
   const todoCtx = useContext(TodosContext);
   const pomodoroCtx = useContext(PomodoroContext);
+
   function closeModalHandler() {
     todoCtx.closeModal();
   }
-  const presentBreakCard = () => {
-    // IF TRUE then a button has been selected so the modal does not appear
+
+  const presentMoodCard = () => {
     pomodoroCtx.setYesNoModalState(true);
-    setPresentBreak(true); // currently dbl click required
+    setIsPresentingMoodCard(true);
   };
 
   const presentBreakCardUpdateTodo = () => {
     // IF TRUE then a button has been selected so the modal does not appear
     pomodoroCtx.setYesNoModalState(true);
-
-    setPresentBreak(true);
+    setIsPresentingMoodCard(true);
     todoCtx.finishTodo(todoCtx.inProgressTodo);
-    // the selected class needs to be passed here but idk how
   };
 
   return (
@@ -37,15 +37,20 @@ const YesNoModal = () => {
       {!pomodoroCtx.yesOrNoChosen && (
         <section>
           <div className={styles.closeIcon}>
-            <img src={closeTabIcon} alt="close tab" onClick={closeModalHandler} />
+            <img
+              src={closeTabIcon}
+              alt="close tab"
+              onClick={closeModalHandler}
+            />
           </div>
           <span className={styles.textDiv}>Did you finish the task?</span>
           <div className={styles.iconDiv}>
             <img src={yes} alt="yes" onClick={presentBreakCardUpdateTodo} />
-            <img src={no} alt="no" onClick={presentBreakCard} />
+            <img src={no} alt="no" onClick={presentMoodCard} />
           </div>
           <span className={styles.textDiv}>
-            Don’t worry if you didn’t, sometimes things take longer than we expect them to
+            Don’t worry if you didn’t, sometimes things take longer than we
+            expect them to
           </span>
           <div className={styles.tooltip}>
             <img src={helpIcon} alt="help tool" />
@@ -54,9 +59,9 @@ const YesNoModal = () => {
         </section>
       )}
 
-      {presentBreak && (
+      {isPresentingMoodCard && (
         <Modal>
-          <BreakCard />
+          <Moodtracker />
         </Modal>
       )}
     </div>

@@ -27,8 +27,8 @@ const PomodoroTimer = () => {
         <img src={closeTabIcon} alt="close tab" onClick={closeModalHandler} />
       </div> */}
       <small>You got this</small>
-
-      {pomodoroCtx.pomodoro === 0 && !pomodoroCtx.isTimerFinished && <PomodoroSettings />}
+      {/* here! do break logic? */}
+      {pomodoroCtx.pomodoro === 0 && !pomodoroCtx.isWorkTimerFinished && <PomodoroSettings />}
 
       {pomodoroCtx.pomodoro !== 0 && (
         <>
@@ -68,10 +68,10 @@ const PomodoroTimer = () => {
         </div>
       )}
 
-      {/* {pomodoroCtx.isTimerFinished && (
+      {/* {pomodoroCtx.isWorkTimerFinished && (
         <button onClick={presentModal}>Click here to continue</button>
       )} */}
-      {pomodoroCtx.isTimerFinished && (
+      {pomodoroCtx.isWorkTimerFinished && (
         <Modal>
           <YesNoModal />
         </Modal>
