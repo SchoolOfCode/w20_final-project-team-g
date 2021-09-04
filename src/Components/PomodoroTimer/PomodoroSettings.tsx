@@ -23,9 +23,6 @@ const PomodoroSettings = () => {
     } else {
       breakTime = '10';
     }
-
-    let a = 0 + breakTime;
-
     const newVal = {
       ...newTimer,
       work: +selectedTime,
@@ -44,6 +41,7 @@ const PomodoroSettings = () => {
         break;
     }
     pomodoroCtx.updateSettings(newVal); // passes object back to useContext
+    console.log(newVal);
   };
 
   return (

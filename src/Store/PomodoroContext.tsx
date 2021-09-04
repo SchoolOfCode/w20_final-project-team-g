@@ -28,12 +28,12 @@ export const PomodoroContext = createContext({
 });
 
 const PomodoroContextProvider: React.FC = (props) => {
-  const [yesOrNoChosen, setYesOrNoChosen] = useState(false);
   const [pomodoro, setPomodoro] = useState(0); // the number of minutes picked
   const [settings, setSettings] = useState({});
   const [startAnimate, setStartAnimate] = useState(false);
   const [isWorkTimerFinished, setIsWorkTimerFinished] = useState(false);
   const [isBreakTimerFinished, setIsBreakTimerFinished] = useState(false);
+  const [yesOrNoChosen, setYesOrNoChosen] = useState(false);
 
   function startTimer() {
     setIsWorkTimerFinished(false);
@@ -45,7 +45,7 @@ const PomodoroContextProvider: React.FC = (props) => {
 
   function pauseTimer() {
     setStartAnimate(false);
-    setPomodoro(0);
+    // setPomodoro(0);
   }
   function setYesNoModalState(boolean) {
     setYesOrNoChosen(boolean);
@@ -87,12 +87,16 @@ const PomodoroContextProvider: React.FC = (props) => {
     setIsBreakTimerFinished(false);
   };
   const resetAfterBreakSettings = () => {
-    setSettings({});
-    setPomodoro(0);
+    // setSettings({});
+    // setPomodoro(0);
     setIsWorkTimerFinished(false);
     setIsBreakTimerFinished(true);
 
-    console.log('resetsettings function called, pomodoro state & settings is', pomodoro, settings);
+    console.log(
+      'resetsettings function called, pomodoro state & settings is',
+      pomodoro,
+      settings
+    );
   };
 
   function setSession(chosenSession: {}) {
@@ -145,7 +149,11 @@ const PomodoroContextProvider: React.FC = (props) => {
     stopTimer,
   };
 
-  return <PomodoroContext.Provider value={contextValue}>{props.children}</PomodoroContext.Provider>;
+  return (
+    <PomodoroContext.Provider value={contextValue}>
+      {props.children}
+    </PomodoroContext.Provider>
+  );
 };
 
 export default PomodoroContextProvider;
