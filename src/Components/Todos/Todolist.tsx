@@ -5,7 +5,6 @@ import { TodoStatus } from '../../Models/TodoClass';
 import Modal from '../../Layout/Modal';
 import Backdrop from '../../Layout/Backdrop';
 import PomodoroTimer from '../PomodoroTimer/PomodoroTimer';
-import styles from './Todolist.module.css';
 import { MenuItem, Select } from '@material-ui/core';
 import { InputLabel } from '@material-ui/core';
 
