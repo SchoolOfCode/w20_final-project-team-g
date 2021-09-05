@@ -51,19 +51,24 @@ const MoodChart = () => {
   let todaysData = mood.filter((item) => item.day === userSystemDate);
   // console.log('today data:', todaysData);
   // 3 for each mood entry, remove duplicate hour value but combine their score values
-  const specificHour = todaysData.reduce((specificHour, { day, time, mood }) => {
-    const eachHour = specificHour[time];
-    const current = eachHour || { day, time, moods: [+mood] };
-    if (eachHour) current.mood = eachHour.moods.push(+mood); // if [time] property exists add up scores
+  const specificHour = todaysData.reduce(
+    (specificHour, { day, time, mood }) => {
+      const eachHour = specificHour[time];
+      const current = eachHour || { day, time, moods: [+mood] };
+      if (eachHour) current.mood = eachHour.moods.push(+mood); // if [time] property exists add up scores
 
-    return Object.assign(specificHour, { [time]: current });
-  }, {});
+      return Object.assign(specificHour, { [time]: current });
+    },
+    {}
+  );
 
-  const avgMoodForEachHour = Object.values(specificHour).map(({ day, time, moods }) => ({
-    day,
-    time,
-    mood: moods.reduce((a, b) => a + b) / moods.length,
-  }));
+  const avgMoodForEachHour = Object.values(specificHour).map(
+    ({ day, time, moods }) => ({
+      day,
+      time,
+      mood: moods.reduce((a, b) => a + b) / moods.length,
+    })
+  );
 
   let averageMood = avgMoodForEachHour.map((data) => +data.mood.toFixed());
   let timeCollection = avgMoodForEachHour.map((data) => data.time);
@@ -71,12 +76,12 @@ const MoodChart = () => {
   const data = (canvas) => {
     const ctx = canvas.getContext('2d');
     const gradient = ctx.createLinearGradient(0, 90, 100, 0);
-    gradient.addColorStop(1, 'rgba(96, 165, 250, 1)');
-    gradient.addColorStop(0.8, 'rgba(96, 165, 250, 1)');
-    gradient.addColorStop(0.6, 'rgba(167, 139, 250, 1)');
-    gradient.addColorStop(0.4, 'rgba(248, 113, 113, 1)');
-    gradient.addColorStop(0.2, '#FCD34D');
     gradient.addColorStop(0, 'rgb(20, 1, 1)');
+    gradient.addColorStop(0.2, 'rgba(96, 165, 250, 1)');
+    gradient.addColorStop(0.4, 'rgba(96, 165, 250, 1)');
+    gradient.addColorStop(0.6, 'rgba(167, 139, 250, 1)');
+    gradient.addColorStop(0.8, 'rgba(248, 113, 113, 1)');
+    gradient.addColorStop(1, '#FCD34D');
 
     return {
       labels: timeCollection, // x-axis

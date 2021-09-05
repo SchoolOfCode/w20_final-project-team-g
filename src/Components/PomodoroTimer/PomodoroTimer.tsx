@@ -1,11 +1,11 @@
-import styles from './Pomodoro.module.css';
-import { useState } from 'react';
-import CountdownAnimation from './CountDownAnimation';
-import { PomodoroContext } from '../../Store/PomodoroContext';
-import PomodoroSettings from './PomodoroSettings';
-import { useContext } from 'react';
-import Modal from '../../Layout/Modal';
-import YesNoModal from '../YesNoModal/YesNoModal';
+import styles from "./Pomodoro.module.css";
+import { useState } from "react";
+import CountdownAnimation from "./CountDownAnimation";
+import { PomodoroContext } from "../../Store/PomodoroContext";
+import PomodoroSettings from "./PomodoroSettings";
+import { useContext } from "react";
+import Modal from "../../Layout/Modal";
+import YesNoModal from "../YesNoModal/YesNoModal";
 // import closeTabIcon from '../../images/modal-buttons/close.png';
 // import { TodosContext } from '../../Store/TodosContext';
 const PomodoroTimer = () => {
@@ -22,13 +22,17 @@ const PomodoroTimer = () => {
 
   // removed the close icon from here due to lack of CSS knowledge
   return (
+    <div className="flex mt-24">
+
     <div className={styles.container}>
       {/* <div className={styles.closeIcon}>
         <img src={closeTabIcon} alt="close tab" onClick={closeModalHandler} />
       </div> */}
       <small>You got this</small>
-
-      {pomodoroCtx.pomodoro === 0 && !pomodoroCtx.isTimerFinished && <PomodoroSettings />}
+      {/* here! do break logic? */}
+      {pomodoroCtx.pomodoro === 0 && !pomodoroCtx.isWorkTimerFinished && (
+        <PomodoroSettings />
+      )}
 
       {pomodoroCtx.pomodoro !== 0 && (
         <>
@@ -51,15 +55,21 @@ const PomodoroTimer = () => {
         <div className={styles.buttonWrapper}>
           <button
             className={
-              !pomodoroCtx.startAnimate ? styles.active && styles.specialButton : undefined
-            }
+              !pomodoroCtx.startAnimate
+                ? styles.active && styles.specialButton
+                : undefined
+              }
             onClick={pomodoroCtx.startTimer}
           >
             Start
           </button>
 
           <button
-            className={pomodoroCtx.startAnimate ? styles.active && styles.specialButton : undefined}
+            className={
+              pomodoroCtx.startAnimate
+                ? styles.active && styles.specialButton
+                : undefined
+            }
             onClick={pomodoroCtx.pauseTimer}
           >
             Pause
@@ -68,15 +78,19 @@ const PomodoroTimer = () => {
         </div>
       )}
 
-      {/* {pomodoroCtx.isTimerFinished && (
+      {/* {pomodoroCtx.isWorkTimerFinished && (
         <button onClick={presentModal}>Click here to continue</button>
       )} */}
-      {pomodoroCtx.isTimerFinished && (
+      {pomodoroCtx.isWorkTimerFinished && (
         <Modal>
           <YesNoModal />
         </Modal>
       )}
+      <audio id="beep" ref={pomodoroCtx.audioForEndOfPomodoro}>
+        <source src="https://onlineclock.net/audio/options/default.mp3" />
+      </audio>
     </div>
+        </div>
   );
 };
 
