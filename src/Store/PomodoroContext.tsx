@@ -1,9 +1,10 @@
-import { useState, createContext } from 'react';
+import { useRef } from "react";
+import { useState, createContext } from "react";
 
 export enum PomoStatus {
-  work = 'work',
-  break = 'break',
-  nothing = 'null',
+  work = "work",
+  break = "break",
+  nothing = "null",
 }
 
 export const PomodoroContext = createContext({
@@ -25,6 +26,7 @@ export const PomodoroContext = createContext({
 
   setSession: (updatedSettings: any) => {},
   stopTimer: () => {},
+  audioForEndOfPomodoro: null,
 });
 
 const PomodoroContextProvider: React.FC = (props) => {
@@ -34,13 +36,14 @@ const PomodoroContextProvider: React.FC = (props) => {
   const [isWorkTimerFinished, setIsWorkTimerFinished] = useState(false);
   const [isBreakTimerFinished, setIsBreakTimerFinished] = useState(false);
   const [yesOrNoChosen, setYesOrNoChosen] = useState(false);
+  const audioForEndOfPomodoro = useRef(null);
 
   function startTimer() {
     setIsWorkTimerFinished(false);
     setStartAnimate(true);
-    console.log('pomodoro state is', pomodoro);
+    console.log("pomodoro state is", pomodoro);
     // setIsWorkTimerFinished(false);
-    console.log('is Timerfinished value is', isWorkTimerFinished);
+    console.log("is Timerfinished value is", isWorkTimerFinished);
   }
 
   function pauseTimer() {
@@ -66,10 +69,10 @@ const PomodoroContextProvider: React.FC = (props) => {
     switch (
       evaluate.session // frm settings
     ) {
-      case 'work':
+      case "work":
         setPomodoro(evaluate.work);
         break;
-      case 'break':
+      case "break":
         setPomodoro(evaluate.break);
         break;
 
@@ -92,7 +95,7 @@ const PomodoroContextProvider: React.FC = (props) => {
     setIsBreakTimerFinished(true);
 
     console.log(
-      'resetsettings function called, pomodoro state & settings is',
+      "resetsettings function called, pomodoro state & settings is",
       pomodoro,
       settings
     );
@@ -110,21 +113,25 @@ const PomodoroContextProvider: React.FC = (props) => {
   const children = ({ remainingTime }) => {
     const minutes = Math.floor(remainingTime / 60); // change display here
     const seconds = remainingTime % 60;
-    let zeroDisplayerSeconds = '';
-    let zeroDisplayerMinutes = '';
+    let zeroDisplayerSeconds = "";
+    let zeroDisplayerMinutes = "";
 
     if (seconds < 10) {
-      zeroDisplayerSeconds = '0';
+      zeroDisplayerSeconds = "0";
     }
 
     if (minutes < 10) {
-      zeroDisplayerMinutes = '0';
+      zeroDisplayerMinutes = "0";
     }
     ///HERE BE THY PROBLEM ????????//////
     if (remainingTime === 0 && isBreakTimerFinished) {
       setIsWorkTimerFinished(false);
     } else if (remainingTime === 0 && !isBreakTimerFinished) {
       setIsWorkTimerFinished(true);
+    }
+
+    if (remainingTime === 0) {
+      audioForEndOfPomodoro.current.play();
     }
 
     return `${zeroDisplayerMinutes}${minutes}:${zeroDisplayerSeconds}${seconds}`;
@@ -146,6 +153,7 @@ const PomodoroContextProvider: React.FC = (props) => {
     resetAfterBreakSettings,
     setSession,
     stopTimer,
+    audioForEndOfPomodoro,
   };
 
   return (
