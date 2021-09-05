@@ -6,6 +6,7 @@ import PomodoroSettings from './PomodoroSettings';
 import { useContext } from 'react';
 import Modal from '../../Layout/Modal';
 import YesNoModal from '../YesNoModal/YesNoModal';
+import TipsSlider from '../BreakCard/TipsSlider';
 // import closeTabIcon from '../../images/modal-buttons/close.png';
 // import { TodosContext } from '../../Store/TodosContext';
 const PomodoroTimer = () => {
@@ -19,13 +20,14 @@ const PomodoroTimer = () => {
   return (
     <div className="flex mt-24">
       <div className={styles.container}>
-        <small>You got this</small>
         {/* SHOW SETTINGS IF NO POMODORO VALUE IS SELECTED */}
         {pomodoroCtx.pomodoro === 0 && <PomodoroSettings />}
 
         {/* SHOW WORK CLOCK IF VALUE IS CHOSEN AND ONWORKTIMER  */}
         {pomodoroCtx.pomodoro !== 0 && pomodoroCtx.isOnWorkTimer && (
           <>
+            <small>You got this</small>
+
             <div className={styles.timeContainer}>
               <div className={styles.timeWrapper}>
                 <CountdownAnimation
@@ -71,11 +73,16 @@ const PomodoroTimer = () => {
             <YesNoModal />
           </Modal>
         )}
-        
 
         {/* SHOW WORK CLOCK IF VALUE IS CHOSEN AND ON BREAK TIMER  */}
         {pomodoroCtx.pomodoro !== 0 && pomodoroCtx.isOnBreakTimer && (
           <>
+            {pomodoroCtx.startAnimate && (
+              <div>
+                <TipsSlider />
+              </div>
+            )}
+
             <div className={styles.timeContainer}>
               <div className={styles.timeWrapper}>
                 <CountdownAnimation

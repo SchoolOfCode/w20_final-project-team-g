@@ -1,7 +1,7 @@
 export const mindfullData = [
   'Breath in... breath out 🧘‍♀️',
   'Remember your mortality. None of this matters 🦴',
-  'Go and water a plan 🌿',
+  'Go and water a plant 🌿',
 ];
 
 export const exerciseData = [

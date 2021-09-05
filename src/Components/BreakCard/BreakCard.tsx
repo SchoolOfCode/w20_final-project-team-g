@@ -26,11 +26,21 @@ const BreakCard = () => {
     session: 'work',
   });
 
-  const presentBreakTimer = () => {
-    pomodoroCtx.resetSettings(); //reset timer // makes break timer show up!
-    pomodoroCtx.resetAfterBreakSettings();
+  const presentBreakTimer = (id: string) => {
+    //pomodoroCtx.resetSettings(); // makes break timer show up!
     pomodoroCtx.updateBreakTimer(breakTime); // passes object back to useContext
     setIsPresentingBreakTimer(true);
+    console.log('id is', id);
+
+    if (id === 'social') {
+      pomodoroCtx.wellnessQuoteHandler(socialData);
+    }
+    if (id === 'active') {
+      pomodoroCtx.wellnessQuoteHandler(exerciseData);
+    }
+    if (id === 'mindful') {
+      pomodoroCtx.wellnessQuoteHandler(mindfullData);
+    }
   };
 
   // function handleClick(e) {
@@ -67,19 +77,19 @@ const BreakCard = () => {
               src={socialIcon}
               alt="social icon"
               id="social"
-              onClick={() => presentBreakTimer()}
+              onClick={() => presentBreakTimer('social')}
             />
             <img
               src={mindfulicon}
               alt="mindful icon"
               id="mindful"
-              onClick={() => presentBreakTimer()}
+              onClick={() => presentBreakTimer('mindful')}
             />
             <img
               src={activeIcon}
               alt="active icon"
               id="active"
-              onClick={() => presentBreakTimer()}
+              onClick={() => presentBreakTimer('active')}
             />
           </div>
 

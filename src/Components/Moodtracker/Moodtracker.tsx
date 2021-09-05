@@ -1,26 +1,25 @@
-import styles from "./MoodTracker.module.css";
-import emoji1 from "./images/emoji1.png";
-import emoji2 from "./images/emoji2.png";
-import emoji3 from "./images/emoji3.png";
-import emoji4 from "./images/emoji4.png";
-import emoji5 from "./images/emoji5.png";
-import { db } from "../../utilities/firebase";
-import { useState, useContext } from "react";
-import { PomodoroContext } from "../../Store/PomodoroContext";
-import { TodosContext } from "../../Store/TodosContext";
-import Modal from "../../Layout/Modal";
-import BreakCard from "../BreakCard/BreakCard";
+import styles from './MoodTracker.module.css';
+import emoji1 from './images/emoji1.png';
+import emoji2 from './images/emoji2.png';
+import emoji3 from './images/emoji3.png';
+import emoji4 from './images/emoji4.png';
+import emoji5 from './images/emoji5.png';
+import { db } from '../../utilities/firebase';
+import { useState, useContext } from 'react';
+import { PomodoroContext } from '../../Store/PomodoroContext';
+import { TodosContext } from '../../Store/TodosContext';
+import Modal from '../../Layout/Modal';
+import BreakCard from '../BreakCard/BreakCard';
 const Moodtracker = () => {
   const [isPresentingBreakCard, setIsPresentingBreakCard] = useState(false);
   const todoCtx = useContext(TodosContext);
   const pomodoroCtx = useContext(PomodoroContext);
-  
+
   function closeModalHandler() {
     todoCtx.closeModal();
   }
 
   const presentBreakCard = () => {
-    pomodoroCtx.setYesNoModalState(true);
     setIsPresentingBreakCard(true);
   };
 
@@ -28,9 +27,9 @@ const Moodtracker = () => {
     let selectedMood = e.target.id;
     // Getting the computer date
     let day = String(new Date());
-    let split = day.split(" ");
+    let split = day.split(' ');
     let splice = split.splice(0, 3);
-    let fullDate = splice.join(" ");
+    let fullDate = splice.join(' ');
     // comes up as: "Sun Aug 29"
 
     // system time as two digits i.e 14, 15 etc
@@ -45,16 +44,16 @@ const Moodtracker = () => {
     };
 
     // push to firestore
-    db.collection("moods")
+    db.collection('moods')
       .doc()
       .set({
         moodData,
       })
       .then(() => {
-        console.log("Document successfully written!");
+        console.log('Document successfully written!');
       })
       .catch((error) => {
-        console.error("Error writing document: ", error);
+        console.error('Error writing document: ', error);
       });
 
     presentBreakCard();

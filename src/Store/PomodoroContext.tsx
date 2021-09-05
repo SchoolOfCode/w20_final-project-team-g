@@ -8,59 +8,50 @@ export enum PomoStatus {
 }
 
 export const PomodoroContext = createContext({
-  //
-  setYesNoModalState: (boolean: boolean) => {},
-  yesOrNoChosen: false,
   wellnessQuotes: [],
   wellnessQuoteHandler: (quote: string[]) => {},
   isOnWorkTimer: false,
   isOnBreakTimer: false,
   updateBreakTimer: (updatedSettings: any) => {},
+  updateWorkTimer: (updatedSettings: any) => {},
+  isWorkTimerFinished: false,
+  isBreakTimerFinished: false,
   //
   pomodoro: 0,
   settings: {},
-  updateWorkTimer: (updatedSettings: any) => {},
   startAnimate: false,
-  isWorkTimerFinished: false,
-  isBreakTimerFinished: false,
   startTimer: (updatedSettings: any) => {},
   pauseTimer: (updatedSettings: any) => {},
   children: (updatedSettings: any) => {},
   resetSettings: () => {},
-  resetAfterBreakSettings: () => {},
-
   setSession: (updatedSettings: any) => {},
   stopTimer: () => {},
   audioForEndOfPomodoro: null,
+  // resetAfterBreakSettings: () => {},
 });
 
 const PomodoroContextProvider: React.FC = (props) => {
   const [pomodoro, setPomodoro] = useState(0); // the number of minutes picked
   const [settings, setSettings] = useState({});
   const [startAnimate, setStartAnimate] = useState(false);
-  const [yesOrNoChosen, setYesOrNoChosen] = useState(false);
   const audioForEndOfPomodoro = useRef(null);
   const [wellnessQuotes, setWellnessQuotes] = useState([]);
-
+  //
   const [isOnWorkTimer, setIsOnWorkTimer] = useState(false);
   const [isOnBreakTimer, setIsOnBreakTimer] = useState(false);
   const [isWorkTimerFinished, setIsWorkTimerFinished] = useState(false);
   const [isBreakTimerFinished, setIsBreakTimerFinished] = useState(false);
 
   function startTimer() {
-    //setIsWorkTimerFinished(false);
     setStartAnimate(true);
     console.log('pomodoro state is', pomodoro);
-    // setIsWorkTimerFinished(false);
     console.log('is Timerfinished value is', isWorkTimerFinished);
   }
 
   function pauseTimer() {
     setStartAnimate(false);
   }
-  function setYesNoModalState(boolean) {
-    setYesOrNoChosen(boolean);
-  }
+
   function stopTimer() {
     setStartAnimate(false);
     setSettings({});
@@ -70,19 +61,21 @@ const PomodoroContextProvider: React.FC = (props) => {
   function wellnessQuoteHandler(quote: []) {
     setWellnessQuotes(quote);
   }
+  console.log('wellness quotes are', wellnessQuotes);
 
-  // const updateWorkTimer = (updatedSettings) => {
-  //   //obtained from PomodoroSettings
-  //   setSettings(updatedSettings);
-  //   setTimer(updatedSettings);
-  //   // setisWorkTimerFinished(false);
-  // };
+  const resetSettings = () => {
+    setSettings({});
+    setPomodoro(0);
+    setIsWorkTimerFinished(false);
+    setIsBreakTimerFinished(false);
+  };
 
   const updateBreakTimer = (updatedSettings) => {
     setSettings(updatedSettings);
     setTimer(updatedSettings);
     setIsOnBreakTimer(true);
-    //setIsBreakTimerFinished(false);
+    setIsWorkTimerFinished(false);
+    setIsBreakTimerFinished(false);
     console.log('updateBreakTimer was called from context');
   };
 
@@ -109,24 +102,6 @@ const PomodoroContextProvider: React.FC = (props) => {
     }
   };
 
-  const resetSettings = () => {
-    setSettings({});
-    setPomodoro(0);
-    setIsWorkTimerFinished(false);
-    setIsBreakTimerFinished(false);
-  };
-  const resetAfterBreakSettings = () => {
-    // setSettings({});
-    setPomodoro(0);
-    setIsBreakTimerFinished(true);
-
-    console.log(
-      'resetsettings function called, pomodoro state & settings is',
-      pomodoro,
-      settings
-    );
-  };
-
   function setSession(chosenSession: {}) {
     updateWorkTimer({
       ...settings, // updating the session key
@@ -149,14 +124,10 @@ const PomodoroContextProvider: React.FC = (props) => {
     if (minutes < 10) {
       zeroDisplayerMinutes = '0';
     }
-    ///HERE BE THY PROBLEM ????????//////
     if (remainingTime === 0 && isOnWorkTimer) {
       setIsWorkTimerFinished(true); // triggers yes no modal
       setIsOnWorkTimer(false);
     }
-    // } else if (remainingTime === 0 && !isBreakTimerFinished) {
-    //   setIsWorkTimerFinished(true);
-    // }
 
     if (remainingTime === 0 && isOnBreakTimer) {
       setIsBreakTimerFinished(true);
@@ -168,9 +139,19 @@ const PomodoroContextProvider: React.FC = (props) => {
     return `${zeroDisplayerMinutes}${minutes}:${zeroDisplayerSeconds}${seconds}`;
   };
 
+  // const resetAfterBreakSettings = () => {
+  //   // setSettings({});
+  //   setPomodoro(0);
+  //   setIsBreakTimerFinished(true);
+
+  //   console.log(
+  //     'resetsettings function called, pomodoro state & settings is',
+  //     pomodoro,
+  //     settings
+  //   );
+  // };
+
   const contextValue = {
-    yesOrNoChosen,
-    setYesNoModalState,
     wellnessQuotes,
     wellnessQuoteHandler,
     isOnWorkTimer,
@@ -187,7 +168,7 @@ const PomodoroContextProvider: React.FC = (props) => {
     pauseTimer,
     children,
     resetSettings,
-    resetAfterBreakSettings,
+    // resetAfterBreakSettings,
     setSession,
     stopTimer,
     audioForEndOfPomodoro,
