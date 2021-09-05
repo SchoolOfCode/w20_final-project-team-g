@@ -14,7 +14,7 @@ const Moodtracker = () => {
   const [isPresentingBreakCard, setIsPresentingBreakCard] = useState(false);
   const todoCtx = useContext(TodosContext);
   const pomodoroCtx = useContext(PomodoroContext);
-
+  
   function closeModalHandler() {
     todoCtx.closeModal();
   }
