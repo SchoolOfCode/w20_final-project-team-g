@@ -22,6 +22,8 @@ const PomodoroTimer = () => {
 
   // removed the close icon from here due to lack of CSS knowledge
   return (
+    <div className="flex mt-24">
+
     <div className={styles.container}>
       {/* <div className={styles.closeIcon}>
         <img src={closeTabIcon} alt="close tab" onClick={closeModalHandler} />
@@ -56,7 +58,7 @@ const PomodoroTimer = () => {
               !pomodoroCtx.startAnimate
                 ? styles.active && styles.specialButton
                 : undefined
-            }
+              }
             onClick={pomodoroCtx.startTimer}
           >
             Start
@@ -88,6 +90,7 @@ const PomodoroTimer = () => {
         <source src="https://onlineclock.net/audio/options/default.mp3" />
       </audio>
     </div>
+        </div>
   );
 };
 
