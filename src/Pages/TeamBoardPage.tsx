@@ -10,6 +10,7 @@ import { Link, useHistory } from 'react-router-dom';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { green } from '@material-ui/core/colors';
+import TestData from '../Components/test-data/TestData';
 
 const HomePage = () => {
   const history = useHistory;
@@ -34,24 +35,7 @@ const HomePage = () => {
   }
   return (
     <Fragment>
-      {/* RICK SAYS HI */}
-      <button
-        onClick={() => {
-          console.log('rickroll is on HomePage.tsx to delete!');
-          window.open('https://www.youtube.com/watch?v=klfT41uZniI');
-        }}
-        style={{
-          color: 'white',
-          padding: '15px 32px',
-          backgroundColor: 'red',
-          fontSize: '24px',
-          borderRadius: '12px',
-          alignContent: 'center',
-        }}
-      >
-        {'>>'}FREE PIZZA ! click here{'<<'}
-      </button>
-      {/* RICK SAYS BYE */}
+      <TestData></TestData>
       <div className={styles.flex}>
         <div className={styles.column}>
           <TodoList />
