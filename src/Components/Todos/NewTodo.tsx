@@ -52,6 +52,7 @@ export const NewTodo: React.FC<{ onCancel: () => void }> = (props: any) => {
         <section className="mt-2">
           <button
             className="h-8 w-20 bg-red-400 text-white font-normal tracking-wide rounded-lg mr-4 shadow-lgp"
+            type="button"
             value="1"
             name="urgency"
             onClick={() => setRadioValue(1)}
@@ -63,6 +64,7 @@ export const NewTodo: React.FC<{ onCancel: () => void }> = (props: any) => {
             value="2"
             name="urgency"
             onClick={() => setRadioValue(2)}
+            type="button"
           >
             Mid
           </button>
@@ -71,6 +73,7 @@ export const NewTodo: React.FC<{ onCancel: () => void }> = (props: any) => {
             value="3"
             name="urgency"
             onClick={() => setRadioValue(3)}
+            type="button"
           >
             Low
           </button>
@@ -93,7 +96,7 @@ export const NewTodo: React.FC<{ onCancel: () => void }> = (props: any) => {
       </div>
       <button
         className="h-14 w-52 bg-blue-400 text-white text-2xl font-bold tracking-wide rounded-lg shadow-lgp"
-        onClick={() => handleSubmit}
+        type="submit"
       >
         Save Task
       </button>
