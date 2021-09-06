@@ -6,12 +6,10 @@ import no from "../../images/yes-no/no.png";
 import helpIcon from "../../images/modal-buttons/help.png";
 import styles from "./YesNoModal.module.css";
 import closeTabIcon from "../../images/modal-buttons/close.png";
-import { PomodoroContext } from "../../Store/PomodoroContext";
 import Moodtracker from "../Moodtracker/Moodtracker";
 const YesNoModal = () => {
   const [isPresentingMoodCard, setIsPresentingMoodCard] = useState(false);
   const todoCtx = useContext(TodosContext);
-  const pomodoroCtx = useContext(PomodoroContext);
 
   function closeModalHandler() {
     todoCtx.closeModal();
@@ -22,15 +20,13 @@ const YesNoModal = () => {
   };
 
   const presentBreakCardUpdateTodo = () => {
-    // IF TRUE then a button has been selected so the modal does not appear
-   // pomodoroCtx.setYesNoModalState(true);
+
     setIsPresentingMoodCard(true);
     todoCtx.finishTodo(todoCtx.inProgressTodo);
   };
 
   return (
     <div className="m-2">
-      {/* New conditional render. If the yes/no has been chosen then the choice no longer displays (it was displaying behind break flow card) */}
       {!isPresentingMoodCard && (
         <section>
           <div className={styles.closeIcon}>

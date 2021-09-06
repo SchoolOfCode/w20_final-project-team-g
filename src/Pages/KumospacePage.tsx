@@ -1,11 +1,10 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { UserContext } from '../Store/UserContext';
 import kumoSpace from '../images/kumoSpace.png';
 const KumospacePage = () => {
   const {
     userProfile: { name, email, uniqueID },
   } = useContext(UserContext);
-  // const { name, email, uniqueID } = userProfile
   console.log(name);
   return (
     <div>

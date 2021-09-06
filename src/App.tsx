@@ -71,10 +71,10 @@ function App() {
                 <Register />
               </Route>
               <Route path="/" exact>
-                <MyTasksPage />
-              </Route>
-              <Route path="/team" exact>
                 <TeamBoard />
+              </Route>
+              <Route path="/mytasks" exact>
+                <MyTasksPage />
               </Route>
               <Route path="/profile" exact>
                 <ProfilePage />

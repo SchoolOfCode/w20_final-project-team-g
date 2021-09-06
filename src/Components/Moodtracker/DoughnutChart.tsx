@@ -8,7 +8,7 @@ const DoughnutChart = () => {
 
   useEffect(() => {
     const getMoodData = async () => {
-      // funciton to count each occurence of a number in databases
+      // function to count each occurence of a number in databases
       const countOccurrences = (arr, val) =>
         arr.reduce((a, v) => (v === val ? a + 1 : a), 0);
 
