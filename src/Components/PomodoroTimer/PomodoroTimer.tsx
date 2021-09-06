@@ -7,6 +7,8 @@ import { useContext } from 'react';
 import Modal from '../../Layout/Modal';
 import YesNoModal from '../YesNoModal/YesNoModal';
 import TipsSlider from '../BreakCard/TipsSlider';
+import bell from './Bell/meditation-bell.m4a';
+
 // import closeTabIcon from '../../images/modal-buttons/close.png';
 // import { TodosContext } from '../../Store/TodosContext';
 const PomodoroTimer = () => {
@@ -125,7 +127,7 @@ const PomodoroTimer = () => {
         {pomodoroCtx.isBreakTimerFinished && console.log('finished')}
 
         <audio id="beep" ref={pomodoroCtx.audioForEndOfPomodoro}>
-          <source src="https://onlineclock.net/audio/options/default.mp3" />
+          <source src={bell} type="audio/ogg" />
         </audio>
       </div>
     </div>

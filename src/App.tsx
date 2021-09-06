@@ -7,7 +7,7 @@ import {
   useHistory,
 } from 'react-router-dom';
 import './App.css';
-import HomePage from './Pages/HomePage';
+import HomePage from './Pages/TeamBoard';
 import KumospacePage from './Pages/KumospacePage';
 import ProfilePage from './Pages/ProfilePage';
 import Layout from './Layout/Layout';

@@ -127,6 +127,7 @@ const PomodoroContextProvider: React.FC = (props) => {
     if (remainingTime === 0 && isOnWorkTimer) {
       setIsWorkTimerFinished(true); // triggers yes no modal
       setIsOnWorkTimer(false);
+      audioForEndOfPomodoro.current.play();
     }
 
     if (remainingTime === 0 && isOnBreakTimer) {

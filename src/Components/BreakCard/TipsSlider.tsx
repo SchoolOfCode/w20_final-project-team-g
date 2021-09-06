@@ -11,7 +11,7 @@ const TipsSlider = () => {
     let timeout;
 
     if (messageIndex < pomodoroCtx.wellnessQuotes.length - 1) {
-      timeout = setTimeout(() => setMessageIndex(messageIndex + 1), 2000);
+      timeout = setTimeout(() => setMessageIndex(messageIndex + 1), 5000);
     }
 
     return () => {
@@ -24,12 +24,3 @@ const TipsSlider = () => {
 
 export default TipsSlider;
 
-//   return (
-//     <div>
-//       <CardWrapper>
-//         <h2>Hello there </h2>
-//       </CardWrapper>
-//     </div>
-//   );
-
-// Default to the first message passed

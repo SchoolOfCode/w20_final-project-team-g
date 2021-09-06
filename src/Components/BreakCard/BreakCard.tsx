@@ -11,7 +11,7 @@ import { PomodoroContext } from '../../Store/PomodoroContext';
 import PomodoroTimer from '../PomodoroTimer/PomodoroTimer';
 import {
   mindfullData,
-  exerciseData,
+  activeData,
   socialData,
 } from '../BreakCard/WellnessTips';
 
@@ -21,7 +21,7 @@ const BreakCard = () => {
   const [isPresentingBreakTimer, setIsPresentingBreakTimer] = useState(false);
 
   const [breakTime, setBreakTime] = useState({
-    work: 0.08,
+    work: 1,
     break: 0.05,
     session: 'work',
   });
@@ -36,7 +36,7 @@ const BreakCard = () => {
       pomodoroCtx.wellnessQuoteHandler(socialData);
     }
     if (id === 'active') {
-      pomodoroCtx.wellnessQuoteHandler(exerciseData);
+      pomodoroCtx.wellnessQuoteHandler(activeData);
     }
     if (id === 'mindful') {
       pomodoroCtx.wellnessQuoteHandler(mindfullData);

@@ -21,9 +21,9 @@ const TodoList: React.FC = () => {
     if (e.target.value === "urgency") {
       todoCtx.items.sort((a, b) => (b.urgency > a.urgency ? -1 : 1));
     }
-    if (e.target.value === "createdBy") {
-      todoCtx.items.sort((a, b) => (b.createdBy > a.createdBy ? -1 : 1));
-    }
+    // if (e.target.value === "createdBy") {
+    //   todoCtx.items.sort((a, b) => (b.createdBy > a.createdBy ? -1 : 1));
+    // }
   };
   useEffect(() => {
     todoCtx.retrieveCurrentTodo();

@@ -1,8 +1,4 @@
-// const TodoItem: React.FC<{
-//   text: string;
-// }> = (props) => {
-//   return <li>{props.text}</li>;
-// };
+
 import { Fragment } from 'react';
 
 const TodoItem: React.FC<{
@@ -42,8 +38,6 @@ const TodoItem: React.FC<{
               {props.createdBy.match(/\b(\w)/g).join('')}
             </p>
           </div>
-          {/* <button onClick={props.onStartTodo}>Start</button> */}
-          {/* <button onClick={props.onFinish}>Finish</button> */}
         </div>
       </li>
     </Fragment>
