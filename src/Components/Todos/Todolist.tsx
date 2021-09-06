@@ -1,16 +1,16 @@
-import React, { Fragment, useContext, useEffect, useState } from 'react';
-import TodoItem from './TodoItem';
-import { TodosContext } from '../../Store/TodosContext';
-import { TodoStatus } from '../../Models/TodoClass';
-import Modal from '../../Layout/Modal';
-import Backdrop from '../../Layout/Backdrop';
-import PomodoroTimer from '../PomodoroTimer/PomodoroTimer';
-import { MenuItem, Select } from '@material-ui/core';
-import { InputLabel } from '@material-ui/core';
+import React, { Fragment, useContext, useEffect, useState } from "react";
+import TodoItem from "./TodoItem";
+import { TodosContext } from "../../Store/TodosContext";
+import { TodoStatus } from "../../Models/TodoClass";
+import Modal from "../../Layout/Modal";
+import Backdrop from "../../Layout/Backdrop";
+import PomodoroTimer from "../PomodoroTimer/PomodoroTimer";
+import { MenuItem, Select } from "@material-ui/core";
+import { InputLabel } from "@material-ui/core";
 
 const TodoList: React.FC = () => {
   const todoCtx = useContext(TodosContext);
-  const [sortBy, setSortBy] = useState('Urgency');
+  const [sortBy, setSortBy] = useState("Urgency");
 
   function closeModalHandler() {
     todoCtx.closeModal();
@@ -18,10 +18,10 @@ const TodoList: React.FC = () => {
   const handleChange = (e) => {
     console.log(e.target.value);
     setSortBy(e.target.value);
-    if (e.target.value === 'urgency') {
+    if (e.target.value === "urgency") {
       todoCtx.items.sort((a, b) => (b.urgency > a.urgency ? -1 : 1));
     }
-    if (e.target.value === 'createdBy') {
+    if (e.target.value === "createdBy") {
       todoCtx.items.sort((a, b) => (b.createdBy > a.createdBy ? -1 : 1));
     }
   };
@@ -29,15 +29,21 @@ const TodoList: React.FC = () => {
     todoCtx.retrieveCurrentTodo();
     // set;
   }, []);
+  todoCtx.items.sort((a, b) => (b.urgency > a.urgency ? -1 : 1));
   // todoCtx.items.sort((a, b) => (b.urgency > a.urgency ? -1 : 1));
   return (
     <Fragment>
-      <InputLabel id="sort-by-label">Sort By</InputLabel>
+      {/* <InputLabel id="sort-by-label">Sort By</InputLabel>
 
-      <Select labelId="select-label" id="select-label" value={sortBy} onChange={handleChange}>
-        <MenuItem value={'urgency'}>Urgency</MenuItem>
-        <MenuItem value={'createdBy'}>Created By</MenuItem>
-      </Select>
+      <Select
+        labelId="select-label"
+        id="select-label"
+        value={sortBy}
+        onChange={handleChange}
+      >
+        <MenuItem value={"urgency"}>Urgency</MenuItem>
+        <MenuItem value={"createdBy"}>Created By</MenuItem>
+      </Select> */}
       {/* <button
         onClick={() => {
           setSorted(todoCtx.items.sort((a, b) => (b.urgency > a.urgency ? -1 : 1)));
@@ -45,7 +51,9 @@ const TodoList: React.FC = () => {
       >
         Sort
       </button> */}
-      <h3 className="text-gray-500 tracking-wide font-medium text-2xl mt-4 mb-4">Backlog</h3>
+      <h3 className="text-gray-500 tracking-wide font-medium text-2xl mt-4 mb-4">
+        Backlog
+      </h3>
       <ul className="w-72">
         {todoCtx.items &&
           todoCtx.items.map(
