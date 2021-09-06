@@ -1,5 +1,4 @@
 import styles from '../YesNoModal/YesNoModal.module.css';
-
 import activeIcon from '../../images/rest-flows/active.png';
 import mindfulicon from '../../images/rest-flows/mindful.png';
 import socialIcon from '../../images/rest-flows/social.png';
@@ -8,7 +7,6 @@ import closeTabIcon from '../../images/modal-buttons/close.png';
 import { TodosContext } from '../../Store/TodosContext';
 import { useContext, useState } from 'react';
 import { PomodoroContext } from '../../Store/PomodoroContext';
-import PomodoroTimer from '../PomodoroTimer/PomodoroTimer';
 import {
   mindfullData,
   activeData,
@@ -42,19 +40,6 @@ const BreakCard = () => {
       pomodoroCtx.wellnessQuoteHandler(mindfullData);
     }
   };
-
-  // function handleClick(e) {
-  //   let selectedFlow = e.target.id;
-  //   console.log('selectedFlow', selectedFlow);
-
-  //   pomodoroCtx.updateBreakTimer(breakTime); // passes object back to useContext
-  //   setIsPresentingBreakTimer(true);
-  //   //presentBreakTimer();
-  //   // if (selectedFlow === 'social') {
-  //   //   //
-  //   //   pomodoroCtx.wellnessQuoteHandler(socialData);
-  //   // }
-  // }
 
   function closeModalHandler() {
     todoCtx.closeModal();

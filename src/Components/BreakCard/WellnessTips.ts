@@ -1,5 +1,5 @@
 export const mindfullData = [
-  'OK ~ time to bring soem mindfullness into your day',
+  'Time to bring some mindfullness into your day',
   'Take a deep breath',
   'Just relax for a few seconds',
   'Thing of one thing you are grateful for in this moment',
