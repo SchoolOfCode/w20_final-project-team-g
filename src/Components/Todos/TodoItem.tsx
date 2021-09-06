@@ -6,9 +6,9 @@ const TodoItem: React.FC<{
   createdBy: string;
   urgency: number;
   todoBody: string;
-  onRemoveTodo?: () => void;
-  onStartTodo?: () => void;
-  onFinish?: () => void;
+  onRemoveTodo: () => void;
+  onStartTodo: () => void;
+  onFinish: () => void;
 }> = (props) => {
   return (
     <Fragment>

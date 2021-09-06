@@ -25,7 +25,6 @@ const HomePage = () => {
           alignItems: 'center',
           display: 'flex',
           justifyContent: 'center',
-          // alignContent: 'center',
         }}
       >
         <CircularProgress></CircularProgress>
