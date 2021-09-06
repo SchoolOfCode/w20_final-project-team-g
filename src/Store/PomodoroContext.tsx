@@ -136,8 +136,9 @@ const PomodoroContextProvider: React.FC = (props) => {
       resetSettings(); // should set it all to zero and render settings page
       audioForEndOfPomodoro.current.play();
     }
+    let timeDisplay = `${zeroDisplayerMinutes}${minutes}:${zeroDisplayerSeconds}${seconds}`;
 
-    return `${zeroDisplayerMinutes}${minutes}:${zeroDisplayerSeconds}${seconds}`;
+    return timeDisplay;
   };
 
   // const resetAfterBreakSettings = () => {
