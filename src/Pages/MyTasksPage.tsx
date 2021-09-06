@@ -37,13 +37,13 @@ const HomePage = () => {
       {/* <h4>Welcome {name}</h4> */}
       <div className={styles.flex}>
         <div className={styles.column}>
-          <TodoList />
+          <TodoList userFilter={name} />
         </div>
         <div className={styles.column}>
-          <InProgress />
+          <InProgress userFilter={name} />
         </div>
         <div className={styles.column}>
-          <CompletedTodos />
+          <CompletedTodos userFilter={name} />
         </div>
       </div>
     </Fragment>

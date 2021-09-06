@@ -1,6 +1,5 @@
 import React, { useState, useContext } from "react";
 import Modal from "../../Layout/Modal";
-import BreakCard from "../BreakCard/BreakCard";
 import { TodosContext } from "../../Store/TodosContext";
 import yes from "../../images/yes-no/yes.png";
 import no from "../../images/yes-no/no.png";
@@ -8,7 +7,6 @@ import helpIcon from "../../images/modal-buttons/help.png";
 import styles from "./YesNoModal.module.css";
 import closeTabIcon from "../../images/modal-buttons/close.png";
 import { PomodoroContext } from "../../Store/PomodoroContext";
-import { useEffect } from "react";
 import Moodtracker from "../Moodtracker/Moodtracker";
 const YesNoModal = () => {
   const [isPresentingMoodCard, setIsPresentingMoodCard] = useState(false);
@@ -20,13 +18,12 @@ const YesNoModal = () => {
   }
 
   const presentMoodCard = () => {
-    pomodoroCtx.setYesNoModalState(true);
     setIsPresentingMoodCard(true);
   };
 
   const presentBreakCardUpdateTodo = () => {
     // IF TRUE then a button has been selected so the modal does not appear
-    pomodoroCtx.setYesNoModalState(true);
+   // pomodoroCtx.setYesNoModalState(true);
     setIsPresentingMoodCard(true);
     todoCtx.finishTodo(todoCtx.inProgressTodo);
   };
@@ -34,7 +31,7 @@ const YesNoModal = () => {
   return (
     <div className="m-2">
       {/* New conditional render. If the yes/no has been chosen then the choice no longer displays (it was displaying behind break flow card) */}
-      {!pomodoroCtx.yesOrNoChosen && (
+      {!isPresentingMoodCard && (
         <section>
           <div className={styles.closeIcon}>
             <img
@@ -50,7 +47,7 @@ const YesNoModal = () => {
             <section>
               <img src={yes} alt="yes" onClick={presentBreakCardUpdateTodo} />
               <p className="text-xl font-semibold tracking-wide text-gray-600">
-                {" "}
+                {' '}
                 All done!
               </p>
             </section>

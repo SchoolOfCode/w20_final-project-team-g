@@ -7,9 +7,10 @@ import {
   useHistory,
 } from 'react-router-dom';
 import './App.css';
-import HomePage from './Pages/HomePage';
+import MyTasksPage from './Pages/MyTasksPage';
 import KumospacePage from './Pages/KumospacePage';
 import ProfilePage from './Pages/ProfilePage';
+import TeamBoard from './Pages/TeamBoardPage';
 import Layout from './Layout/Layout';
 import TodosContextProvider from './Store/TodosContext';
 import 'firebase/auth';
@@ -70,7 +71,10 @@ function App() {
                 <Register />
               </Route>
               <Route path="/" exact>
-                <HomePage />
+                <MyTasksPage />
+              </Route>
+              <Route path="/team" exact>
+                <TeamBoard />
               </Route>
               <Route path="/profile" exact>
                 <ProfilePage />
