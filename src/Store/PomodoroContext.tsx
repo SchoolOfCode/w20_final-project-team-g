@@ -70,7 +70,8 @@ const PomodoroContextProvider: React.FC = (props) => {
     setIsWorkTimerFinished(false);
     setIsBreakTimerFinished(false);
     setIsOnBreakTimer(false);
-    setIsOnWorkTimer(false)
+    setIsOnWorkTimer(false);
+    setDocTitle('Kaizen');
   };
 
   const updateBreakTimer = (updatedSettings) => {
@@ -127,10 +128,14 @@ const PomodoroContextProvider: React.FC = (props) => {
     if (minutes < 10) {
       zeroDisplayerMinutes = '0';
     }
+    let timeDisplay = `${zeroDisplayerMinutes}${minutes}:${zeroDisplayerSeconds}${seconds}`;
+    setDocTitle(timeDisplay);
+
     if (remainingTime === 0 && isOnWorkTimer) {
       setIsWorkTimerFinished(true); // triggers yes no modal
       setIsOnWorkTimer(false);
       audioForEndOfPomodoro.current.play();
+      setDocTitle('Kaizen');
     }
 
     if (remainingTime === 0 && isOnBreakTimer) {
@@ -138,25 +143,13 @@ const PomodoroContextProvider: React.FC = (props) => {
       setIsOnBreakTimer(false);
       resetSettings(); // should set it all to zero and render settings page
       audioForEndOfPomodoro.current.play();
+      setDocTitle('Kaizen');
     }
-    let timeDisplay = `${zeroDisplayerMinutes}${minutes}:${zeroDisplayerSeconds}${seconds}`;
-    setDocTitle(timeDisplay);
+
     //console.log('timeDisplay:', timeDisplay);
     return timeDisplay;
   };
   console.log(doctitle);
-
-  // const resetAfterBreakSettings = () => {
-  //   // setSettings({});
-  //   setPomodoro(0);
-  //   setIsBreakTimerFinished(true);
-
-  //   console.log(
-  //     'resetsettings function called, pomodoro state & settings is',
-  //     pomodoro,
-  //     settings
-  //   );
-  // };
 
   const contextValue = {
     wellnessQuotes,

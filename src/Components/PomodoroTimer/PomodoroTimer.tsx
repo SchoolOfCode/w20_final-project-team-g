@@ -9,11 +9,8 @@ import YesNoModal from '../YesNoModal/YesNoModal';
 import TipsSlider from '../BreakCard/TipsSlider';
 import bell from './Bell/meditation-bell.m4a';
 
-// import closeTabIcon from '../../images/modal-buttons/close.png';
-// import { TodosContext } from '../../Store/TodosContext';
 const PomodoroTimer = () => {
   const pomodoroCtx = useContext(PomodoroContext);
-  const [fetchModal, setFetchModal] = useState(false);
 
   useEffect(() => {
     document.title = pomodoroCtx.doctitle;

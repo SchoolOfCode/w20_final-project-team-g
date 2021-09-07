@@ -21,6 +21,7 @@ import Reset from './Components/Login/Reset';
 import { UserContext } from './Store/UserContext';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import PomodoroContextProvider from './Store/PomodoroContext';
+import { PomodoroContext } from '../src/Store/PomodoroContext';
 
 function App() {
   //
@@ -28,6 +29,7 @@ function App() {
   const [user, loading, error] = useAuthState(auth);
   const [userProfile, setUserProfile] = useState({});
   const history = useHistory();
+
   // name does not exist on 'user' so it needs an async fetch to get it.
   const fetchUserName = async () => {
     try {
@@ -51,8 +53,6 @@ function App() {
     if (!user) return history.replace('/login'); // Send you to register rather than home if no user is logged n
     fetchUserName();
   }, [user, loading]);
-
- 
 
   console.log(user ? 'Yes logged in' : 'No user logged in'); // user returns true if someone is logged in
   return (
@@ -94,4 +94,3 @@ function App() {
 }
 
 export default App;
-
