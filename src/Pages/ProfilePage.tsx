@@ -15,10 +15,9 @@ const Profile = () => {
   } = useContext(UserContext);
   return (
     <div className="m-0">
-      <h1>{name}</h1>
       <h1>PROFILE PAGE</h1>
-      <h2>Name: {name}</h2>
-      <h2>Your email is: {email}</h2>
+      <h1>Hello {name}</h1>
+      <h2>Your logged in email is: {email}</h2>
       <h2>Your ID is: {uniqueID}</h2>
       <div className={styles.flex}>
         <div className={styles.colum}>

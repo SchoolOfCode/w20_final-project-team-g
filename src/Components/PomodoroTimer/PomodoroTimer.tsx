@@ -1,5 +1,5 @@
 import styles from './Pomodoro.module.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import CountdownAnimation from './CountDownAnimation';
 import { PomodoroContext } from '../../Store/PomodoroContext';
 import PomodoroSettings from './PomodoroSettings';
@@ -9,15 +9,12 @@ import YesNoModal from '../YesNoModal/YesNoModal';
 import TipsSlider from '../BreakCard/TipsSlider';
 import bell from './Bell/meditation-bell.m4a';
 
-// import closeTabIcon from '../../images/modal-buttons/close.png';
-// import { TodosContext } from '../../Store/TodosContext';
 const PomodoroTimer = () => {
   const pomodoroCtx = useContext(PomodoroContext);
-  const [fetchModal, setFetchModal] = useState(false);
 
-  const presentModal = () => {
-    setFetchModal(true);
-  };
+  useEffect(() => {
+    document.title = pomodoroCtx.doctitle;
+  }, [pomodoroCtx.doctitle]);
 
   return (
     <div className="flex mt-24">
