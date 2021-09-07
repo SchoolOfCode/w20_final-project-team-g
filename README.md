@@ -37,7 +37,7 @@ Another common complaint amongst remote workers was that they felt overworked, d
 
 ## What did we learn?
 
-We decided to write the project with React and Typscript, which was a irst timer experience for all of us on the team. Despite its challenges, we learned a lot about the different React hooks (especially `useContext`!) and how to pass data between React function components.
+We decided to write the project with React and Typscript, which was a irst timer experience for all of us on the team. Despite its challenges, we learned a lot about the different React hooks (especially React's `useContext` and Firebase Cloud storage) and how to pass data between React function components.
 
 This was a really rewarding experience for us as we got to experiment and try out many new frameworkes and also put our programming skills to the test.
 
