@@ -1,5 +1,5 @@
 import styles from './Pomodoro.module.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import CountdownAnimation from './CountDownAnimation';
 import { PomodoroContext } from '../../Store/PomodoroContext';
 import PomodoroSettings from './PomodoroSettings';
@@ -15,9 +15,9 @@ const PomodoroTimer = () => {
   const pomodoroCtx = useContext(PomodoroContext);
   const [fetchModal, setFetchModal] = useState(false);
 
-  const presentModal = () => {
-    setFetchModal(true);
-  };
+  useEffect(() => {
+    document.title = pomodoroCtx.doctitle;
+  }, [pomodoroCtx.doctitle]);
 
   return (
     <div className="flex mt-24">

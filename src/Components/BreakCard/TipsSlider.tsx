@@ -17,8 +17,9 @@ const TipsSlider = () => {
     return () => {
       clearTimeout(timeout);
     };
-  }, [pomodoroCtx.wellnessQuotes, messageIndex]);
+  }, [messageIndex]);
 
+  //pomodoroCtx.wellnessQuotes, messageIndex
   return <div>{pomodoroCtx.wellnessQuotes[messageIndex]}</div>;
 };
 

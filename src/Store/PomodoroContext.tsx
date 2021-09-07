@@ -16,6 +16,7 @@ export const PomodoroContext = createContext({
   updateWorkTimer: (updatedSettings: any) => {},
   isWorkTimerFinished: false,
   isBreakTimerFinished: false,
+  doctitle: 'Kaizen',
   //
   pomodoro: 0,
   settings: {},
@@ -36,6 +37,7 @@ const PomodoroContextProvider: React.FC = (props) => {
   const [startAnimate, setStartAnimate] = useState(false);
   const audioForEndOfPomodoro = useRef(null);
   const [wellnessQuotes, setWellnessQuotes] = useState([]);
+  const [doctitle, setDocTitle] = useState<string>(null);
   //
   const [isOnWorkTimer, setIsOnWorkTimer] = useState(false);
   const [isOnBreakTimer, setIsOnBreakTimer] = useState(false);
@@ -45,7 +47,6 @@ const PomodoroContextProvider: React.FC = (props) => {
   function startTimer() {
     setStartAnimate(true);
     console.log('pomodoro state is', pomodoro);
-    console.log('is Timerfinished value is', isWorkTimerFinished);
   }
 
   function pauseTimer() {
@@ -68,6 +69,8 @@ const PomodoroContextProvider: React.FC = (props) => {
     setPomodoro(0);
     setIsWorkTimerFinished(false);
     setIsBreakTimerFinished(false);
+    setIsOnBreakTimer(false);
+    setIsOnWorkTimer(false)
   };
 
   const updateBreakTimer = (updatedSettings) => {
@@ -137,9 +140,11 @@ const PomodoroContextProvider: React.FC = (props) => {
       audioForEndOfPomodoro.current.play();
     }
     let timeDisplay = `${zeroDisplayerMinutes}${minutes}:${zeroDisplayerSeconds}${seconds}`;
-
+    setDocTitle(timeDisplay);
+    //console.log('timeDisplay:', timeDisplay);
     return timeDisplay;
   };
+  console.log(doctitle);
 
   // const resetAfterBreakSettings = () => {
   //   // setSettings({});
@@ -159,6 +164,7 @@ const PomodoroContextProvider: React.FC = (props) => {
     isOnWorkTimer,
     updateBreakTimer,
     isOnBreakTimer,
+    doctitle,
     /////
     pomodoro,
     settings,
