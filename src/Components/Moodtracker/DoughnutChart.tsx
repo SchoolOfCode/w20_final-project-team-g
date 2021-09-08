@@ -37,7 +37,7 @@ const DoughnutChart = () => {
   console.log('moodArrayData', moodArrayData);
 
   const data = {
-    labels: ['Very Sad', 'Sad', 'Ok', 'Happy', 'Very Happy'], // hover effect
+    labels: ['1 Very Sad', '2 Sad', '3 Ok', '4 Happy', '5 Very Happy'], // hover effect
     datasets: [
       {
         label: '# of Votes',

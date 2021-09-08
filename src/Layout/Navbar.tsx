@@ -6,9 +6,8 @@ import FormModal from '../Components/Form/FormModal';
 import React, { useContext } from 'react';
 import Dashboard from '../Components/Login/Dashboard';
 import { auth } from '../utilities/firebase';
-
+import { logout } from '../utilities/firebase';
 import { useState } from 'react';
-
 import logo from '../images/kaizen-logo.png';
 
 const Navbar = () => {
@@ -30,7 +29,7 @@ const Navbar = () => {
             </li>
             <li className="text-gray-500 font-medium tracking-wider hover:text-blue-400 focus:text-blue-400">
               <Link to="/">Team Board</Link>
-              </li>
+            </li>
             <li className="text-gray-500 font-medium tracking-wider hover:text-blue-400 focus:text-blue-400">
               <Link to="/mytasks">My Tasks</Link>
             </li>
@@ -42,15 +41,18 @@ const Navbar = () => {
               <Link to="/profile">P</Link>
             </li>
             <li>
-              <button 
-                onMouseEnter={() => setIsShown(true)}
-                onMouseOver={() => setIsShown(true)}
-                onMouseLeave={() => setIsShown(false)}
-                className="bg-green-500 h-8 w-8">
+              <button
+                // onMouseEnter={() => setIsShown(true)}
+                // onMouseOver={() => setIsShown(true)}
+                // onMouseLeave={() => setIsShown(true)}
+                onClick={logout}
+                className="bg-green-500 h-8 w-8"
+              >
                 L
               </button>
-              {isShown && (<div className="loginState">{user && <Dashboard></Dashboard>}</div>)}
-
+              {isShown && (
+                <div className="loginState">{user && <Dashboard />}</div>
+              )}
             </li>
             <li>
               <FormModal></FormModal>
@@ -60,10 +62,7 @@ const Navbar = () => {
       </>
     );
   }
-  return (
-    <div>
-    </div>
-  );
+  return <div></div>;
 };
 
 export default Navbar;
