@@ -3,7 +3,6 @@ import activeIcon from '../../images/rest-flows/active.png';
 import mindfulicon from '../../images/rest-flows/mindful.png';
 import socialIcon from '../../images/rest-flows/social.png';
 import helpIcon from '../../images/modal-buttons/help.png';
-import closeTabIcon from '../../images/modal-buttons/close.png';
 import { TodosContext } from '../../Store/TodosContext';
 import { useContext, useState } from 'react';
 import { PomodoroContext } from '../../Store/PomodoroContext';
@@ -41,16 +40,9 @@ const BreakCard = () => {
     }
   };
 
-  function closeModalHandler() {
-    todoCtx.closeModal();
-  }
 
   return (
     <div className={styles.parentFlex}>
-      <div className={styles.closeIcon}>
-        <img src={closeTabIcon} alt="close tab" onClick={closeModalHandler} />
-      </div>
-
       {!isPresentingBreakTimer && (
         <>
           <span className={styles.textDiv}>Time for a break!</span>

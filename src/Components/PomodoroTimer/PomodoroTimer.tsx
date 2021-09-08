@@ -2,6 +2,8 @@ import styles from './Pomodoro.module.css';
 import { useState } from 'react';
 import CountdownAnimation from './CountDownAnimation';
 import { PomodoroContext } from '../../Store/PomodoroContext';
+import { TodosContext } from '../../Store/TodosContext';
+
 import PomodoroSettings from './PomodoroSettings';
 import { useContext } from 'react';
 import Modal from '../../Layout/Modal';
@@ -9,15 +11,13 @@ import YesNoModal from '../YesNoModal/YesNoModal';
 import TipsSlider from '../BreakCard/TipsSlider';
 import bell from './Bell/meditation-bell.m4a';
 
-// import closeTabIcon from '../../images/modal-buttons/close.png';
-// import { TodosContext } from '../../Store/TodosContext';
 const PomodoroTimer = () => {
   const pomodoroCtx = useContext(PomodoroContext);
-  const [fetchModal, setFetchModal] = useState(false);
+  const todoCtx = useContext(TodosContext);
 
-  const presentModal = () => {
-    setFetchModal(true);
-  };
+  function closeModalHandler() {
+    todoCtx.closeModal();
+  }
 
   return (
     <div className="flex mt-24">
@@ -71,7 +71,7 @@ const PomodoroTimer = () => {
 
         {/* IF WORK TIMER FINISHED SWITCH TO NEW MODAL*/}
         {pomodoroCtx.isWorkTimerFinished && (
-          <Modal>
+          <Modal onCancel={closeModalHandler}>
             <YesNoModal />
           </Modal>
         )}
