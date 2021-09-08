@@ -1,17 +1,17 @@
-import { NewTodo } from '../Components/Todos/NewTodo';
 import TodoList from '../Components/Todos/Todolist';
 import InProgress from '../Components/Todos/InProgress';
 import styles from './HomePage.module.css';
 import CompletedTodos from '../Components/Todos/CompletedTodos';
-import { Fragment, useState, useContext } from 'react';
+import { Fragment, useContext } from 'react';
 import { UserContext } from '../Store/UserContext';
 import { auth } from '../utilities/firebase';
 import { Link, useHistory } from 'react-router-dom';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { green } from '@material-ui/core/colors';
+import TestData from '../Components/test-data/TestData';
 
-const HomePage = () => {
+const TeamBoardPage = () => {
   const history = useHistory;
   const [user, loading, error] = useAuthState(auth);
   const {
@@ -34,7 +34,7 @@ const HomePage = () => {
   }
   return (
     <Fragment>
-      {/* RICK SAYS BYE */}
+      <TestData></TestData>
       <div className={styles.flex}>
         <div className={styles.column}>
           <TodoList />
@@ -50,4 +50,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default TeamBoardPage;

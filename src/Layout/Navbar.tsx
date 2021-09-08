@@ -27,10 +27,10 @@ const Navbar = () => {
               <img src={logo} className="max-h-10 inset-y-4"></img>
             </li>
             <li className="text-gray-500 font-medium tracking-wider hover:text-blue-400 active:text-blue-400">
-              <Link to="/">My Tasks</Link>
+              <Link to="/">Team Board</Link>
               </li>
             <li className="text-gray-500 font-medium tracking-wider hover:text-blue-400 active:text-blue-400">
-              <Link to="/team">Team Board</Link>
+              <Link to="/mytasks">My Tasks</Link>
             </li>
             <li className="text-gray-500 font-medium tracking-wider hover:text-blue-400 active:text-blue-400">
               <Link to="/kumospace">Coffee Room</Link>
@@ -49,7 +49,6 @@ const Navbar = () => {
   }
   return (
     <div>
-      <p>{/* Please <Link to="/login">Login</Link> */}</p>
     </div>
   );
 };

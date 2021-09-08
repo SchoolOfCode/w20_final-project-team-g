@@ -21,15 +21,15 @@ import Reset from './Components/Login/Reset';
 import { UserContext } from './Store/UserContext';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import PomodoroContextProvider from './Store/PomodoroContext';
+import { PomodoroContext } from '../src/Store/PomodoroContext';
 
 function App() {
   //
   //GET USER INFO FOR USER CONTEXT--> can this be put in its own context file like the Todo list?
   const [user, loading, error] = useAuthState(auth);
-
-  //
   const [userProfile, setUserProfile] = useState({});
   const history = useHistory();
+
   // name does not exist on 'user' so it needs an async fetch to get it.
   const fetchUserName = async () => {
     try {
@@ -71,10 +71,10 @@ function App() {
                 <Register />
               </Route>
               <Route path="/" exact>
-                <MyTasksPage />
-              </Route>
-              <Route path="/team" exact>
                 <TeamBoard />
+              </Route>
+              <Route path="/mytasks" exact>
+                <MyTasksPage />
               </Route>
               <Route path="/profile" exact>
                 <ProfilePage />
@@ -94,19 +94,3 @@ function App() {
 }
 
 export default App;
-
-// for later
-// {
-//   !authCtx.isLoggedIn && (
-//     <Route path="/auth">
-//       <AuthPage />
-//     </Route>
-//   );
-// }
-// {
-//   authCtx.isLoggedIn && (
-//     <Route path="/profile">
-//       <UserProfile />
-//     </Route>
-//   );
-// }

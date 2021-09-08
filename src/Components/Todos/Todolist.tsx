@@ -5,26 +5,17 @@ import { TodoStatus } from '../../Models/TodoClass';
 import Modal from '../../Layout/Modal';
 import Backdrop from '../../Layout/Backdrop';
 import PomodoroTimer from '../PomodoroTimer/PomodoroTimer';
-import { MenuItem, Select } from '@material-ui/core';
-import { InputLabel } from '@material-ui/core';
 
 const TodoList: React.FC<{ userFilter?: string }> = ({
   children,
   userFilter,
 }) => {
   const todoCtx = useContext(TodosContext);
-  const [sortBy, setSortBy] = useState('Urgency');
 
   function closeModalHandler() {
     todoCtx.closeModal();
   }
-  const handleChange = (e) => {
-    console.log(e.target.value);
-    setSortBy(e.target.value);
-    if (e.target.value === 'urgency') {
-      todoCtx.items.sort((a, b) => (b.urgency > a.urgency ? -1 : 1));
-    }
-  };
+
   useEffect(() => {
     todoCtx.retrieveCurrentTodo();
     // set;
@@ -35,7 +26,7 @@ const TodoList: React.FC<{ userFilter?: string }> = ({
     return (
       <Fragment>
         <h3 className="text-gray-500 tracking-wide font-medium text-2xl mt-4 mb-4">
-          My todos
+          My Todos
         </h3>
         <ul className="w-72">
           {todoCtx.items.map(
