@@ -7,6 +7,8 @@ import React, { useContext } from 'react';
 import Dashboard from '../Components/Login/Dashboard';
 import { auth } from '../utilities/firebase';
 
+import { useState } from 'react';
+
 import logo from '../images/kaizen-logo.png';
 
 const Navbar = () => {
@@ -14,13 +16,13 @@ const Navbar = () => {
   const {
     userProfile: { name, email, uniqueID },
   } = useContext(UserContext);
+
+  const [isShown, setIsShown] = useState(false);
+
   // console.log(user ? "yes" : "no");
   if (user) {
     return (
       <>
-        {/* <>
-            <div className="loginState">{user && <Dashboard></Dashboard>}</div>
-          </> */}
         <nav className="max-w-7xl mx-auto px-20">
           <ul className="relative flex items-center justify-between h-16">
             <li>
@@ -38,6 +40,17 @@ const Navbar = () => {
             <li className="text-gray-500 font-extralight">|</li>
             <li className="text-gray-500 font-semibold tracking-wider hover:text-blue-400 focus:text-blue-400">
               <Link to="/profile">P</Link>
+            </li>
+            <li>
+              <button 
+                onMouseEnter={() => setIsShown(true)}
+                onMouseOver={() => setIsShown(true)}
+                onMouseLeave={() => setIsShown(false)}
+                className="bg-green-500 h-8 w-8">
+                L
+              </button>
+              {isShown && (<div className="loginState">{user && <Dashboard></Dashboard>}</div>)}
+
             </li>
             <li>
               <FormModal></FormModal>

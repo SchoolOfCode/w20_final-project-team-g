@@ -84,7 +84,6 @@ export const NewTodo: React.FC<{ onCancel: () => void }> = (props: any) => {
         </label>
 
         <textarea
-          // type="text-area"
           id="body"
           className="mt-2 h-32 w-full border-2 border-blue-400 rounded-lg focus:outline-none ring-4 ring-transparent focus:ring-blue-100"
           style={{resize:'none'}}
