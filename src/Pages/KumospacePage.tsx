@@ -8,13 +8,7 @@ const KumospacePage = () => {
   console.log(name);
   return (
     <div>
-      <h1>{name}</h1>
-      <h1>{email}</h1>
-      <h1> ID : {uniqueID}</h1>
-      <h1>KumospacePage</h1>;
-      <div>
-        <img src={kumoSpace} alt="team in kumospace" />
-      </div>
+      <img src={kumoSpace} alt="team in kumospace" />
     </div>
   );
 };
