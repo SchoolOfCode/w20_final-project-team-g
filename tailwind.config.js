@@ -13,7 +13,7 @@ module.exports = {
   },
   variants: {
     extend: {
-      textColor: ['active'],
+      ringColor: ['hover'],
     },
   },
   plugins: [],

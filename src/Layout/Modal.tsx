@@ -4,7 +4,7 @@ import { NewTodo } from "../Components/Todos/NewTodo";
 const Modal = (props: any) => {
   return (
     <div 
-      className='h-560 w-640 fixed z-20 rounded-2xl shadow-lg bg-white text-center' 
+      className='h-560 w-640 fixed z-20 rounded-2xl shadow-2xl bg-white text-center' 
       style={{top:'50%', left:'50%', marginRight:'-50%', transform:'translate(-50%, -50%)'}}>
         <button 
           onClick={props.onCancel}

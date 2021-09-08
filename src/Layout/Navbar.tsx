@@ -26,17 +26,17 @@ const Navbar = () => {
             <li>
               <img src={logo} className="max-h-10 inset-y-4"></img>
             </li>
-            <li className="text-gray-500 font-medium tracking-wider hover:text-blue-400 active:text-blue-400">
+            <li className="text-gray-500 font-medium tracking-wider hover:text-blue-400 focus:text-blue-400">
               <Link to="/">Team Board</Link>
               </li>
-            <li className="text-gray-500 font-medium tracking-wider hover:text-blue-400 active:text-blue-400">
+            <li className="text-gray-500 font-medium tracking-wider hover:text-blue-400 focus:text-blue-400">
               <Link to="/mytasks">My Tasks</Link>
             </li>
-            <li className="text-gray-500 font-medium tracking-wider hover:text-blue-400 active:text-blue-400">
+            <li className="text-gray-500 font-medium tracking-wider hover:text-blue-400 focus:text-blue-400">
               <Link to="/kumospace">Coffee Room</Link>
             </li>
             <li className="text-gray-500 font-extralight">|</li>
-            <li className="text-gray-500 font-semibold tracking-wider hover:text-blue-400 active:text-blue-400">
+            <li className="text-gray-500 font-semibold tracking-wider hover:text-blue-400 focus:text-blue-400">
               <Link to="/profile">P</Link>
             </li>
             <li>
