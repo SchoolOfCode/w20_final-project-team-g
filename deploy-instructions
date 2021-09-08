@@ -1,0 +1,14 @@
+FIRST TIME ONLY:
+npm i 
+npm install -g firebase-tools  <- installs firebase CLI tools on your terminal
+firebase login
+firebase projects:list <-- If you want to test your login then do this
+my-cool-app should appear in your terminal. 
+
+----
+Change to 'deployment' branch
+
+git merge main  <- to pull in most up to date changes
+npm run build  <- create a build version
+firebase deploy  <- deploy to firebase. 
+---
