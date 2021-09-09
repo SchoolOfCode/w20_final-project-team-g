@@ -10,6 +10,7 @@ import '@testing-library/jest-dom';
 // if todo is clicked timer is displayed
 // if todo is clicked its moved to inprogress
 // if tasked is marked as finished in modal it moves to "done"
+// if a state changes on button click 
 // averages for moodchart?
 
 // testing suites 

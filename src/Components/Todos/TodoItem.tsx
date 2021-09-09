@@ -30,7 +30,7 @@ const TodoItem: React.FC<{
             x
           </button>
         </div>
-        <div onClick={props.onStartTodo} className=" px-6 pb-6 cursor-pointer">
+        <div id="startTodoDiv" onClick={props.onStartTodo} className=" px-6 pb-6 cursor-pointer">
           <h3 className="mt-2 text-base text-gray-600 font-semibold">{props.text}</h3>
           <p className="mt-2 text-gray-600 font-medium">{props.todoBody}</p>
           <div className="mt-6 flex justify-center bg-blue-400 h-10 w-10 rounded-full">
