@@ -7,7 +7,13 @@ const KumospacePage = () => {
   } = useContext(UserContext);
   console.log(name);
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
+    >
       {/* <img src={kumoSpace} alt="team in kumospace" /> */}
       <iframe
         src="https://www.kumospace.com/kaizensocial"
@@ -19,6 +25,7 @@ const KumospacePage = () => {
         style={{ border: '3px solid lightblue', margin: '20px' }}
         // style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
       ></iframe>
+      {Error && alert('Please enable cookies to gain access to Kumospace 🍪')}
     </div>
   );
 };
