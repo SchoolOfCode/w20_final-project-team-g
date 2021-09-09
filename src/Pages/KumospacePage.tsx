@@ -15,7 +15,7 @@ const KumospacePage = () => {
         width="95%"
         frameBorder="0"
         title="kumospace"
-        // scrolling="no"
+        allow="camera;microphone"
         style={{ border: '3px solid lightblue', margin: '20px' }}
         // style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
       ></iframe>
