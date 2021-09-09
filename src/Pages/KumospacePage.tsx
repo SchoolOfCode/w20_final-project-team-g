@@ -10,10 +10,13 @@ const KumospacePage = () => {
     <div>
       {/* <img src={kumoSpace} alt="team in kumospace" /> */}
       <iframe
-        src="https://www.kumospace.com/adadsfaa"
-        height="900"
+        src="https://www.kumospace.com/kaizensocial"
+        height="800"
         width="100%"
+        frameBorder="0"
         title="kumospace"
+        // scrolling="no"
+        style={{ display: 'flex' }}
       ></iframe>
     </div>
   );
