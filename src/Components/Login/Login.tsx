@@ -64,7 +64,7 @@ function Login() {
         </button> */}
 
           <div 
-          className="mt-4 text-gray-600 font-medium">
+          className="mt-4 text-gray-600 font-medium tracking-wide">
           Don't have an account yet? <Link to="/register" className="underline font-semibold text-blue-400 tracking-wide">Sign Up</Link>
           </div>
       </div>

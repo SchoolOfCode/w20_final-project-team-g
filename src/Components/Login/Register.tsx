@@ -3,6 +3,8 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { Link, useHistory } from "react-router-dom";
 import { auth, registerWithEmailAndPassword, signInWithGoogle } from "../../utilities/firebase";
 import "./Register.css";
+import logo from '../../images/kaizen-logo.png';
+
 function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -18,37 +20,59 @@ function Register() {
     if (user) history.replace("/");
   }, [user, loading]);
   return (
-    <div className="register">
-      <div className="register__container">
+    <div className="">
+      <div className="flex flex-col w-full h-full items-center justify-center p-20">
+      <img src={logo} alt="logo" className="w-80" />
+        <div className="flex flex-col items-start">
+          <label 
+            htmlFor="name"
+            className="mt-6 font-medium tracking-wide text-gray-600">
+              Full Name
+          </label>
+          <input
+          id="name"
+            type="text"
+            className="mt-1 px-4 h-12 w-80 border-2 border-blue-400 rounded-lg focus:outline-none ring-4 ring-transparent focus:ring-blue-100 text-gray-600 placeholder-gray-400"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder="Jane Doe"
+          />
+          <label 
+            htmlFor="email"
+            className="mt-2 font-medium tracking-wide text-gray-600">
+              Email
+          </label>
+          <input
+            id="email"
+            type="text"
+            className="mt-1 px-4 h-12 w-80 border-2 border-blue-400 rounded-lg focus:outline-none ring-4 ring-transparent focus:ring-blue-100 text-gray-600 placeholder-gray-400"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="janedoe@email.com"
+          />
+          <label 
+            htmlFor="password"
+            className="mt-2 font-medium tracking-wide text-gray-600">
+              Password
+          </label>
         <input
-          type="text"
-          className="register__textBox"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          placeholder="Full Name"
-        />
-        <input
-          type="text"
-          className="register__textBox"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="E-mail Address"
-        />
-        <input
+          id="password"
           type="password"
-          className="register__textBox"
+          className="mt-1 px-4 h-12 w-80 border-2 border-blue-400 rounded-lg focus:outline-none ring-4 ring-transparent focus:ring-blue-100 text-gray-600 placeholder-gray-400"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          placeholder="Password"
+          placeholder="••••••••••••"
         />
-        <button className="register__btn" onClick={register}>
-          Register
+        </div>
+        <button className="mt-6 h-12 w-80 bg-blue-400 text-white text-2xl font-bold tracking-wide rounded-lg shadow-lg ring-4 ring-transparent hover:ring-blue-100" onClick={register}>
+          Sign Up
         </button>
-        <button className="register__btn register__google" onClick={signInWithGoogle}>
+        {/* <button className="register__btn register__google" onClick={signInWithGoogle}>
           Register with Google
-        </button>
-        <div>
-          Already have an account? <Link to="/login">Login</Link> now.
+        </button> */}
+        <div
+        className="mt-4 text-gray-600 font-medium tracking-wide">
+          Already have an account? <Link to="/login" className="underline font-semibold text-blue-400 tracking-wide">Login</Link>
         </div>
       </div>
     </div>
