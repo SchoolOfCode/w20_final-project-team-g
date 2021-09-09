@@ -7,16 +7,17 @@ const KumospacePage = () => {
   } = useContext(UserContext);
   console.log(name);
   return (
-    <div>
+    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
       {/* <img src={kumoSpace} alt="team in kumospace" /> */}
       <iframe
         src="https://www.kumospace.com/kaizensocial"
-        height="800"
-        width="100%"
+        height="820"
+        width="95%"
         frameBorder="0"
         title="kumospace"
         // scrolling="no"
-        style={{ display: 'flex' }}
+        style={{ border: '3px solid lightblue', margin: '20px' }}
+        // style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
       ></iframe>
     </div>
   );
