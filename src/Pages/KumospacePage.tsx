@@ -8,7 +8,13 @@ const KumospacePage = () => {
   console.log(name);
   return (
     <div>
-      <img src={kumoSpace} alt="team in kumospace" />
+      {/* <img src={kumoSpace} alt="team in kumospace" /> */}
+      <iframe
+        src="https://www.kumospace.com/adadsfaa"
+        height="900"
+        width="100%"
+        title="kumospace"
+      ></iframe>
     </div>
   );
 };
