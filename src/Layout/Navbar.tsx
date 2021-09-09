@@ -10,6 +10,7 @@ import { logout } from '../utilities/firebase';
 import { useState } from 'react';
 import logo from '../images/kaizen-logo.png';
 import styles from './Modal.module.css';
+import logoutButton from '../images/logout.png';
 
 const Navbar = () => {
   const [user, loading, error] = useAuthState(auth);
@@ -29,36 +30,32 @@ const Navbar = () => {
               <img src={logo} className="max-h-10 inset-y-4"></img>
             </li>
             <li className="text-gray-500 font-medium tracking-wider hover:text-blue-400 focus:text-blue-400">
-              <NavLink activeStyle={{ color: '#5734a8' }} exact to="/">
+              <NavLink activeStyle={{ color: '#60A5FA' }} exact to="/">
                 Team Board
               </NavLink>
             </li>
             <li className="text-gray-500 font-medium tracking-wider hover:text-blue-400 focus:text-blue-400">
-              <NavLink activeStyle={{ color: '#5734a8' }} to="/mytasks">
+              <NavLink activeStyle={{ color: '#60A5FA' }} to="/mytasks">
                 My Tasks
               </NavLink>
             </li>
             <li className="text-gray-500 font-medium tracking-wider hover:text-blue-400 focus:text-blue-400">
               {/* links directly to the styles page */}
-              <NavLink activeClassName={styles.active} to="/kumospace">
+              <NavLink activeStyle={{ color: '#60A5FA' }} to="/kumospace">
                 Coffee Room
               </NavLink>
             </li>
-            <li className="text-gray-500 font-extralight">|</li>
-            <li className="text-gray-500 font-semibold tracking-wider hover:text-blue-400 focus:text-blue-400">
-              <NavLink activeStyle={{ color: '#5734a8' }} to="/profile">
-                P
+            <li className="text-gray-500 font-medium tracking-wider hover:text-blue-400 focus:text-blue-400">
+              <NavLink activeStyle={{ color: '#60A5FA' }} to="/profile">
+                Profile
               </NavLink>
             </li>
+            <li className="text-gray-500 font-extralight">|</li>
             <li>
               <button
-                // onMouseEnter={() => setIsShown(true)}
-                // onMouseOver={() => setIsShown(true)}
-                // onMouseLeave={() => setIsShown(true)}
                 onClick={logout}
-                className="bg-green-500 h-8 w-8"
-              >
-                L
+                className="h-6 w-6 mt-2 opacity-75 hover:opacity-100 transform hover:scale-110">
+                  <img src={logoutButton} />
               </button>
               {isShown && (
                 <div className="loginState">{user && <Dashboard />}</div>
