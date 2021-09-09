@@ -6,6 +6,8 @@ const KumospacePage = () => {
     userProfile: { name, email, uniqueID },
   } = useContext(UserContext);
   console.log(name);
+
+  console.log(Error);
   return (
     <div
       style={{
@@ -25,7 +27,7 @@ const KumospacePage = () => {
         style={{ border: '3px solid lightblue', margin: '20px' }}
         // style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
       ></iframe>
-      {Error && alert('Please enable cookies to gain access to Kumospace 🍪')}
+      {Error && <p>('Please enable cookies to gain access to Kumospace 🍪')</p>}
     </div>
   );
 };
