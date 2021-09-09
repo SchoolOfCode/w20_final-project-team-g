@@ -26,7 +26,7 @@ const TodoList: React.FC<{ userFilter?: string }> = ({
     return (
       <Fragment>
         <h3 className="text-gray-500 tracking-wide font-medium text-2xl mt-4 mb-4">
-          My Todos
+          Backlog
         </h3>
         <ul className="w-72">
           {todoCtx.items.map(
@@ -63,7 +63,7 @@ const TodoList: React.FC<{ userFilter?: string }> = ({
     return (
       <Fragment>
         <h3 className="text-gray-500 tracking-wide font-medium text-2xl mt-4 mb-4">
-          Team Todos
+          Backlog
         </h3>
         <ul className="w-72">
           {todoCtx.items.map(

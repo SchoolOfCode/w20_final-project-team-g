@@ -12,7 +12,7 @@ const TodoItem: React.FC<{
 }> = (props) => {
   return (
     <Fragment>
-      <li className="mb-10 shadow-lg rounded-2xl">
+      <li className="mb-10 shadow-lg rounded-2xl transform hover:scale-105">
         <div className="flex justify-between">
           {props.urgency === 1 && (
             <div className="bg-red-400 h-2 w-14 rounded-full mt-6 ml-6"></div>
