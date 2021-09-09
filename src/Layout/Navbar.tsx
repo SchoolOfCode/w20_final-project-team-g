@@ -1,5 +1,5 @@
-// import { Link } from "react-router-dom";
-import { BrowserRouter as Router, Link } from 'react-router-dom';
+// import { NavLink } from "react-router-dom";
+import { BrowserRouter as Router, NavLink } from 'react-router-dom';
 import { UserContext } from '../Store/UserContext';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import FormModal from '../Components/Form/FormModal';
@@ -9,6 +9,7 @@ import { auth } from '../utilities/firebase';
 import { logout } from '../utilities/firebase';
 import { useState } from 'react';
 import logo from '../images/kaizen-logo.png';
+import styles from './Modal.module.css';
 
 const Navbar = () => {
   const [user, loading, error] = useAuthState(auth);
@@ -28,17 +29,26 @@ const Navbar = () => {
               <img src={logo} className="max-h-10 inset-y-4"></img>
             </li>
             <li className="text-gray-500 font-medium tracking-wider hover:text-blue-400 focus:text-blue-400">
-              <Link to="/">Team Board</Link>
+              <NavLink activeStyle={{ color: '#5734a8' }} exact to="/">
+                Team Board
+              </NavLink>
             </li>
             <li className="text-gray-500 font-medium tracking-wider hover:text-blue-400 focus:text-blue-400">
-              <Link to="/mytasks">My Tasks</Link>
+              <NavLink activeStyle={{ color: '#5734a8' }} to="/mytasks">
+                My Tasks
+              </NavLink>
             </li>
             <li className="text-gray-500 font-medium tracking-wider hover:text-blue-400 focus:text-blue-400">
-              <Link to="/kumospace">Coffee Room</Link>
+              {/* links directly to the styles page */}
+              <NavLink activeClassName={styles.active} to="/kumospace">
+                Coffee Room
+              </NavLink>
             </li>
             <li className="text-gray-500 font-extralight">|</li>
             <li className="text-gray-500 font-semibold tracking-wider hover:text-blue-400 focus:text-blue-400">
-              <Link to="/profile">P</Link>
+              <NavLink activeStyle={{ color: '#5734a8' }} to="/profile">
+                P
+              </NavLink>
             </li>
             <li>
               <button
