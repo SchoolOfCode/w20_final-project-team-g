@@ -1,7 +1,7 @@
 import { useState, useContext } from 'react';
 import styles from './Pomodoro.module.css';
 import { PomodoroContext } from '../../Store/PomodoroContext';
-import CardWrapper from '../../Layout/CardWrapper';
+// import CardWrapper from '../../Layout/CardWrapper';
 
 const PomodoroSettings = () => {
   const [newTimer, setNewTimer] = useState({
@@ -43,21 +43,23 @@ const PomodoroSettings = () => {
 
   return (
     <div className={styles.formContainer}>
-      <CardWrapper>
+      <h2>Task Title</h2>
+      <p>Task body would go here blah blah blah blah blah</p>
+      {/* <CardWrapper> */}
         <button name="work" value="25" onClick={() => handleClick('25')}>
           25 minutes
         </button>
-      </CardWrapper>
-      <CardWrapper>
+      {/* </CardWrapper> */}
+      {/* <CardWrapper> */}
         <button name="work" value="50" onClick={() => handleClick('50')}>
           50 minutes
         </button>
-      </CardWrapper>
-      <CardWrapper>
+      {/* </CardWrapper> */}
+      {/* <CardWrapper> */}
         <button name="work" value="0.04" onClick={() => handleClick('0.04')}>
           for quick test
         </button>
-      </CardWrapper>
+      {/* </CardWrapper> */}
     </div>
   );
 };
