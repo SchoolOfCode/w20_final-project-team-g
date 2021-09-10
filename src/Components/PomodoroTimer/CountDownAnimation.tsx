@@ -10,13 +10,13 @@ const CountdownAnimation = ({ key, timer, animate, children }) => {
       isPlaying={animate}
       duration={timer * 60} 
       colors={[
-        ['#f9fafb', 0.33],
-        ['#f9fafb', 0.33],
-        ['#f9fafb', 0.33],
+        ['#D1D5DB', 0.33],
+        ['#D1D5DB', 0.33],
+        ['#D1D5DB', 0.33],
       ]}
       strokeWidth={6}
       size={220}
-      trailColor="#FCD34D"
+      trailColor="#60A5FA"
       onComplete={() => {
         pomodoroCtx.stopTimer();
       }}
