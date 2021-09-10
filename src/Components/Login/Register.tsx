@@ -4,6 +4,7 @@ import { Link, useHistory } from "react-router-dom";
 import { auth, registerWithEmailAndPassword, signInWithGoogle } from "../../utilities/firebase";
 import "./Register.css";
 import logo from '../../images/kaizen-logo.png';
+import google from '../../images/google.png';
 
 function Register() {
   const [email, setEmail] = useState("");
@@ -65,14 +66,15 @@ function Register() {
         />
         </div>
         <button className="mt-6 h-12 w-80 bg-blue-400 text-white text-2xl font-bold tracking-wide rounded-lg shadow-lg ring-4 ring-transparent hover:ring-blue-100" onClick={register}>
-          Sign Up
+          Sign up
         </button>
-        {/* <button className="register__btn register__google" onClick={signInWithGoogle}>
-          Register with Google
-        </button> */}
+        <button className="flex p-2 mt-4 h-12 w-80 bg-gray-50 text-gray-500 text-xl font-semibold tracking-wide rounded-lg shadow-lg ring-4 ring-transparent hover:ring-blue-100" onClick={signInWithGoogle}>
+        <img src={google} className="h-8 w-8 mr-10" />
+          Sign up with Google
+        </button>
         <div
         className="mt-4 text-gray-600 font-medium tracking-wide">
-          Already have an account? <Link to="/login" className="underline font-semibold text-blue-400 tracking-wide">Login</Link>
+          Already have an account? <Link to="/login" className="underline font-semibold text-blue-400 tracking-wide">Sign in</Link>
         </div>
       </div>
     </div>

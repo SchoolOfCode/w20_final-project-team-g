@@ -54,11 +54,6 @@ const PomodoroTimer = () => {
             <div className="flex w-48 justify-evenly">
               <button
                 className=""
-                // {
-                //   !pomodoroCtx.startAnimate
-                //     ? styles.active && styles.specialButton
-                //     : undefined
-                // }
                 onClick={pomodoroCtx.startTimer}>
                   <img 
                     src={play} 
@@ -67,11 +62,6 @@ const PomodoroTimer = () => {
 
               <button
                 className=""
-                // {
-                //   pomodoroCtx.startAnimate
-                //     ? styles.active && styles.specialButton
-                //     : undefined
-                // }
                 onClick={pomodoroCtx.pauseTimer}>
                   <img 
                     src={pause}
@@ -99,14 +89,14 @@ const PomodoroTimer = () => {
         {/* SHOW WORK CLOCK IF VALUE IS CHOSEN AND ON BREAK TIMER  */}
         {pomodoroCtx.pomodoro !== 0 && pomodoroCtx.isOnBreakTimer && (
           <>
-            {pomodoroCtx.startAnimate && (
               <div>
+            {pomodoroCtx.startAnimate && (
                 <TipsSlider />
-              </div>
-            )}
+                )}
+                </div>
 
-            <div className={styles.timeContainer}>
-              <div className={styles.timeWrapper}>
+            <div className="mb-4">
+              <div className="flex justify-center items-center text-6xl font-medium h-80 w-80 rounded-full shadow-lg">
                 <CountdownAnimation
                   key={pomodoroCtx.pomodoro}
                   timer={pomodoroCtx.pomodoro}
@@ -117,29 +107,30 @@ const PomodoroTimer = () => {
               </div>
             </div>
 
-            <div className={styles.buttonWrapper}>
+            <div className="flex w-48 justify-evenly">
               <button
-                className={
-                  !pomodoroCtx.startAnimate
-                    ? styles.active && styles.specialButton
-                    : undefined
-                }
-                onClick={pomodoroCtx.startTimer}
-              >
-                Start
+                className=""
+                onClick={pomodoroCtx.startTimer}>
+                  <img 
+                    src={play} 
+                    className="h-12 w-12 rounded-full shadow-lg opacity-75 hover:opacity-100 transform hover:scale-110" />
               </button>
 
               <button
-                className={
-                  pomodoroCtx.startAnimate
-                    ? styles.active && styles.specialButton
-                    : undefined
-                }
-                onClick={pomodoroCtx.pauseTimer}
-              >
-                Pause
+                className=""
+                onClick={pomodoroCtx.pauseTimer}>
+                  <img 
+                    src={pause}
+                    className="h-12 w-12 rounded-full shadow-lg opacity-75 hover:opacity-100 transform hover:scale-110" />
               </button>
-              <button onClick={pomodoroCtx.resetSettings}> Reset </button>
+
+              <button 
+                className="" 
+                onClick={pomodoroCtx.resetSettings}>
+                  <img 
+                    src={stop}
+                    className="h-12 w-12 rounded-full shadow-lg opacity-75 hover:opacity-100 transform hover:scale-110" /> 
+              </button>
             </div>
           </>
         )}
