@@ -47,7 +47,7 @@ const PomodoroSettings = () => {
         className="mb-10 text-2xl font-semibold tracking-wide text-gray-600">
           Task Title</h2>
       <p
-      className="mb-20 px-12 h-48 overflow-auto text-lg tracking wide text-gray-600">
+      className="mb-20 px-12 h-48 overflow-auto text-lg tracking wide text-gray-600 text-left">
         Task body would go here blah blah blah blah blah blah blah blah blah</p>
 
       <div className="flex w-56 justify-evenly">

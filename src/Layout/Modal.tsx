@@ -1,6 +1,8 @@
 import PomodoroTimer from "../Components/PomodoroTimer/PomodoroTimer";
 import styles from "./Modal.module.css";
 import { NewTodo } from "../Components/Todos/NewTodo";
+
+import close from '../images/modal-buttons/close.png'
 const Modal = (props: any) => {
   return (
     <div 
@@ -8,8 +10,9 @@ const Modal = (props: any) => {
       style={{top:'50%', left:'50%', marginRight:'-50%', transform:'translate(-50%, -50%)'}}>
         <button 
           onClick={props.onCancel}
-          className='cursor-pointer text-gray-600 hover:opacity-100 text-4xl align-middle opacity-75 font-mono float-right mt-6 mr-6 transform hover:scale-110'
-          >x
+          className='cursor-pointer hover:opacity-100 opacity-75 float-right mt-6 mr-6 mb-4 transform hover:scale-110'
+          >
+            <img src={close} className="w-8 h-8"/>
         </button>
         {props.children}
     </div>

@@ -106,7 +106,7 @@ const Moodtracker = () => {
           </p>
 
           <div className="has-tooltip self-start ml-10 mt-12">
-            <img src={helpIcon} alt="help tool" className="transform hover:scale-110 cursor-pointer opacity-75 hover:opacity-100"/>
+            <img src={helpIcon} alt="help tool" className="transform h-8 w-8 hover:scale-110 cursor-pointer opacity-75 hover:opacity-100"/>
             <p className="tooltip -mt-8 ml-14 text-lg tracking-wide text-gray-600">This data is submitted anonymously</p>
           </div>
         </>
