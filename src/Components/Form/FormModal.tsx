@@ -14,7 +14,7 @@ const FormModal = (props: any) => {
   return (
     <div>
       <button
-        className="h-10 w-36 bg-blue-400 text-white font-bold tracking-wide rounded-2xl shadow-lg"
+        className="h-10 w-36 bg-blue-400 text-white font-bold tracking-wide rounded-lg shadow-lg ring-4 ring-transparent hover:ring-blue-100 transform hover:scale-105"
         onClick={() => setModalIsOpen(true)}
       >
         + New Task

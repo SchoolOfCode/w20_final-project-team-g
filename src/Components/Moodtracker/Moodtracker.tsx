@@ -4,6 +4,8 @@ import emoji2 from './images/emoji2.png';
 import emoji3 from './images/emoji3.png';
 import emoji4 from './images/emoji4.png';
 import emoji5 from './images/emoji5.png';
+import helpIcon from '../../images/modal-buttons/help.png';
+
 import { db } from '../../utilities/firebase';
 import { useState, useContext } from 'react';
 import { PomodoroContext } from '../../Store/PomodoroContext';
@@ -82,15 +84,15 @@ const Moodtracker = () => {
           <span className="mt-20 text-xl font-semibold tracking-wide text-gray-600">
             Please rate your mood to continue
           </span>
-          {/* <div className={styles.tooltip}>
-            Hover over me
-            <span className={styles.tooltiptext}>Tooltip text</span>
-          </div> */}
+          <div className={styles.tooltip}>
+            <img src={helpIcon} alt="help tool" />
+            <p className={styles.tooltiptext}>Don't touch me</p>
+          </div>
         </>
       )}
 
       {isPresentingBreakCard && (
-        <Modal>
+        <Modal onCancel={closeModalHandler}>
           <BreakCard />
         </Modal>
       )}
