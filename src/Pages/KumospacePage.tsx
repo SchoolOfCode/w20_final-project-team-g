@@ -27,7 +27,6 @@ const KumospacePage = () => {
         style={{ border: '3px solid lightblue', margin: '20px' }}
         // style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
       ></iframe>
-      {Error && <p>('Please enable cookies to gain access to Kumospace 🍪')</p>}
     </div>
   );
 };
