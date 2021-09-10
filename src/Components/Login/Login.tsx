@@ -1,13 +1,17 @@
-import React, { useEffect, useState } from "react";
-import { Link, useHistory } from "react-router-dom";
-import { auth, signInWithEmailAndPassword, signInWithGoogle } from "../../utilities/firebase";
-import { useAuthState } from "react-firebase-hooks/auth";
-import "./login.css";
+import React, { useEffect, useState } from 'react';
+import { Link, useHistory } from 'react-router-dom';
+import {
+  auth,
+  signInWithEmailAndPassword,
+  signInWithGoogle,
+} from '../../utilities/firebase';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import './login.css';
 import logo from '../../images/kaizen-logo.png';
 
 function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [user, loading, error] = useAuthState(auth);
   const history = useHistory();
 
@@ -16,7 +20,7 @@ function Login() {
       // maybe trigger a loading screen
       return;
     }
-    if (user) history.replace("/");
+    if (user) history.replace('/');
   }, [user, loading]);
   //
   return (
@@ -24,10 +28,11 @@ function Login() {
       <div className="flex flex-col w-full h-full items-center justify-center p-20">
         <img src={logo} alt="logo" className="w-80" />
         <div className="flex flex-col items-start">
-          <label 
+          <label
             htmlFor="email"
-            className="mt-6 font-medium tracking-wide text-gray-600">
-              Email
+            className="mt-6 font-medium tracking-wide text-gray-600"
+          >
+            Email
           </label>
           <input
             id="email"
@@ -37,10 +42,11 @@ function Login() {
             onChange={(e) => setEmail(e.target.value)}
             placeholder="janedoe@email.com"
           />
-          <label 
+          <label
             htmlFor="password"
-            className="mt-2 font-medium tracking-wide text-gray-600">
-              Password
+            className="mt-2 font-medium tracking-wide text-gray-600"
+          >
+            Password
           </label>
           <input
             id="password"
@@ -49,24 +55,37 @@ function Login() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="••••••••••••"
+            onKeyPress={(e) => {
+              if (e.key === 'Enter')
+                signInWithEmailAndPassword(email, password);
+            }}
           />
           <p className="mt-1 self-end font-semibold text-blue-400 underline tracking-wide">
             <Link to="/passwordreset">Forgot Password?</Link>
           </p>
         </div>
-        <button 
-          className="mt-4 h-12 w-80 bg-blue-400 text-white text-2xl font-bold tracking-wide rounded-lg shadow-lg ring-4 ring-transparent hover:ring-blue-100" 
-          onClick={() => signInWithEmailAndPassword(email, password)}>
+        <button
+          className="mt-4 h-12 w-80 bg-blue-400 text-white text-2xl font-bold tracking-wide rounded-lg shadow-lg ring-4 ring-transparent hover:ring-blue-100"
+          onClick={() => signInWithEmailAndPassword(email, password)}
+        >
           Log In
         </button>
-        {/* <button className="login__btn login__google" onClick={signInWithGoogle}>
+        <button
+          className="mt-4 h-12 w-80 bg-blue-400 text-white text-2xl font-bold tracking-wide rounded-lg shadow-lg ring-4 ring-transparent hover:ring-blue-100"
+          onClick={signInWithGoogle}
+        >
           Login with Google
-        </button> */}
+        </button>
 
-          <div 
-          className="mt-4 text-gray-600 font-medium tracking-wide">
-          Don't have an account yet? <Link to="/register" className="underline font-semibold text-blue-400 tracking-wide">Sign Up</Link>
-          </div>
+        <div className="mt-4 text-gray-600 font-medium tracking-wide">
+          Don't have an account yet?
+          <Link
+            to="/register"
+            className="underline font-semibold text-blue-400 tracking-wide"
+          >
+            Sign Up
+          </Link>
+        </div>
       </div>
     </div>
   );
