@@ -40,7 +40,7 @@ export const NewTodo: React.FC<{ onCancel: () => void }> = (props: any) => {
         <input
           type="text"
           id="title"
-          className="mt-2 h-10 w-full border-2 border-blue-400 rounded-lg focus:outline-none ring-4 ring-transparent focus:ring-blue-100"
+          className="mt-2 h-10 px-4 w-full border-2 border-blue-400 rounded-lg focus:outline-none ring-4 ring-transparent focus:ring-blue-100"
           {...register("title", { required: true, maxLength: 60 })}
         />
         <p className="mt-6 text-2xl font-semibold tracking-wide text-gray-600">
@@ -85,7 +85,7 @@ export const NewTodo: React.FC<{ onCancel: () => void }> = (props: any) => {
 
         <textarea
           id="body"
-          className="mt-2 h-32 w-full border-2 border-blue-400 rounded-lg focus:outline-none ring-4 ring-transparent focus:ring-blue-100"
+          className="mt-2 h-32 px-4 py-2 w-full border-2 border-blue-400 rounded-lg focus:outline-none ring-4 ring-transparent focus:ring-blue-100"
           style={{resize:'none'}}
           {...register("body", { required: false, maxLength: 1000 })}
         />
