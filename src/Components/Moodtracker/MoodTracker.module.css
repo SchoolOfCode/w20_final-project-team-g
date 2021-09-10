@@ -1,18 +1,17 @@
 
-.textDiv {
+/* .textDiv { */
   /* margin: 3rem; */
-  font-size: large;
-}
-.emojiDiv {
+  /* font-size: large; */
+/* } */
+/* .emojiDiv { */
   /* margin: 2rem; */
-}
+/* } */
 
-.tooltip {
+/* .tooltip {
   position: relative;
   display: inline-block;
   border-bottom: 1px dotted black;
-}
-
+} 
 .tooltip .tooltiptext {
   visibility: hidden;
   width: 120px;
@@ -22,14 +21,14 @@
   border-radius: 6px;
   padding: 5px 0;
 
-  /* Position the tooltip */
+
   position: absolute;
   z-index: 1;
-}
+} 
 
 .tooltip:hover .tooltiptext {
   visibility: visible;
-}
+}   */
 /* 
 .cardDiv {
   background-color: white;

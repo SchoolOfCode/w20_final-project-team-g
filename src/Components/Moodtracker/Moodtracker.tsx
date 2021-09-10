@@ -1,9 +1,9 @@
 import styles from './MoodTracker.module.css';
-import emoji1 from './images/emoji1.png';
-import emoji2 from './images/emoji2.png';
-import emoji3 from './images/emoji3.png';
-import emoji4 from './images/emoji4.png';
-import emoji5 from './images/emoji5.png';
+import emoji1 from '../../images/mood-tracker/emoji1.png'
+import emoji2 from '../../images/mood-tracker/emoji2.png'
+import emoji3 from '../../images/mood-tracker/emoji3.png'
+import emoji4 from '../../images/mood-tracker/emoji4.png'
+import emoji5 from '../../images/mood-tracker/emoji5.png'
 import helpIcon from '../../images/modal-buttons/help.png';
 
 import { db } from '../../utilities/firebase';
@@ -62,31 +62,52 @@ const Moodtracker = () => {
   };
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col w-full h-full m-0 p-0 items-center">
       {!isPresentingBreakCard && (
         <>
-          <span className="mt-20 text-2xl font-semibold tracking-wide text-gray-600">
+          <h2 className="mb-10 text-2xl font-semibold tracking-wide text-gray-600">
             How are you feeling right now?
-          </span>
+          </h2>
           <div className="mt-24 flex flex-row justify-evenly">
             <img
+              className="rounded-full shadow-lg mx-2 cursor-pointer transform hover:scale-110 ring-4 ring-transparent hover:ring-red-100"
               src={emoji1}
               alt="vsad"
               onClick={captureMood}
               id="1"
-              className=""
             />
-            <img src={emoji2} alt="sad" onClick={captureMood} id="2" />
-            <img src={emoji3} alt="ok" onClick={captureMood} id="3" />
-            <img src={emoji4} alt="happy" onClick={captureMood} id="4" />
-            <img src={emoji5} alt="vhappy" onClick={captureMood} id="5" />
+            <img 
+              className="rounded-full shadow-lg mx-2 cursor-pointer transform hover:scale-110 ring-4 ring-transparent hover:ring-purple-100"
+              src={emoji2} 
+              alt="sad" 
+              onClick={captureMood} 
+              id="2" />
+            <img 
+              className="rounded-full shadow-lg mx-2 cursor-pointer transform hover:scale-110 ring-4 ring-transparent hover:ring-blue-100"
+              src={emoji3} 
+              alt="ok" 
+              onClick={captureMood} 
+              id="3" />
+            <img 
+              className="rounded-full shadow-lg mx-2 cursor-pointer transform hover:scale-110 ring-4 ring-transparent hover:ring-yellow-100"
+              src={emoji4} 
+              alt="happy" 
+              onClick={captureMood} 
+              id="4" />
+            <img 
+              className="rounded-full shadow-lg mx-2 cursor-pointer transform hover:scale-110 ring-4 ring-transparent hover:ring-green-100"
+              src={emoji5} 
+              alt="vhappy" 
+              onClick={captureMood} 
+              id="5" />
           </div>
-          <span className="mt-20 text-xl font-semibold tracking-wide text-gray-600">
+          <p className="mt-20 text-xl tracking-wide text-gray-600">
             Please rate your mood to continue
-          </span>
-          <div className={styles.tooltip}>
-            <img src={helpIcon} alt="help tool" />
-            <p className={styles.tooltiptext}>Don't touch me</p>
+          </p>
+
+          <div className="has-tooltip self-start ml-10 mt-12">
+            <img src={helpIcon} alt="help tool" className="transform hover:scale-110 cursor-pointer opacity-75 hover:opacity-100"/>
+            <p className="tooltip -mt-8 ml-14 text-lg tracking-wide text-gray-600">This data is submitted anonymously</p>
           </div>
         </>
       )}

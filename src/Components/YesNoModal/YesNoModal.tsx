@@ -28,7 +28,7 @@ const YesNoModal = () => {
     <div className="flex flex-col w-full h-full m-0 p-0 items-center">
       {!isPresentingMoodCard && (
         <section>
-          <h2 className="mb-10 text-2xl font-semibold tracking-wide text-gray-600">
+          <h2 className="mb-28 text-2xl font-semibold tracking-wide text-gray-600">
             Did you finish the task?
           </h2>
           <div className="flex mt-20">
