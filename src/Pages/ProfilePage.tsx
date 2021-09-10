@@ -8,6 +8,7 @@ import MoodChart from '../Components/Moodtracker/MoodChart';
 import DoughnutChart from '../Components/Moodtracker/DoughnutChart';
 import styles from './HomePage.module.css';
 import Moodtracker from '../Components/Moodtracker/Moodtracker';
+import Loading from '../Components/Loading/Loading';
 const Profile = () => {
   const history = useHistory();
   const {
