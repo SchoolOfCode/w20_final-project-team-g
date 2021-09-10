@@ -6,11 +6,8 @@ import {
   Redirect,
   useHistory,
 } from 'react-router-dom';
+import { Suspense } from 'react';
 import './App.css';
-import MyTasksPage from './Pages/MyTasksPage';
-import KumospacePage from './Pages/KumospacePage';
-import ProfilePage from './Pages/ProfilePage';
-import TeamBoard from './Pages/TeamBoardPage';
 import Layout from './Layout/Layout';
 import TodosContextProvider from './Store/TodosContext';
 import 'firebase/auth';
@@ -21,7 +18,12 @@ import Reset from './Components/Login/Reset';
 import { UserContext } from './Store/UserContext';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import PomodoroContextProvider from './Store/PomodoroContext';
-import { PomodoroContext } from '../src/Store/PomodoroContext';
+
+import Loading from './Components/Loading/Loading';
+const MyTasksPage = React.lazy(() => import('./Pages/MyTasksPage'));
+const KumospacePage = React.lazy(() => import('./Pages/KumospacePage'));
+const ProfilePage = React.lazy(() => import('./Pages/ProfilePage'));
+const TeamBoardPage = React.lazy(() => import('./Pages/TeamBoardPage'));
 
 function App() {
   //
@@ -60,32 +62,34 @@ function App() {
       <PomodoroContextProvider>
         <TodosContextProvider>
           <Layout>
-            <Switch>
-              <Route path="/login" exact>
-                <Login />
-              </Route>
-              <Route path="/passwordreset" exact>
-                <Reset />
-              </Route>
-              <Route path="/register" exact>
-                <Register />
-              </Route>
-              <Route path="/" exact>
-                <TeamBoard />
-              </Route>
-              <Route path="/mytasks" exact>
-                <MyTasksPage />
-              </Route>
-              <Route path="/profile" exact>
-                <ProfilePage />
-              </Route>
-              <Route path="/kumospace" exact>
-                <KumospacePage />
-              </Route>
-              <Route path="*">
-                <Redirect to="/" />
-              </Route>
-            </Switch>
+            <Suspense fallback={<Loading />}>
+              <Switch>
+                <Route path="/login" exact>
+                  <Login />
+                </Route>
+                <Route path="/passwordreset" exact>
+                  <Reset />
+                </Route>
+                <Route path="/register" exact>
+                  <Register />
+                </Route>
+                <Route path="/" exact>
+                  <TeamBoardPage />
+                </Route>
+                <Route path="/mytasks" exact>
+                  <MyTasksPage />
+                </Route>
+                <Route path="/profile" exact>
+                  <ProfilePage />
+                </Route>
+                <Route path="/kumospace" exact>
+                  <KumospacePage />
+                </Route>
+                <Route path="*">
+                  <Redirect to="/" />
+                </Route>
+              </Switch>
+            </Suspense>
           </Layout>
         </TodosContextProvider>
       </PomodoroContextProvider>
