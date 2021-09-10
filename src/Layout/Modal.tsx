@@ -8,7 +8,7 @@ const Modal = (props: any) => {
       style={{top:'50%', left:'50%', marginRight:'-50%', transform:'translate(-50%, -50%)'}}>
         <button 
           onClick={props.onCancel}
-          className='cursor-pointer text-gray-600 hover:opacity-100 text-4xl align-middle opacity-75 font-mono float-right mt-6 mr-6'
+          className='cursor-pointer text-gray-600 hover:opacity-100 text-4xl align-middle opacity-75 font-mono float-right mt-6 mr-6 transform hover:scale-110'
           >x
         </button>
         {props.children}
