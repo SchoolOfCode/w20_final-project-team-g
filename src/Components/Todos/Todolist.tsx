@@ -48,7 +48,7 @@ const TodoList: React.FC<{ userFilter?: string }> = ({
               )
           )}
           {todoCtx.modal && (
-            <Modal>
+            <Modal onCancel={closeModalHandler}>
               <PomodoroTimer />
             </Modal>
           )}
