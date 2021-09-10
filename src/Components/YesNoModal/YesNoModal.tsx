@@ -25,38 +25,43 @@ const YesNoModal = () => {
   };
 
   return (
-    <div className="m-2">
+    <div className="flex flex-col w-full h-full m-0 p-0 items-center">
       {!isPresentingMoodCard && (
         <section>
-          {/* <div className={styles.closeIcon}>
-            <img
-              src={closeTabIcon}
-              alt="close tab"
-              onClick={closeModalHandler}
-            />
-          </div> */}
-          <span className="flex mt-20 justify-center text-2xl font-semibold tracking-wide text-gray-600">
+          <h2 className="mb-28 text-2xl font-semibold tracking-wide text-gray-600">
             Did you finish the task?
-          </span>
-          <div className="flex justify-center mt-20">
-            <section>
-              <img src={yes} alt="yes" onClick={presentBreakCardUpdateTodo} />
-              <p className="text-xl font-semibold tracking-wide text-gray-600">
-    
+          </h2>
+          <div className="flex mt-20">
+            <section className="px-6">
+              <button
+              className="w-40 h-40 rounded-full border-8 border-green-400 p-6 shadow-lg ring-8 ring-transparent hover:ring-green-100 transform hover:scale-110"
+              onClick={presentBreakCardUpdateTodo}>
+                <img 
+                  className="w-24 h-24"
+                  src={yes} alt="yes" />
+              </button>
+              <p className="text-xl font-semibold tracking-wide text-gray-600 mt-6">
                 All done!
               </p>
             </section>
-            <section>
-              <img src={no} alt="no" onClick={presentMoodCard} />
-              <p className="text-xl font-semibold tracking-wide text-gray-600">
+
+            <section className="px-6">
+              <button
+               className="w-40 h-40 rounded-full border-8 border-yellow-300 p-6 shadow-lg ring-8 ring-transparent hover:ring-yellow-100 transform hover:scale-110" 
+               onClick={presentMoodCard}>
+                <img 
+                  className="w-24 h-24"
+                  src={no} alt="no" />
+              </button>
+              <p className="text-xl font-semibold tracking-wide text-gray-600 mt-6">
                 Not yet...
               </p>
             </section>
           </div>
-          <div className={styles.tooltip}>
+          {/* <div className={styles.tooltip}>
             <img src={helpIcon} alt="help tool" />
             <p className={styles.tooltiptext}>Don't touch me</p>
-          </div>
+          </div> */}
         </section>
       )}
 

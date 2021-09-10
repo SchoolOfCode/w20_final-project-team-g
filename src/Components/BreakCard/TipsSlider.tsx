@@ -1,4 +1,4 @@
-import CardWrapper from '../../Layout/CardWrapper';
+// import CardWrapper from '../../Layout/CardWrapper';
 import { PomodoroContext } from '../../Store/PomodoroContext';
 import { useContext, useState, useEffect } from 'react';
 
@@ -20,7 +20,7 @@ const TipsSlider = () => {
   }, [messageIndex]);
 
   //pomodoroCtx.wellnessQuotes, messageIndex
-  return <div>{pomodoroCtx.wellnessQuotes[messageIndex]}</div>;
+  return <div className="mb-4 text-2xl font-semibold tracking-wide text-gray-600">{pomodoroCtx.wellnessQuotes[messageIndex]}</div>;
 };
 
 export default TipsSlider;

@@ -39,7 +39,7 @@ function Reset() {
             Reset Password
         </button>
         <div className="mt-4 text-gray-600 font-medium tracking-wide">
-          Don't have an account yet? <Link to="/register" className="underline font-semibold text-blue-400 tracking-wide">Sign Up</Link>
+          Don't have an account yet? <Link to="/register" className="underline font-semibold text-blue-400 tracking-wide">Sign up</Link>
         </div>
       </div>
     </div>

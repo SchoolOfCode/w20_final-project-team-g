@@ -8,6 +8,7 @@ import {
 import { useAuthState } from 'react-firebase-hooks/auth';
 import './login.css';
 import logo from '../../images/kaizen-logo.png';
+import google from '../../images/google.png';
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -68,23 +69,18 @@ function Login() {
           className="mt-4 h-12 w-80 bg-blue-400 text-white text-2xl font-bold tracking-wide rounded-lg shadow-lg ring-4 ring-transparent hover:ring-blue-100"
           onClick={() => signInWithEmailAndPassword(email, password)}
         >
-          Log In
+          Sign in
         </button>
         <button
-          className="mt-4 h-12 w-80 bg-blue-400 text-white text-2xl font-bold tracking-wide rounded-lg shadow-lg ring-4 ring-transparent hover:ring-blue-100"
+          className="flex p-2 mt-4 h-12 w-80 bg-gray-50 text-gray-500 text-xl font-semibold tracking-wide rounded-lg shadow-lg ring-4 ring-transparent hover:ring-blue-100"
           onClick={signInWithGoogle}
         >
-          Login with Google
+          <img src={google} className="h-8 w-8 mr-10" />
+          Sign in with Google
         </button>
 
         <div className="mt-4 text-gray-600 font-medium tracking-wide">
-          Don't have an account yet?
-          <Link
-            to="/register"
-            className="underline font-semibold text-blue-400 tracking-wide"
-          >
-            Sign Up
-          </Link>
+          Don't have an account yet? <Link to="/register" className="underline font-semibold text-blue-400 tracking-wide">Sign Up</Link>
         </div>
       </div>
     </div>

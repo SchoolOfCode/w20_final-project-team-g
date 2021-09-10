@@ -2,7 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+.tooltip {
+  @apply invisible absolute;
+}
 
+.has-tooltip:hover .tooltip {
+  @apply visible z-50
+}
 
 /* body {
   margin: 0;

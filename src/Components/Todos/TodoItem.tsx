@@ -1,5 +1,6 @@
 
 import { Fragment } from 'react';
+import close from '../../images/modal-buttons/close.png';
 
 const TodoItem: React.FC<{
   text: string;
@@ -25,9 +26,9 @@ const TodoItem: React.FC<{
           )}
           <button
             onClick={props.onRemoveTodo}
-            className="h-8 w-8 rounded-full cursor-pointer hover:bg-red-100 text-s text-gray-600 mt-2 mr-2 font-mono"
+            className="w-6 h-6 rounded-full cursor-pointer mt-4 mr-2 transform hover:scale-110 opacity-75 hover:opacity-100 ring-4 ring-transparent hover:ring-red-100"
           >
-            x
+            <img src={close} className="w-6 h-6"/>
           </button>
         </div>
         <div onClick={props.onStartTodo} className=" px-6 pb-6 cursor-pointer">
