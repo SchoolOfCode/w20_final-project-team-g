@@ -9,6 +9,12 @@ type FormValues = {
   body: string
 }
 
+const maxTitleCharacters = 30
+
+const capitalizeFirstLetter = (input: string) => {
+  return input.charAt(0).toUpperCase() + input.slice(1)
+}
+
 export const NewTodo: React.FC<{ onCancel: () => void }> = (props: any) => {
   const todoCtx = useContext(TodosContext)
   const [radioValue, setRadioValue] = useState(null)
@@ -25,7 +31,10 @@ export const NewTodo: React.FC<{ onCancel: () => void }> = (props: any) => {
   const submitHandler = (data: FormValues, event: React.FormEvent) => {
     event.preventDefault()
     let { title, body } = data
-    todoCtx.addTodo(title, name, body, radioValue) // saves to firebase
+    let sanitizedTitle = capitalizeFirstLetter(title)
+    let sanitizedBody = capitalizeFirstLetter(body)
+
+    todoCtx.addTodo(sanitizedTitle, name, sanitizedBody, radioValue) // saves to firebase
     props.onCancel()
   }
 
@@ -42,13 +51,18 @@ export const NewTodo: React.FC<{ onCancel: () => void }> = (props: any) => {
           type="text"
           id="title"
           className="mt-2 h-10 px-4 w-full border-2 border-blue-400 rounded-lg focus:outline-none ring-4 ring-transparent focus:ring-blue-100"
-          {...register("title", { required: true, maxLength: 30 })}
+          {...register("title", {
+            required: true,
+            maxLength: maxTitleCharacters,
+          })}
         />
         {errors.title?.type === "required" && (
           <span style={{ color: "red" }}>This field is required</span>
         )}
         {errors.title?.type === "maxLength" && (
-          <span style={{ color: "red" }}>Maximum characters is 30 </span>
+          <span style={{ color: "red" }}>
+            Maximum characters should not exceed {maxTitleCharacters}
+          </span>
         )}
 
         <p className="mt-6 text-2xl font-semibold tracking-wide text-gray-600">
