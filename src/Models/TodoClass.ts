@@ -5,26 +5,31 @@ export enum TodoStatus {
 }
 
 class TodoClass {
-  id: string;
-  todoTitle: string;
-  date: string;
-  todoBody?: string;
-  createdBy?: string;
-  status?: TodoStatus;
-  urgency?: number;
+  id: string
+  todoTitle: string
+  date: string
+  todoBody?: string
+  createdBy?: string
+  status?: TodoStatus
+  urgency?: number
 
-  constructor(todoTitle: string, createdBy: string, todoBody: string, urgency: number) {
-    this.todoTitle = todoTitle;
-    this.todoBody = todoBody || 'example text';
-    this.id = new Date().toISOString();
-    this.date = new Date().toISOString();
-    this.createdBy = createdBy; // later change to signed in user name/ID ?
-    this.status = TodoStatus.todo; // by default
-    this.urgency = urgency || 3;
+  constructor(
+    todoTitle: string,
+    createdBy: string,
+    todoBody: string,
+    urgency: number
+  ) {
+    this.todoTitle = todoTitle
+    this.todoBody = todoBody
+    this.id = new Date().toISOString()
+    this.date = new Date().toISOString()
+    this.createdBy = createdBy // later change to signed in user name/ID ?
+    this.status = TodoStatus.todo // by default
+    this.urgency = urgency || 3
   }
 }
 
-export default TodoClass;
+export default TodoClass
 
 //Notes on adding futher database entries to show in DOM(i.e adding a body and notes):
 //Add as variable above

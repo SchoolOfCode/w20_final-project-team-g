@@ -1,32 +1,42 @@
-import React, { useContext, useState } from "react";
-import { TodosContext } from "../../Store/TodosContext";
-import { UserContext } from "../../Store/UserContext";
-import { useForm } from "react-hook-form";
+import React, { useContext, useState } from "react"
+import { TodosContext } from "../../Store/TodosContext"
+import { UserContext } from "../../Store/UserContext"
+import { useForm } from "react-hook-form"
+import { red } from "@material-ui/core/colors"
 
 type FormValues = {
-  title: string;
-  body: string;
-};
+  title: string
+  body: string
+}
+
+const maxTitleCharacters = 30
+
+const capitalizeFirstLetter = (input: string) => {
+  return input.charAt(0).toUpperCase() + input.slice(1)
+}
 
 export const NewTodo: React.FC<{ onCancel: () => void }> = (props: any) => {
-  const todoCtx = useContext(TodosContext);
-  const [radioValue, setRadioValue] = useState(null);
+  const todoCtx = useContext(TodosContext)
+  const [radioValue, setRadioValue] = useState(null)
   const {
     userProfile: { name },
-  } = useContext(UserContext);
+  } = useContext(UserContext)
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormValues>();
+  } = useForm<FormValues>()
 
   const submitHandler = (data: FormValues, event: React.FormEvent) => {
-    event.preventDefault();
-    let { title, body } = data;
-    todoCtx.addTodo(title, name, body, radioValue); // saves to firebase
-    props.onCancel();
-  };
+    event.preventDefault()
+    let { title, body } = data
+    let sanitizedTitle = capitalizeFirstLetter(title)
+    let sanitizedBody = capitalizeFirstLetter(body)
+
+    todoCtx.addTodo(sanitizedTitle, name, sanitizedBody, radioValue) // saves to firebase
+    props.onCancel()
+  }
 
   return (
     <form onSubmit={handleSubmit(submitHandler)}>
@@ -41,8 +51,20 @@ export const NewTodo: React.FC<{ onCancel: () => void }> = (props: any) => {
           type="text"
           id="title"
           className="mt-2 h-10 px-4 w-full border-2 border-blue-400 rounded-lg focus:outline-none ring-4 ring-transparent focus:ring-blue-100"
-          {...register("title", { required: true, maxLength: 60 })}
+          {...register("title", {
+            required: true,
+            maxLength: maxTitleCharacters,
+          })}
         />
+        {errors.title?.type === "required" && (
+          <span style={{ color: "red" }}>This field is required</span>
+        )}
+        {errors.title?.type === "maxLength" && (
+          <span style={{ color: "red" }}>
+            Maximum characters should not exceed {maxTitleCharacters}
+          </span>
+        )}
+
         <p className="mt-6 text-2xl font-semibold tracking-wide text-gray-600">
           Priority
         </p>
@@ -86,7 +108,7 @@ export const NewTodo: React.FC<{ onCancel: () => void }> = (props: any) => {
         <textarea
           id="body"
           className="mt-2 h-32 px-4 py-2 w-full border-2 border-blue-400 rounded-lg focus:outline-none ring-4 ring-transparent focus:ring-blue-100"
-          style={{resize:'none'}}
+          style={{ resize: "none" }}
           {...register("body", { required: false, maxLength: 1000 })}
         />
       </div>
@@ -97,5 +119,5 @@ export const NewTodo: React.FC<{ onCancel: () => void }> = (props: any) => {
         Save Task
       </button>
     </form>
-  );
-};
+  )
+}
