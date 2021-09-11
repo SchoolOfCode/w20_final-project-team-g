@@ -117,19 +117,29 @@ const MoodChart = () => {
         suggestedMax: 5,
         grid: {
           display: false,
-        }
+        },
+        // gridLines: {
+        //   zeroLineColor: '#000000'
+        // },
       },
       x: {
         grid: {
           display: false,
-        }
+        },
+        // gridLines: {
+        //   zeroLineColor: '#000000'
+        // },
       },
       // maintainAspectRatio: false,
       // xAxis: {
-      //   display: false,
+      //   gridLines: {
+      //     color: '#000000'
+      //   },
       // },
       // yAxis: {
-      //   display: false,
+      //   gridLines: {
+      //     color: '#000000'
+      //   },
       // }
       
     },
@@ -138,10 +148,10 @@ const MoodChart = () => {
   return (
     <>
       <div className="w-640">
-        <h1 className="text-gray-500 tracking-wide font-medium text-2xl mt-8 mb-4">Today's Mood</h1>
+        <h1 className="text-gray-500 tracking-wide font-medium text-2xl mt-8 mb-16">Today's Mood</h1>
         <div className="flex">
           <div className="z-20 relative flex flex-col-reverse bg-white">
-            <img src={emoji1} className="h-12 w-12 mt-2"/>
+            <img src={emoji1} className="h-12 w-12 mt-2 mb-4"/>
             <img src={emoji2} className="h-12 w-12 mt-2"/>
             <img src={emoji3} className="h-12 w-12 mt-2"/>
             <img src={emoji4} className="h-12 w-12 mt-2"/>
