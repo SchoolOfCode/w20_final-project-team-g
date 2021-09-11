@@ -15,11 +15,11 @@ const Profile = () => {
     userProfile: { name, email, uniqueID },
   } = useContext(UserContext);
   return (
-    <div className="m-0">
-      <h1>PROFILE PAGE</h1>
+    <div className="">
+      {/* <h1>PROFILE PAGE</h1>
       <h1>Hello {name}</h1>
       <h2>Your logged in email is: {email}</h2>
-      <h2>Your ID is: {uniqueID}</h2>
+      <h2>Your ID is: {uniqueID}</h2> */}
       <div className={styles.flex}>
         <div className={styles.colum}>
           <MoodChart />
