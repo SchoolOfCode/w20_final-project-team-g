@@ -4,6 +4,12 @@ import { Line } from 'react-chartjs-2';
 
 import { useEffect } from 'react';
 
+import emoji1 from '../../images/mood-tracker/emoji1.png';
+import emoji2 from '../../images/mood-tracker/emoji2.png';
+import emoji3 from '../../images/mood-tracker/emoji3.png';
+import emoji4 from '../../images/mood-tracker/emoji4.png';
+import emoji5 from '../../images/mood-tracker/emoji5.png';
+
 const MoodChart = () => {
   const moodRef = firebase.firestore().collection('moods');
   const [mood, setMood] = useState([]);
@@ -87,32 +93,64 @@ const MoodChart = () => {
       labels: timeCollection, // x-axis
       datasets: [
         {
-          label: 'Average mood for today',
+          label: 'Average mood',
           data: averageMood,
           fill: false,
           tension: 0.4,
-          borderColor: gradient,
-          borderWidth: 2,
+          borderColor: '#60A5FA',
+          borderWidth: 4,
+          backgroundColor: '#60A5FA',
+
+          
         },
       ],
     };
   };
 
   const options = {
+    // legend: false,
+    // scaleShowLabels : false,
+    responsive: true,
     scales: {
       y: {
         suggestedMin: 0,
         suggestedMax: 5,
+        grid: {
+          display: false,
+        }
       },
+      x: {
+        grid: {
+          display: false,
+        }
+      },
+      // maintainAspectRatio: false,
+      // xAxis: {
+      //   display: false,
+      // },
+      // yAxis: {
+      //   display: false,
+      // }
+      
     },
   };
 
   return (
     <>
-      <div>
-        <h1 className="title">Today's Moods</h1>
+      <div className="w-640">
+        <h1 className="text-gray-500 tracking-wide font-medium text-2xl mt-8 mb-4">Today's Mood</h1>
+        <div className="flex">
+          <div className="z-20 relative flex flex-col-reverse bg-white">
+            <img src={emoji1} className="h-12 w-12 mt-2"/>
+            <img src={emoji2} className="h-12 w-12 mt-2"/>
+            <img src={emoji3} className="h-12 w-12 mt-2"/>
+            <img src={emoji4} className="h-12 w-12 mt-2"/>
+            <img src={emoji5} className="h-12 w-12 mt-2"/>
+
+          </div>
+        <Line data={data} options={options} className="z-10 absolute ml-6"/>
+        </div>
       </div>
-      <Line data={data} options={options} />
     </>
   );
 };

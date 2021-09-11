@@ -58,7 +58,7 @@ const DoughnutChart = () => {
   return (
     <>
       <div>
-        <h1 className="title">This Week's Mood</h1>
+        <h1 className="text-gray-500 tracking-wide font-medium text-2xl mt-8 mb-4">This Week's Mood</h1>
       </div>
       <Doughnut data={data} />
     </>
