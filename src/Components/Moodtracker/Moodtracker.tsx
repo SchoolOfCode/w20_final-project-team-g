@@ -62,9 +62,9 @@ const Moodtracker = () => {
   };
 
   return (
-    <div className="flex flex-col w-full h-full m-0 p-0 items-center">
+    <div >
       {!isPresentingBreakCard && (
-        <>
+        <div className="flex flex-col w-full h-full m-0 p-0 items-center">
           <h2 className="mb-10 text-2xl font-semibold tracking-wide text-gray-600">
             How are you feeling right now?
           </h2>
@@ -76,40 +76,50 @@ const Moodtracker = () => {
               onClick={captureMood}
               id="1"
             />
-            <img 
+            <img
               className="rounded-full shadow-lg mx-2 cursor-pointer transform hover:scale-110 ring-4 ring-transparent hover:ring-purple-100"
-              src={emoji2} 
-              alt="sad" 
-              onClick={captureMood} 
-              id="2" />
-            <img 
+              src={emoji2}
+              alt="sad"
+              onClick={captureMood}
+              id="2"
+            />
+            <img
               className="rounded-full shadow-lg mx-2 cursor-pointer transform hover:scale-110 ring-4 ring-transparent hover:ring-blue-100"
-              src={emoji3} 
-              alt="ok" 
-              onClick={captureMood} 
-              id="3" />
-            <img 
+              src={emoji3}
+              alt="ok"
+              onClick={captureMood}
+              id="3"
+            />
+            <img
               className="rounded-full shadow-lg mx-2 cursor-pointer transform hover:scale-110 ring-4 ring-transparent hover:ring-yellow-100"
-              src={emoji4} 
-              alt="happy" 
-              onClick={captureMood} 
-              id="4" />
-            <img 
+              src={emoji4}
+              alt="happy"
+              onClick={captureMood}
+              id="4"
+            />
+            <img
               className="rounded-full shadow-lg mx-2 cursor-pointer transform hover:scale-110 ring-4 ring-transparent hover:ring-green-100"
-              src={emoji5} 
-              alt="vhappy" 
-              onClick={captureMood} 
-              id="5" />
+              src={emoji5}
+              alt="vhappy"
+              onClick={captureMood}
+              id="5"
+            />
           </div>
           <p className="mt-20 text-xl tracking-wide text-gray-600">
             Please rate your mood to continue
           </p>
 
           <div className="has-tooltip self-start ml-10 mt-12">
-            <img src={helpIcon} alt="help tool" className="transform h-8 w-8 hover:scale-110 cursor-pointer opacity-75 hover:opacity-100"/>
-            <p className="tooltip -mt-8 ml-14 text-lg tracking-wide text-gray-600">This data is submitted anonymously</p>
+            <img
+              src={helpIcon}
+              alt="help tool"
+              className="transform h-8 w-8 hover:scale-110 cursor-pointer opacity-75 hover:opacity-100"
+            />
+            <p className="tooltip -mt-8 ml-14 text-lg tracking-wide text-gray-600">
+              This data is submitted anonymously
+            </p>
           </div>
-        </>
+        </div>
       )}
 
       {isPresentingBreakCard && (

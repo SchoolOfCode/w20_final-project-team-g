@@ -23,12 +23,12 @@ const PomodoroTimer = () => {
     todoCtx.closeModal();
   }
 
-  useEffect(() => {
-    document.title = pomodoroCtx.doctitle;
-  }, [pomodoroCtx.doctitle]);
+  // useEffect(() => {
+  //   document.title = pomodoroCtx.doctitle;
+  // }, [pomodoroCtx.doctitle]);
 
   return (
-    <div className="">
+    <div>
       <div className="flex flex-col w-full h-full m-0 p-0 items-center">
         {/* SHOW SETTINGS IF NO POMODORO VALUE IS SELECTED */}
         {pomodoroCtx.pomodoro === 0 && <PomodoroSettings />}
@@ -36,8 +36,7 @@ const PomodoroTimer = () => {
         {/* SHOW WORK CLOCK IF VALUE IS CHOSEN AND ONWORKTIMER  */}
         {pomodoroCtx.pomodoro !== 0 && pomodoroCtx.isOnWorkTimer && (
           <>
-            <h2
-            className="mb-4 text-2xl font-semibold tracking-wide text-gray-600">
+            <h2 className="mb-4 text-2xl font-semibold tracking-wide text-gray-600">
               Task Title
             </h2>
             <div className="mb-4">
@@ -45,35 +44,33 @@ const PomodoroTimer = () => {
                 <CountdownAnimation
                   key={pomodoroCtx.pomodoro}
                   timer={pomodoroCtx.pomodoro}
-                  animate={pomodoroCtx.startAnimate}>
+                  animate={pomodoroCtx.startAnimate}
+                >
                   {pomodoroCtx.children}
                 </CountdownAnimation>
               </div>
             </div>
 
             <div className="flex w-48 justify-evenly">
-              <button
-                className=""
-                onClick={pomodoroCtx.startTimer}>
-                  <img 
-                    src={play} 
-                    className="h-12 w-12 rounded-full shadow-lg opacity-75 hover:opacity-100 transform hover:scale-110" />
+              <button className="" onClick={pomodoroCtx.startTimer}>
+                <img
+                  src={play}
+                  className="h-12 w-12 rounded-full shadow-lg opacity-75 hover:opacity-100 transform hover:scale-110"
+                />
               </button>
 
-              <button
-                className=""
-                onClick={pomodoroCtx.pauseTimer}>
-                  <img 
-                    src={pause}
-                    className="h-12 w-12 rounded-full shadow-lg opacity-75 hover:opacity-100 transform hover:scale-110" />
+              <button className="" onClick={pomodoroCtx.pauseTimer}>
+                <img
+                  src={pause}
+                  className="h-12 w-12 rounded-full shadow-lg opacity-75 hover:opacity-100 transform hover:scale-110"
+                />
               </button>
 
-              <button 
-                className="" 
-                onClick={pomodoroCtx.resetSettings}>
-                  <img 
-                    src={stop}
-                    className="h-12 w-12 rounded-full shadow-lg opacity-75 hover:opacity-100 transform hover:scale-110" /> 
+              <button className="" onClick={pomodoroCtx.resetSettings}>
+                <img
+                  src={stop}
+                  className="h-12 w-12 rounded-full shadow-lg opacity-75 hover:opacity-100 transform hover:scale-110"
+                />
               </button>
             </div>
           </>
@@ -89,11 +86,7 @@ const PomodoroTimer = () => {
         {/* SHOW WORK CLOCK IF VALUE IS CHOSEN AND ON BREAK TIMER  */}
         {pomodoroCtx.pomodoro !== 0 && pomodoroCtx.isOnBreakTimer && (
           <>
-              <div>
-            {pomodoroCtx.startAnimate && (
-                <TipsSlider />
-                )}
-                </div>
+            <div>{pomodoroCtx.startAnimate && <TipsSlider />}</div>
 
             <div className="mb-4">
               <div className="flex justify-center items-center text-6xl font-medium h-80 w-80 rounded-full shadow-lg">
@@ -108,28 +101,25 @@ const PomodoroTimer = () => {
             </div>
 
             <div className="flex w-48 justify-evenly">
-              <button
-                className=""
-                onClick={pomodoroCtx.startTimer}>
-                  <img 
-                    src={play} 
-                    className="h-12 w-12 rounded-full shadow-lg opacity-75 hover:opacity-100 transform hover:scale-110" />
+              <button className="" onClick={pomodoroCtx.startTimer}>
+                <img
+                  src={play}
+                  className="h-12 w-12 rounded-full shadow-lg opacity-75 hover:opacity-100 transform hover:scale-110"
+                />
               </button>
 
-              <button
-                className=""
-                onClick={pomodoroCtx.pauseTimer}>
-                  <img 
-                    src={pause}
-                    className="h-12 w-12 rounded-full shadow-lg opacity-75 hover:opacity-100 transform hover:scale-110" />
+              <button className="" onClick={pomodoroCtx.pauseTimer}>
+                <img
+                  src={pause}
+                  className="h-12 w-12 rounded-full shadow-lg opacity-75 hover:opacity-100 transform hover:scale-110"
+                />
               </button>
 
-              <button 
-                className="" 
-                onClick={pomodoroCtx.resetSettings}>
-                  <img 
-                    src={stop}
-                    className="h-12 w-12 rounded-full shadow-lg opacity-75 hover:opacity-100 transform hover:scale-110" /> 
+              <button className="" onClick={pomodoroCtx.resetSettings}>
+                <img
+                  src={stop}
+                  className="h-12 w-12 rounded-full shadow-lg opacity-75 hover:opacity-100 transform hover:scale-110"
+                />
               </button>
             </div>
           </>

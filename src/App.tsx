@@ -18,7 +18,6 @@ import Reset from './Components/Login/Reset';
 import { UserContext } from './Store/UserContext';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import PomodoroContextProvider from './Store/PomodoroContext';
-
 import Loading from './Components/Loading/Loading';
 const MyTasksPage = React.lazy(() => import('./Pages/MyTasksPage'));
 const KumospacePage = React.lazy(() => import('./Pages/KumospacePage'));
