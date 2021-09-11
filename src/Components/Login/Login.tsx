@@ -6,7 +6,6 @@ import {
   signInWithGoogle,
 } from '../../utilities/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import './login.css';
 import logo from '../../images/kaizen-logo.png';
 import google from '../../images/google.png';
 
