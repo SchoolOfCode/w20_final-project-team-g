@@ -1,26 +1,26 @@
-import styles from './Pomodoro.module.css';
-import { useState, useEffect } from 'react';
-import CountdownAnimation from './CountDownAnimation';
-import { PomodoroContext } from '../../Store/PomodoroContext';
-import { TodosContext } from '../../Store/TodosContext';
+import styles from "./Pomodoro.module.css"
+import { useState, useEffect } from "react"
+import CountdownAnimation from "./CountDownAnimation"
+import { PomodoroContext } from "../../Store/PomodoroContext"
+import { TodosContext } from "../../Store/TodosContext"
 
-import PomodoroSettings from './PomodoroSettings';
-import { useContext } from 'react';
-import Modal from '../../Layout/Modal';
-import YesNoModal from '../YesNoModal/YesNoModal';
-import TipsSlider from '../BreakCard/TipsSlider';
-import bell from './Bell/meditation-bell.m4a';
+import PomodoroSettings from "./PomodoroSettings"
+import { useContext } from "react"
+import Modal from "../../Layout/Modal"
+import YesNoModal from "../YesNoModal/YesNoModal"
+import TipsSlider from "../BreakCard/TipsSlider"
+import bell from "./Bell/meditation-bell.m4a"
 
-import play from '../../images/timer/play.png';
-import pause from '../../images/timer/pause.png';
-import stop from '../../images/timer/stop.png';
+import play from "../../images/timer/play.png"
+import pause from "../../images/timer/pause.png"
+import stop from "../../images/timer/stop.png"
 
 const PomodoroTimer = () => {
-  const pomodoroCtx = useContext(PomodoroContext);
-  const todoCtx = useContext(TodosContext);
+  const pomodoroCtx = useContext(PomodoroContext)
+  const todoCtx = useContext(TodosContext)
 
   function closeModalHandler() {
-    todoCtx.closeModal();
+    todoCtx.closeModal()
   }
 
   // useEffect(() => {
@@ -86,8 +86,14 @@ const PomodoroTimer = () => {
         {/* SHOW WORK CLOCK IF VALUE IS CHOSEN AND ON BREAK TIMER  */}
         {pomodoroCtx.pomodoro !== 0 && pomodoroCtx.isOnBreakTimer && (
           <>
+            <div>
+              {!pomodoroCtx.startAnimate && (
+                <div className="mb-4 text-2xl font-semibold tracking-wide text-gray-600">
+                  Enjoy your {pomodoroCtx.breakType} break...
+                </div>
+              )}
+            </div>
             <div>{pomodoroCtx.startAnimate && <TipsSlider />}</div>
-
             <div className="mb-4">
               <div className="flex justify-center items-center text-6xl font-medium h-80 w-80 rounded-full shadow-lg">
                 <CountdownAnimation
@@ -99,7 +105,6 @@ const PomodoroTimer = () => {
                 </CountdownAnimation>
               </div>
             </div>
-
             <div className="flex w-48 justify-evenly">
               <button className="" onClick={pomodoroCtx.startTimer}>
                 <img
@@ -125,14 +130,14 @@ const PomodoroTimer = () => {
           </>
         )}
 
-        {pomodoroCtx.isBreakTimerFinished && console.log('finished')}
+        {pomodoroCtx.isBreakTimerFinished && console.log("finished")}
 
         <audio id="beep" ref={pomodoroCtx.audioForEndOfPomodoro}>
           <source src={bell} type="audio/ogg" />
         </audio>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default PomodoroTimer;
+export default PomodoroTimer

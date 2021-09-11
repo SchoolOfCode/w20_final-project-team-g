@@ -1,44 +1,44 @@
-import styles from '../YesNoModal/YesNoModal.module.css';
-import activeIcon from '../../images/rest-flows/active.png';
-import mindfulicon from '../../images/rest-flows/mindful.png';
-import socialIcon from '../../images/rest-flows/social.png';
-import helpIcon from '../../images/modal-buttons/help.png';
-import { TodosContext } from '../../Store/TodosContext';
-import { useContext, useState } from 'react';
-import { PomodoroContext } from '../../Store/PomodoroContext';
-import {
-  mindfullData,
-  activeData,
-  socialData,
-} from '../BreakCard/WellnessTips';
+import styles from "../YesNoModal/YesNoModal.module.css"
+import activeIcon from "../../images/rest-flows/active.png"
+import mindfulicon from "../../images/rest-flows/mindful.png"
+import socialIcon from "../../images/rest-flows/social.png"
+import helpIcon from "../../images/modal-buttons/help.png"
+import { TodosContext } from "../../Store/TodosContext"
+import { useContext, useState } from "react"
+import { PomodoroContext } from "../../Store/PomodoroContext"
+import { mindfullData, activeData, socialData } from "../BreakCard/WellnessTips"
 
 const BreakCard = () => {
-  const pomodoroCtx = useContext(PomodoroContext);
-  const todoCtx = useContext(TodosContext);
-  const [isPresentingBreakTimer, setIsPresentingBreakTimer] = useState(false);
+  const pomodoroCtx = useContext(PomodoroContext)
+  const todoCtx = useContext(TodosContext)
+  const [isPresentingBreakTimer, setIsPresentingBreakTimer] = useState(false)
 
   const [breakTime, setBreakTime] = useState({
     work: 1,
     break: 0.05,
-    session: 'work',
-  });
+    session: "work",
+  })
 
   const presentBreakTimer = (id: string) => {
     //pomodoroCtx.resetSettings(); // makes break timer show up!
-    pomodoroCtx.updateBreakTimer(breakTime); // passes object back to useContext
-    setIsPresentingBreakTimer(true);
-    console.log('id is', id);
+    if (id === "social") {
+      window.open("/kumospace")
+    }
 
-    if (id === 'social') {
-      pomodoroCtx.wellnessQuoteHandler(socialData);
+    pomodoroCtx.updateBreakTimer(breakTime) // passes object back to useContext
+    setIsPresentingBreakTimer(true)
+    console.log("id is", id)
+
+    if (id === "social") {
+      pomodoroCtx.wellnessQuoteHandler(socialData, "social")
     }
-    if (id === 'active') {
-      pomodoroCtx.wellnessQuoteHandler(activeData);
+    if (id === "active") {
+      pomodoroCtx.wellnessQuoteHandler(activeData, "active")
     }
-    if (id === 'mindful') {
-      pomodoroCtx.wellnessQuoteHandler(mindfullData);
+    if (id === "mindful") {
+      pomodoroCtx.wellnessQuoteHandler(mindfullData, "mindful")
     }
-  };
+  }
 
   return (
     <div>
@@ -57,7 +57,7 @@ const BreakCard = () => {
                 src={socialIcon}
                 alt="social icon"
                 id="social"
-                onClick={() => presentBreakTimer('social')}
+                onClick={() => presentBreakTimer("social")}
               />
               <p className="text-xl font-semibold tracking-wide text-gray-600 mt-6">
                 Social
@@ -69,7 +69,7 @@ const BreakCard = () => {
                 src={mindfulicon}
                 alt="mindful icon"
                 id="mindful"
-                onClick={() => presentBreakTimer('mindful')}
+                onClick={() => presentBreakTimer("mindful")}
               />
               <p className="text-xl font-semibold tracking-wide text-gray-600 mt-6">
                 Mindful
@@ -81,7 +81,7 @@ const BreakCard = () => {
                 src={activeIcon}
                 alt="active icon"
                 id="active"
-                onClick={() => presentBreakTimer('active')}
+                onClick={() => presentBreakTimer("active")}
               />
               <p className="text-xl font-semibold tracking-wide text-gray-600 mt-6">
                 Active
@@ -96,7 +96,7 @@ const BreakCard = () => {
 
       </>} */}
     </div>
-  );
-};
+  )
+}
 
-export default BreakCard;
+export default BreakCard

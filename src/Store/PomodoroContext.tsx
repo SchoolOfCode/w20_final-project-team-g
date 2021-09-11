@@ -1,15 +1,15 @@
-import { useRef } from 'react';
-import { useState, createContext } from 'react';
+import { useRef } from "react"
+import { useState, createContext } from "react"
 
 export enum PomoStatus {
-  work = 'work',
-  break = 'break',
-  nothing = 'null',
+  work = "work",
+  break = "break",
+  nothing = "null",
 }
 
 export const PomodoroContext = createContext({
   wellnessQuotes: [],
-  wellnessQuoteHandler: (quote: string[]) => {},
+  wellnessQuoteHandler: (quote: string[], type: string) => {},
   isOnWorkTimer: false,
   isOnBreakTimer: false,
   updateBreakTimer: (updatedSettings: any) => {},
@@ -18,6 +18,7 @@ export const PomodoroContext = createContext({
   isBreakTimerFinished: false,
   //
   pomodoro: 0,
+  breakType: "",
   settings: {},
   startAnimate: false,
   startTimer: (updatedSettings: any) => {},
@@ -28,120 +29,123 @@ export const PomodoroContext = createContext({
   stopTimer: () => {},
   audioForEndOfPomodoro: null,
   // resetAfterBreakSettings: () => {},
-});
+})
 
 const PomodoroContextProvider: React.FC = (props) => {
-  const [pomodoro, setPomodoro] = useState(0); // the number of minutes picked
-  const [settings, setSettings] = useState({});
-  const [startAnimate, setStartAnimate] = useState(false);
-  const audioForEndOfPomodoro = useRef(null);
-  const [wellnessQuotes, setWellnessQuotes] = useState([]);
+  const [pomodoro, setPomodoro] = useState(0) // the number of minutes picked
+  const [settings, setSettings] = useState({})
+  const [startAnimate, setStartAnimate] = useState(false)
+  const audioForEndOfPomodoro = useRef(null)
+  const [wellnessQuotes, setWellnessQuotes] = useState([])
   //
-  const [isOnWorkTimer, setIsOnWorkTimer] = useState(false);
-  const [isOnBreakTimer, setIsOnBreakTimer] = useState(false);
-  const [isWorkTimerFinished, setIsWorkTimerFinished] = useState(false);
-  const [isBreakTimerFinished, setIsBreakTimerFinished] = useState(false);
+  const [isOnWorkTimer, setIsOnWorkTimer] = useState(false)
+  const [isOnBreakTimer, setIsOnBreakTimer] = useState(false)
+  const [isWorkTimerFinished, setIsWorkTimerFinished] = useState(false)
+  const [isBreakTimerFinished, setIsBreakTimerFinished] = useState(false)
+  const [breakType, setBreakType] = useState("")
 
   function startTimer() {
-    setStartAnimate(true);
+    setStartAnimate(true)
   }
 
   function pauseTimer() {
-    setStartAnimate(false);
+    setStartAnimate(false)
   }
 
   function stopTimer() {
-    setStartAnimate(false);
-    setSettings({});
-    setPomodoro(0);
+    setStartAnimate(false)
+    setSettings({})
+    setPomodoro(0)
   }
 
-  function wellnessQuoteHandler(quote: []) {
-    setWellnessQuotes(quote);
+  function wellnessQuoteHandler(quote: [], type: string) {
+    setWellnessQuotes(quote)
+    setBreakType(type)
+    console.log(breakType)
   }
-  console.log('wellness quotes are', wellnessQuotes);
+  console.log("wellness quotes are", wellnessQuotes)
 
   const resetSettings = () => {
-    setSettings({});
-    setPomodoro(0);
-    setIsWorkTimerFinished(false);
-    setIsBreakTimerFinished(false);
-    setIsOnBreakTimer(false);
-    setIsOnWorkTimer(false);
-  };
+    setSettings({})
+    setPomodoro(0)
+    setIsWorkTimerFinished(false)
+    setIsBreakTimerFinished(false)
+    setIsOnBreakTimer(false)
+    setIsOnWorkTimer(false)
+  }
 
   const updateBreakTimer = (updatedSettings) => {
-    setSettings(updatedSettings);
-    setTimer(updatedSettings);
-    setIsOnBreakTimer(true);
-    setIsWorkTimerFinished(false);
-    setIsBreakTimerFinished(false);
-    console.log('updateBreakTimer was called from context');
-  };
+    setSettings(updatedSettings)
+    setTimer(updatedSettings)
+    setIsOnBreakTimer(true)
+    setIsWorkTimerFinished(false)
+    setIsBreakTimerFinished(false)
+    console.log("updateBreakTimer was called from context")
+  }
 
   const updateWorkTimer = (updatedSettings) => {
-    setSettings(updatedSettings);
-    setTimer(updatedSettings);
-    setIsOnWorkTimer(true);
-  };
+    setSettings(updatedSettings)
+    setTimer(updatedSettings)
+    setIsOnWorkTimer(true)
+  }
 
   const setTimer = (evaluate) => {
     switch (
       evaluate.session // frm settings
     ) {
-      case 'work':
-        setPomodoro(evaluate.work);
-        break;
-      case 'break':
-        setPomodoro(evaluate.break);
-        break;
+      case "work":
+        setPomodoro(evaluate.work)
+        break
+      case "break":
+        setPomodoro(evaluate.break)
+        break
 
       default:
-        setPomodoro(0);
-        break;
+        setPomodoro(0)
+        break
     }
-  };
+  }
 
   function setSession(chosenSession: {}) {
     updateWorkTimer({
       ...settings, // updating the session key
       session: chosenSession,
-    });
-    setTimer(settings); // either work, short, or long
+    })
+    setTimer(settings) // either work, short, or long
   }
 
   // pass time to counter
   const children = ({ remainingTime }) => {
-    const minutes = Math.floor(remainingTime / 60); // change display here
-    const seconds = remainingTime % 60;
-    let zeroDisplayerSeconds = '';
-    let zeroDisplayerMinutes = '';
+    const minutes = Math.floor(remainingTime / 60) // change display here
+    const seconds = remainingTime % 60
+    let zeroDisplayerSeconds = ""
+    let zeroDisplayerMinutes = ""
 
     if (seconds < 10) {
-      zeroDisplayerSeconds = '0';
+      zeroDisplayerSeconds = "0"
     }
 
     if (minutes < 10) {
-      zeroDisplayerMinutes = '0';
+      zeroDisplayerMinutes = "0"
     }
-    let timeDisplay = `${zeroDisplayerMinutes}${minutes}:${zeroDisplayerSeconds}${seconds}`;
+    let timeDisplay = `${zeroDisplayerMinutes}${minutes}:${zeroDisplayerSeconds}${seconds}`
 
     if (remainingTime === 0 && isOnWorkTimer) {
-      setIsWorkTimerFinished(true); // triggers yes no modal
-      setIsOnWorkTimer(false);
-      audioForEndOfPomodoro.current.play();
+      setIsWorkTimerFinished(true) // triggers yes no modal
+      setIsOnWorkTimer(false)
+      audioForEndOfPomodoro.current.play()
     }
 
     if (remainingTime === 0 && isOnBreakTimer) {
-      setIsBreakTimerFinished(true);
-      setIsOnBreakTimer(false);
-      resetSettings(); // should set it all to zero and render settings page
-      audioForEndOfPomodoro.current.play();
+      setIsBreakTimerFinished(true)
+      setIsOnBreakTimer(false)
+      resetSettings() // should set it all to zero and render settings page
+      audioForEndOfPomodoro.current.play()
     }
 
     //console.log('timeDisplay:', timeDisplay);
-    return timeDisplay;
-  };
+    return timeDisplay
+  }
 
   const contextValue = {
     wellnessQuotes,
@@ -159,18 +163,19 @@ const PomodoroContextProvider: React.FC = (props) => {
     startTimer,
     pauseTimer,
     children,
+    breakType,
     resetSettings,
     // resetAfterBreakSettings,
     setSession,
     stopTimer,
     audioForEndOfPomodoro,
-  };
+  }
 
   return (
     <PomodoroContext.Provider value={contextValue}>
       {props.children}
     </PomodoroContext.Provider>
-  );
-};
+  )
+}
 
-export default PomodoroContextProvider;
+export default PomodoroContextProvider
