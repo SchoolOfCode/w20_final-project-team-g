@@ -4,8 +4,7 @@ import TodoItem from './TodoItem';
 import userEvent from '@testing-library/user-event';
 
 describe('Todoitem component', () => {
-
-   // // is this an integration test?! 
+  // // is this an integration test?!
   // test('renders the pomodoro timer component when it is clicked', () => {
 
   //   // arrange
@@ -23,3 +22,7 @@ describe('Todoitem component', () => {
 
   test('does not render pomodoro timer if delete button is clicked', () => {});
 });
+
+// if todolist renders and asyn function is complete
+// const liInTodoItem = screen.findAllByRole("LI") (find vs get: find returns a promise)
+// expect(liInTodoItem).not.toHaveLength(0)
