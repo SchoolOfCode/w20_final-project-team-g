@@ -1,6 +1,6 @@
 # Introducing _Kaizen_: the most mindfull project management app
 
-This project was built by [Tania Yeromiyan](https://github.com/TaniaY21), [Merlin Jones](https://github.com/merlinjones10), [Umar Begg](https://github.com/UmarBegg) and [Kate Harrison](https://github.com/katehrsn).
+This project was built by [Tania Yeromiyan](https://github.com/TaniaY21), [Merlin Jones](https://github.com/merlinjones10), [Kate Harrison](https://github.com/katehrsn) and [Umar Begg](https://github.com/UmarBegg).
 
 Kaizen was presented as the solution to the following problem statement provided by our client Codeweavers:
 
