@@ -167,26 +167,3 @@ const MoodChart = () => {
 
 export default MoodChart;
 
-// working graph options in case needed for future use
-// const options = {
-//   scales: {
-//     y: {
-//       suggestedMin: 0,
-//       suggestedMax: 5,
-//     },
-//   },
-// };
-
-// const data = {
-//   labels: timeCollection, // x-axis
-//   datasets: [
-//     {
-//       label: 'Average mood for today',
-//       data: averageMood,
-//       fill: false,
-//       tension: 0.4,
-//       backgroundColor: ['rgba(167, 139, 250, 1)'], // The line fill color/ dots
-//       borderColor: ['rgba(248, 113, 113, 1)'], // The line color.
-//     },
-//   ],
-// };

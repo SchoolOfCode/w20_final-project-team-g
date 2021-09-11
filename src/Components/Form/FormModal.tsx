@@ -1,6 +1,4 @@
-// import styles from "./Modal.module.css";
-// import { TodosContext } from '../../Store/TodosContext';
-// import styles from "../../Layout/Modal.module.css";
+
 import { NewTodo } from '../../Components/Todos/NewTodo';
 import { useState } from 'react';
 import Backdrop from '../../Layout/Backdrop';

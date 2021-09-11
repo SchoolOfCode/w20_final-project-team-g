@@ -1,31 +1,24 @@
-import styles from "./Pomodoro.module.css"
-import { useState, useEffect } from "react"
-import CountdownAnimation from "./CountDownAnimation"
-import { PomodoroContext } from "../../Store/PomodoroContext"
-import { TodosContext } from "../../Store/TodosContext"
+import CountdownAnimation from './CountDownAnimation';
+import { PomodoroContext } from '../../Store/PomodoroContext';
+import { TodosContext } from '../../Store/TodosContext';
+import PomodoroSettings from './PomodoroSettings';
+import { useContext } from 'react';
+import Modal from '../../Layout/Modal';
+import YesNoModal from '../YesNoModal/YesNoModal';
+import TipsSlider from '../BreakCard/TipsSlider';
+import bell from './Bell/meditation-bell.m4a';
 
-import PomodoroSettings from "./PomodoroSettings"
-import { useContext } from "react"
-import Modal from "../../Layout/Modal"
-import YesNoModal from "../YesNoModal/YesNoModal"
-import TipsSlider from "../BreakCard/TipsSlider"
-import bell from "./Bell/meditation-bell.m4a"
-
-import play from "../../images/timer/play.png"
-import pause from "../../images/timer/pause.png"
-import stop from "../../images/timer/stop.png"
+import play from '../../images/timer/play.png';
+import pause from '../../images/timer/pause.png';
+import stop from '../../images/timer/stop.png';
 
 const PomodoroTimer = () => {
-  const pomodoroCtx = useContext(PomodoroContext)
-  const todoCtx = useContext(TodosContext)
+  const pomodoroCtx = useContext(PomodoroContext);
+  const todoCtx = useContext(TodosContext);
 
   function closeModalHandler() {
-    todoCtx.closeModal()
+    todoCtx.closeModal();
   }
-
-  // useEffect(() => {
-  //   document.title = pomodoroCtx.doctitle;
-  // }, [pomodoroCtx.doctitle]);
 
   return (
     <div>
@@ -37,7 +30,7 @@ const PomodoroTimer = () => {
         {pomodoroCtx.pomodoro !== 0 && pomodoroCtx.isOnWorkTimer && (
           <>
             <h2 className="mb-4 text-2xl font-semibold tracking-wide text-gray-600">
-              Task Title
+              {todoCtx.inProgressTodo.todoTitle}
             </h2>
             <div className="mb-4">
               <div className="flex justify-center items-center text-6xl font-medium h-80 w-80 rounded-full shadow-lg">
@@ -55,6 +48,7 @@ const PomodoroTimer = () => {
               <button className="" onClick={pomodoroCtx.startTimer}>
                 <img
                   src={play}
+                  alt="play"
                   className="h-12 w-12 rounded-full shadow-lg opacity-75 hover:opacity-100 transform hover:scale-110"
                 />
               </button>
@@ -62,6 +56,7 @@ const PomodoroTimer = () => {
               <button className="" onClick={pomodoroCtx.pauseTimer}>
                 <img
                   src={pause}
+                  alt="pause"
                   className="h-12 w-12 rounded-full shadow-lg opacity-75 hover:opacity-100 transform hover:scale-110"
                 />
               </button>
@@ -69,6 +64,7 @@ const PomodoroTimer = () => {
               <button className="" onClick={pomodoroCtx.resetSettings}>
                 <img
                   src={stop}
+                  alt="stop"
                   className="h-12 w-12 rounded-full shadow-lg opacity-75 hover:opacity-100 transform hover:scale-110"
                 />
               </button>
@@ -109,6 +105,7 @@ const PomodoroTimer = () => {
               <button className="" onClick={pomodoroCtx.startTimer}>
                 <img
                   src={play}
+                  alt="start"
                   className="h-12 w-12 rounded-full shadow-lg opacity-75 hover:opacity-100 transform hover:scale-110"
                 />
               </button>
@@ -116,6 +113,7 @@ const PomodoroTimer = () => {
               <button className="" onClick={pomodoroCtx.pauseTimer}>
                 <img
                   src={pause}
+                  alt="pause"
                   className="h-12 w-12 rounded-full shadow-lg opacity-75 hover:opacity-100 transform hover:scale-110"
                 />
               </button>
@@ -123,6 +121,7 @@ const PomodoroTimer = () => {
               <button className="" onClick={pomodoroCtx.resetSettings}>
                 <img
                   src={stop}
+                  alt="stop"
                   className="h-12 w-12 rounded-full shadow-lg opacity-75 hover:opacity-100 transform hover:scale-110"
                 />
               </button>
@@ -130,14 +129,14 @@ const PomodoroTimer = () => {
           </>
         )}
 
-        {pomodoroCtx.isBreakTimerFinished && console.log("finished")}
+        {pomodoroCtx.isBreakTimerFinished && console.log('finished')}
 
         <audio id="beep" ref={pomodoroCtx.audioForEndOfPomodoro}>
           <source src={bell} type="audio/ogg" />
         </audio>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default PomodoroTimer
+export default PomodoroTimer;

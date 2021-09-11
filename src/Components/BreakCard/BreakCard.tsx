@@ -1,8 +1,6 @@
-import styles from "../YesNoModal/YesNoModal.module.css"
 import activeIcon from "../../images/rest-flows/active.png"
 import mindfulicon from "../../images/rest-flows/mindful.png"
 import socialIcon from "../../images/rest-flows/social.png"
-import helpIcon from "../../images/modal-buttons/help.png"
 import { TodosContext } from "../../Store/TodosContext"
 import { useContext, useState } from "react"
 import { PomodoroContext } from "../../Store/PomodoroContext"
@@ -20,7 +18,6 @@ const BreakCard = () => {
   })
 
   const presentBreakTimer = (id: string) => {
-    //pomodoroCtx.resetSettings(); // makes break timer show up!
     if (id === "social") {
       window.open("/kumospace")
     }

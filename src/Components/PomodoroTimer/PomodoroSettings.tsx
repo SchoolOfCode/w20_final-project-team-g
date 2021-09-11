@@ -1,7 +1,5 @@
 import { useState, useContext } from "react"
-import styles from "./Pomodoro.module.css"
 import { PomodoroContext } from "../../Store/PomodoroContext"
-// import CardWrapper from '../../Layout/CardWrapper';
 import { TodosContext } from "../../Store/TodosContext"
 
 const PomodoroSettings = () => {

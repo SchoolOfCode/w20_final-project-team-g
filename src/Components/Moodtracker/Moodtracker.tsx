@@ -1,4 +1,3 @@
-import styles from './MoodTracker.module.css';
 import emoji1 from '../../images/mood-tracker/emoji1.png'
 import emoji2 from '../../images/mood-tracker/emoji2.png'
 import emoji3 from '../../images/mood-tracker/emoji3.png'
@@ -8,14 +7,12 @@ import helpIcon from '../../images/modal-buttons/help.png';
 
 import { db } from '../../utilities/firebase';
 import { useState, useContext } from 'react';
-import { PomodoroContext } from '../../Store/PomodoroContext';
 import { TodosContext } from '../../Store/TodosContext';
 import Modal from '../../Layout/Modal';
 import BreakCard from '../BreakCard/BreakCard';
 const Moodtracker = () => {
   const [isPresentingBreakCard, setIsPresentingBreakCard] = useState(false);
   const todoCtx = useContext(TodosContext);
-  const pomodoroCtx = useContext(PomodoroContext);
 
   function closeModalHandler() {
     todoCtx.closeModal();
