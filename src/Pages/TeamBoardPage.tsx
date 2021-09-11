@@ -1,36 +1,33 @@
-import TodoList from '../Components/Todos/Todolist';
-import InProgress from '../Components/Todos/InProgress';
-import styles from './HomePage.module.css';
-import CompletedTodos from '../Components/Todos/CompletedTodos';
-import { Fragment, useContext } from 'react';
-import { UserContext } from '../Store/UserContext';
-import { auth } from '../utilities/firebase';
-import { Link, useHistory } from 'react-router-dom';
-import { useAuthState } from 'react-firebase-hooks/auth';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import { green } from '@material-ui/core/colors';
-import TestData from '../Components/test-data/TestData';
+import TodoList from "../Components/Todos/Todolist"
+import InProgress from "../Components/Todos/InProgress"
+import styles from "./HomePage.module.css"
+import CompletedTodos from "../Components/Todos/CompletedTodos"
+import { Fragment, useContext } from "react"
+import { UserContext } from "../Store/UserContext"
+import { auth } from "../utilities/firebase"
+import { Link, useHistory } from "react-router-dom"
+import { useAuthState } from "react-firebase-hooks/auth"
+import { green } from "@material-ui/core/colors"
+import TestData from "../Components/test-data/TestData"
 
 const TeamBoardPage = () => {
-  const history = useHistory;
-  const [user, loading, error] = useAuthState(auth);
+  const history = useHistory
+  const [user, loading, error] = useAuthState(auth)
   const {
     userProfile: { name, email, uniqueID },
-  } = useContext(UserContext);
+  } = useContext(UserContext)
   if (!user) {
     return (
       <div
         style={{
-          padding: '50px',
-          height: '100%',
-          alignItems: 'center',
-          display: 'flex',
-          justifyContent: 'center',
+          padding: "50px",
+          height: "100%",
+          alignItems: "center",
+          display: "flex",
+          justifyContent: "center",
         }}
-      >
-        <CircularProgress></CircularProgress>
-      </div>
-    );
+      ></div>
+    )
   }
   return (
     <Fragment>
@@ -47,7 +44,7 @@ const TeamBoardPage = () => {
         </div>
       </div>
     </Fragment>
-  );
-};
+  )
+}
 
-export default TeamBoardPage;
+export default TeamBoardPage
