@@ -101,6 +101,8 @@ const TodosContextProvider: React.FC = (props) => {
   function closeModalHandler() {
     setModalIsOpen(false);
     pomodoroCtx.resetSettings(); // for extra support
+    //pomodoroCtx.resetDocTitle();
+    console.log('close modal handler called');
   }
   function openModalHandler() {
     setModalIsOpen(true);

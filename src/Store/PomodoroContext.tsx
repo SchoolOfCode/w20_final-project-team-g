@@ -16,7 +16,6 @@ export const PomodoroContext = createContext({
   updateWorkTimer: (updatedSettings: any) => {},
   isWorkTimerFinished: false,
   isBreakTimerFinished: false,
-  doctitle: 'Kaizen',
   //
   pomodoro: 0,
   settings: {},
@@ -37,7 +36,6 @@ const PomodoroContextProvider: React.FC = (props) => {
   const [startAnimate, setStartAnimate] = useState(false);
   const audioForEndOfPomodoro = useRef(null);
   const [wellnessQuotes, setWellnessQuotes] = useState([]);
-  const [doctitle, setDocTitle] = useState<string>(null);
   //
   const [isOnWorkTimer, setIsOnWorkTimer] = useState(false);
   const [isOnBreakTimer, setIsOnBreakTimer] = useState(false);
@@ -46,7 +44,6 @@ const PomodoroContextProvider: React.FC = (props) => {
 
   function startTimer() {
     setStartAnimate(true);
-    console.log('pomodoro state is', pomodoro);
   }
 
   function pauseTimer() {
@@ -71,7 +68,6 @@ const PomodoroContextProvider: React.FC = (props) => {
     setIsBreakTimerFinished(false);
     setIsOnBreakTimer(false);
     setIsOnWorkTimer(false);
-    setDocTitle('Kaizen');
   };
 
   const updateBreakTimer = (updatedSettings) => {
@@ -129,13 +125,11 @@ const PomodoroContextProvider: React.FC = (props) => {
       zeroDisplayerMinutes = '0';
     }
     let timeDisplay = `${zeroDisplayerMinutes}${minutes}:${zeroDisplayerSeconds}${seconds}`;
-    setDocTitle(timeDisplay);
 
     if (remainingTime === 0 && isOnWorkTimer) {
       setIsWorkTimerFinished(true); // triggers yes no modal
       setIsOnWorkTimer(false);
       audioForEndOfPomodoro.current.play();
-      setDocTitle('Kaizen');
     }
 
     if (remainingTime === 0 && isOnBreakTimer) {
@@ -143,13 +137,11 @@ const PomodoroContextProvider: React.FC = (props) => {
       setIsOnBreakTimer(false);
       resetSettings(); // should set it all to zero and render settings page
       audioForEndOfPomodoro.current.play();
-      setDocTitle('Kaizen');
     }
 
     //console.log('timeDisplay:', timeDisplay);
     return timeDisplay;
   };
-  console.log(doctitle);
 
   const contextValue = {
     wellnessQuotes,
@@ -157,7 +149,6 @@ const PomodoroContextProvider: React.FC = (props) => {
     isOnWorkTimer,
     updateBreakTimer,
     isOnBreakTimer,
-    doctitle,
     /////
     pomodoro,
     settings,
