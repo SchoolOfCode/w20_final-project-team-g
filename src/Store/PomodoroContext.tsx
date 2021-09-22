@@ -61,9 +61,8 @@ const PomodoroContextProvider: React.FC = (props) => {
   function wellnessQuoteHandler(quote: [], type: string) {
     setWellnessQuotes(quote)
     setBreakType(type)
-    console.log(breakType)
+   
   }
-  console.log("wellness quotes are", wellnessQuotes)
 
   const resetSettings = () => {
     setSettings({})
@@ -80,7 +79,6 @@ const PomodoroContextProvider: React.FC = (props) => {
     setIsOnBreakTimer(true)
     setIsWorkTimerFinished(false)
     setIsBreakTimerFinished(false)
-    console.log("updateBreakTimer was called from context")
   }
 
   const updateWorkTimer = (updatedSettings) => {

@@ -38,7 +38,6 @@ const PomodoroSettings = () => {
         break;
     }
     pomodoroCtx.updateWorkTimer(newVal); // passes object back to useContext
-    console.log(newVal);
   };
 
   return (

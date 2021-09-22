@@ -1,8 +1,8 @@
-import emoji1 from '../../images/mood-tracker/emoji1.png'
-import emoji2 from '../../images/mood-tracker/emoji2.png'
-import emoji3 from '../../images/mood-tracker/emoji3.png'
-import emoji4 from '../../images/mood-tracker/emoji4.png'
-import emoji5 from '../../images/mood-tracker/emoji5.png'
+import emoji1 from '../../images/mood-tracker/emoji1.png';
+import emoji2 from '../../images/mood-tracker/emoji2.png';
+import emoji3 from '../../images/mood-tracker/emoji3.png';
+import emoji4 from '../../images/mood-tracker/emoji4.png';
+import emoji5 from '../../images/mood-tracker/emoji5.png';
 import helpIcon from '../../images/modal-buttons/help.png';
 
 import { db } from '../../utilities/firebase';
@@ -59,7 +59,7 @@ const Moodtracker = () => {
   };
 
   return (
-    <div >
+    <div>
       {!isPresentingBreakCard && (
         <div className="flex flex-col w-full h-full m-0 p-0 items-center">
           <h2 className="mb-10 text-2xl font-semibold tracking-wide text-gray-600">

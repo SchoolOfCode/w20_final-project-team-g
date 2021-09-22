@@ -64,7 +64,6 @@ const TodosContextProvider: React.FC = (props) => {
       .doc(newTodo.id)
       .set(Object.assign({}, newTodo))
       .catch((err) => {
-        console.log(err);
       });
   }
 
@@ -88,7 +87,6 @@ const TodosContextProvider: React.FC = (props) => {
         console.error(err);
       });
 
-    console.log('todo deleted from database');
   }
 
   function startTodoHandler(selectedTodo: TodoClass) {
@@ -102,7 +100,6 @@ const TodosContextProvider: React.FC = (props) => {
     setModalIsOpen(false);
     pomodoroCtx.resetSettings(); // for extra support
     //pomodoroCtx.resetDocTitle();
-    console.log('close modal handler called');
   }
   function openModalHandler() {
     setModalIsOpen(true);

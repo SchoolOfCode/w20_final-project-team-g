@@ -24,7 +24,6 @@ const BreakCard = () => {
 
     pomodoroCtx.updateBreakTimer(breakTime) // passes object back to useContext
     setIsPresentingBreakTimer(true)
-    console.log("id is", id)
 
     if (id === "social") {
       pomodoroCtx.wellnessQuoteHandler(socialData, "social")
