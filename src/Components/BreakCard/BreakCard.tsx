@@ -12,8 +12,8 @@ const BreakCard = () => {
   const [isPresentingBreakTimer, setIsPresentingBreakTimer] = useState(false)
 
   const [breakTime, setBreakTime] = useState({
-    work: 1,
-    break: 0.05,
+    work: 0.333,
+    break: 0.333,
     session: "work",
   })
 

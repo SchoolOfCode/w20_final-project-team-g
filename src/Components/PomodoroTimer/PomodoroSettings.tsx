@@ -1,45 +1,45 @@
-import { useState, useContext } from "react"
-import { PomodoroContext } from "../../Store/PomodoroContext"
-import { TodosContext } from "../../Store/TodosContext"
+import { useState, useContext } from 'react';
+import { PomodoroContext } from '../../Store/PomodoroContext';
+import { TodosContext } from '../../Store/TodosContext';
 
 const PomodoroSettings = () => {
-  const todoCtx = useContext(TodosContext)
+  const todoCtx = useContext(TodosContext);
   const [newTimer, setNewTimer] = useState({
     work: 0,
     break: 0,
-    session: "work",
-  })
+    session: 'work',
+  });
 
-  const pomodoroCtx = useContext(PomodoroContext)
+  const pomodoroCtx = useContext(PomodoroContext);
 
   const handleClick = (selectedTime) => {
-    let breakTime
+    let breakTime;
 
-    if (selectedTime === "25") {
-      breakTime = "5"
+    if (selectedTime === '0.333') {
+      breakTime = '0.333';
     } else {
-      breakTime = "10"
+      breakTime = '10';
     }
     const newVal = {
       ...newTimer,
       work: +selectedTime,
       break: +breakTime,
-    }
+    };
 
     switch (selectedTime) {
-      case "work":
-        setNewTimer(newVal)
-        break
-      case "break":
+      case 'work':
+        setNewTimer(newVal);
+        break;
+      case 'break':
         setNewTimer({
           ...newTimer,
           break: +breakTime, // needs to be auto value depending on work session chosen
-        })
-        break
+        });
+        break;
     }
-    pomodoroCtx.updateWorkTimer(newVal) // passes object back to useContext
-    console.log(newVal)
-  }
+    pomodoroCtx.updateWorkTimer(newVal); // passes object back to useContext
+    console.log(newVal);
+  };
 
   return (
     <div className="flex flex-col w-full h-full m-0 p-0 items-center">
@@ -55,7 +55,7 @@ const PomodoroSettings = () => {
           className="h-20 w-20 rounded-full shadow-lg transform hover:scale-110 border-4 border-blue-400 text-blue-400 text-4xl font-semibold hover:text-white hover:bg-blue-400 ring-4 ring-transparent hover:ring-blue-100"
           name="work"
           value="25"
-          onClick={() => handleClick("25")}
+          onClick={() => handleClick('25')}
         >
           25
         </button>
@@ -64,7 +64,7 @@ const PomodoroSettings = () => {
           className="h-20 w-20 rounded-full shadow-lg transform hover:scale-110 border-4 border-blue-400 text-blue-400 text-4xl font-semibold hover:text-white hover:bg-blue-400 ring-4 ring-transparent hover:ring-blue-100"
           name="work"
           value="50"
-          onClick={() => handleClick("50")}
+          onClick={() => handleClick('50')}
         >
           50
         </button>
@@ -73,10 +73,10 @@ const PomodoroSettings = () => {
         className="h-4 w-4 hover:bg-gray-400 bg-gray-100 text-gray-400 hover:text-white rounded-full shadow-lg transform hover:scale-110 ring-4 ring-transparent hover:ring-gray-100"
         name="work"
         value="0.04"
-        onClick={() => handleClick("0.04")}
+        onClick={() => handleClick('0.333')}
       ></button>
     </div>
-  )
-}
+  );
+};
 
-export default PomodoroSettings
+export default PomodoroSettings;
