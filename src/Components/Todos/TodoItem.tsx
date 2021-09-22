@@ -12,8 +12,8 @@ const TodoItem: React.FC<{
   onFinish: () => void;
 }> = (props) => {
 let elipsesAdded = ""
-if(props.todoBody.split(" ").length > 10){
-  elipsesAdded = props.todoBody.split(" ").slice(0,10).join(" ") + "..."
+if(props.todoBody.split(" ").length > 5){
+  elipsesAdded = props.todoBody.split(" ").slice(0,5).join(" ") + "..."
 } else{elipsesAdded = props.todoBody}
 
   return (
