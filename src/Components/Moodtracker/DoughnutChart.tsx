@@ -39,7 +39,7 @@ const DoughnutChart = () => {
     datasets: [
       {
         label: '# of Votes',
-        data: [5,4,7,8,3,6], //moodArrayData,
+        data: [5,4,7,8,6], //moodArrayData,
 
         backgroundColor: [
           'rgba(96, 165, 250, 1)',
