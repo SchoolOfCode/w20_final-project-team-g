@@ -6,7 +6,7 @@ import { useContext } from 'react';
 import Modal from '../../Layout/Modal';
 import YesNoModal from '../YesNoModal/YesNoModal';
 import TipsSlider from '../BreakCard/TipsSlider';
-import bell from './Bell/meditation-bell.m4a';
+import bell from './Bell/kaizen_bell.m4a';
 
 import play from '../../images/timer/play.png';
 import pause from '../../images/timer/pause.png';
