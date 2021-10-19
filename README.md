@@ -2,6 +2,8 @@
 
 This project was built by [Tania Yeromiyan](https://github.com/TaniaY21), [Merlin Jones](https://github.com/merlinjones10), [Kate Harrison](https://github.com/katehrsn) and [Umar Begg](https://github.com/UmarBegg).
 
+[LIVE WEBSITE] (https://kaizen-soc.netlify.app/)
+
 Kaizen was presented as the solution to the following problem statement provided by our client Codeweavers:
 
 **_"How can we organise and manage a team of developers who are working remotely on a project?"_**
