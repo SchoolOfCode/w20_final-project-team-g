@@ -2,7 +2,7 @@
 
 This project was built by [Tania Yeromiyan](https://github.com/TaniaY21), [Merlin Jones](https://github.com/merlinjones10), [Kate Harrison](https://github.com/katehrsn) and [Umar Begg](https://github.com/UmarBegg).
 
-[LIVE WEBSITE] (https://kaizen-soc.netlify.app/)
+[LIVE WEBSITE](https://kaizen-soc.netlify.app/)
 
 Kaizen was presented as the solution to the following problem statement provided by our client Codeweavers:
 
